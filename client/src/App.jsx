@@ -14,6 +14,7 @@ import OnboardingWelcome from './pages/onboarding/OnboardingWelcome';
 import OnboardingPrivacy from './pages/onboarding/OnboardingPrivacy';
 import OnboardingActivatiecode from './pages/onboarding/OnboardingActivatiecode';
 import OnboardingFeature from './pages/onboarding/OnboardingFeature';
+import OnboardingDagboek from './pages/onboarding/OnboardingDagboek';
 
 configureApiAuth({
   getAccessToken: () => useAuthStore.getState().accessToken,
@@ -54,7 +55,7 @@ export default function App() {
         <Route path="/onboarding" element={<OnboardingWelcome />} />
         <Route path="/onboarding/privacy" element={<OnboardingPrivacy />} />
         <Route path="/onboarding/activatiecode" element={<OnboardingActivatiecode />} />
-        <Route path="/onboarding/dagboek" element={<OnboardingFeature feature="dagboek" />} />
+        <Route path="/onboarding/dagboek" element={<OnboardingDagboek />} />
         <Route path="/onboarding/gids" element={<OnboardingFeature feature="gids" />} />
         <Route path="/onboarding/berichten" element={<OnboardingFeature feature="berichten" />} />
 
