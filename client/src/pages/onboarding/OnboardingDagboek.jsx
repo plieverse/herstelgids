@@ -222,7 +222,7 @@ export default function OnboardingDagboek() {
         justifyContent: 'center',
       }}>
         <span className="material-symbols-outlined" style={{
-          fontSize: '72px',
+          fontSize: '96px',
           color: '#377B8A',
           userSelect: 'none',
         }}>contract_edit</span>
