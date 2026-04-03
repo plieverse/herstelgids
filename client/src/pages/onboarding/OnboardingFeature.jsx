@@ -1,16 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import OnboardingLayout from './OnboardingLayout';
 
-// SVG icons per feature
+// ── Card icons ──────────────────────────────────────────────
 function DagboekIcon() {
   return (
     <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-      <rect x="14" y="10" width="36" height="46" rx="4" fill="#4a9db0" />
-      <rect x="18" y="16" width="28" height="3" rx="1.5" fill="#e6f4f2" />
-      <rect x="18" y="23" width="28" height="3" rx="1.5" fill="#e6f4f2" />
-      <rect x="18" y="30" width="20" height="3" rx="1.5" fill="#e6f4f2" />
-      <circle cx="50" cy="50" r="14" fill="#377b8a" />
-      <path d="M44 50l2 2 5-5" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Notebook body */}
+      <rect x="16" y="10" width="34" height="44" rx="4" fill="#4a9db0" />
+      {/* Page lines */}
+      <rect x="22" y="18" width="22" height="2.5" rx="1.25" fill="#e6f4f2" />
+      <rect x="22" y="24" width="22" height="2.5" rx="1.25" fill="#e6f4f2" />
+      <rect x="22" y="30" width="16" height="2.5" rx="1.25" fill="#e6f4f2" />
+      {/* Pencil in bottom-right */}
+      <rect x="38" y="38" width="6" height="16" rx="2" fill="#377b8a" transform="rotate(-35 44 46)" />
+      {/* Check circle */}
+      <circle cx="50" cy="52" r="12" fill="#377b8a" />
+      <path d="M44 52l3.5 3.5 6-6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -18,13 +23,20 @@ function DagboekIcon() {
 function GidsIcon() {
   return (
     <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-      <path d="M36 12 C28 9 16 11 10 15 L10 58 C16 55 28 53 36 56 Z" fill="#4a9db0" />
-      <path d="M36 12 C44 9 56 11 62 15 L62 58 C56 55 44 53 36 56 Z" fill="#377b8a" />
-      <line x1="36" y1="12" x2="36" y2="56" stroke="#2a5c6a" strokeWidth="2" opacity="0.4" />
-      <line x1="16" y1="25" x2="32" y2="23" stroke="#e6f4f2" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
-      <line x1="16" y1="33" x2="32" y2="31" stroke="#e6f4f2" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
-      <line x1="40" y1="23" x2="56" y2="25" stroke="#cfebe8" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
-      <line x1="40" y1="31" x2="56" y2="33" stroke="#cfebe8" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
+      {/* Left page */}
+      <path d="M36 14 C28 11 16 13 10 17 L10 57 C16 54 28 52 36 55 Z" fill="#4a9db0" />
+      {/* Right page */}
+      <path d="M36 14 C44 11 56 13 62 17 L62 57 C56 54 44 52 36 55 Z" fill="#377b8a" />
+      {/* Spine */}
+      <rect x="34" y="13" width="4" height="43" rx="2" fill="#2a5c6a" opacity="0.5" />
+      {/* Left page lines */}
+      <line x1="14" y1="26" x2="32" y2="24" stroke="#e6f4f2" strokeWidth="1.8" strokeLinecap="round" opacity="0.9" />
+      <line x1="14" y1="33" x2="32" y2="31" stroke="#e6f4f2" strokeWidth="1.8" strokeLinecap="round" opacity="0.9" />
+      <line x1="14" y1="40" x2="32" y2="38" stroke="#e6f4f2" strokeWidth="1.8" strokeLinecap="round" opacity="0.9" />
+      {/* Right page lines */}
+      <line x1="40" y1="24" x2="58" y2="26" stroke="#cfebe8" strokeWidth="1.8" strokeLinecap="round" opacity="0.9" />
+      <line x1="40" y1="31" x2="58" y2="33" stroke="#cfebe8" strokeWidth="1.8" strokeLinecap="round" opacity="0.9" />
+      <line x1="40" y1="38" x2="58" y2="40" stroke="#cfebe8" strokeWidth="1.8" strokeLinecap="round" opacity="0.9" />
     </svg>
   );
 }
@@ -32,14 +44,81 @@ function GidsIcon() {
 function BerichtenIcon() {
   return (
     <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-      <rect x="10" y="14" width="52" height="38" rx="10" fill="#377b8a" />
-      <path d="M22 52 L16 62 L36 54" fill="#377b8a" />
-      <rect x="20" y="26" width="32" height="3" rx="1.5" fill="#e6f4f2" />
-      <rect x="20" y="34" width="24" height="3" rx="1.5" fill="#e6f4f2" />
+      {/* Speech bubble */}
+      <rect x="10" y="13" width="52" height="36" rx="10" fill="#377b8a" />
+      {/* Tail */}
+      <path d="M20 49 L14 62 L34 52" fill="#377b8a" />
+      {/* Lines */}
+      <rect x="20" y="24" width="32" height="3" rx="1.5" fill="#e6f4f2" />
+      <rect x="20" y="32" width="24" height="3" rx="1.5" fill="#e6f4f2" />
     </svg>
   );
 }
 
+// ── Bullet icons ─────────────────────────────────────────────
+function BulletIconCircle({ children, bg = '#377b8a' }) {
+  return (
+    <div style={{
+      width: 34,
+      height: 34,
+      borderRadius: '50%',
+      background: bg,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0,
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function IconPlus() {
+  return (
+    <BulletIconCircle bg="#4a9db0">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M9 4v10M4 9h10" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" />
+      </svg>
+    </BulletIconCircle>
+  );
+}
+
+function IconEye() {
+  return (
+    <BulletIconCircle bg="#4a9db0">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9C3.5 5.5 7 3.5 9 3.5C11 3.5 14.5 5.5 16 9C14.5 12.5 11 14.5 9 14.5C7 14.5 3.5 12.5 2 9Z" stroke="#fff" strokeWidth="1.8" />
+        <circle cx="9" cy="9" r="2.2" fill="#fff" />
+      </svg>
+    </BulletIconCircle>
+  );
+}
+
+function IconInfo() {
+  return (
+    <BulletIconCircle bg="#377b8a">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <circle cx="9" cy="5.5" r="1.3" fill="#fff" />
+        <path d="M9 8.5v5" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </BulletIconCircle>
+  );
+}
+
+function IconChat() {
+  return (
+    <BulletIconCircle bg="#377b8a">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <rect x="2" y="2.5" width="14" height="10" rx="3" fill="#fff" opacity="0.9" />
+        <path d="M5 12.5l-1.5 3 5-2.5" fill="#fff" opacity="0.9" />
+        <rect x="4.5" y="6" width="9" height="1.5" rx="0.75" fill="#377b8a" />
+        <rect x="4.5" y="9" width="6" height="1.5" rx="0.75" fill="#377b8a" />
+      </svg>
+    </BulletIconCircle>
+  );
+}
+
+// ── Feature config ────────────────────────────────────────────
 const FEATURES = {
   dagboek: {
     step: 3,
@@ -48,8 +127,8 @@ const FEATURES = {
     icon: <DagboekIcon />,
     iconLabel: 'Dagboek',
     bullets: [
-      { icon: '+', text: 'Vul dagelijks in hoe je je voelt' },
-      { icon: '👁', text: 'Zorgverleners bekijken je ingevuld dagboeken.' },
+      { iconEl: <IconPlus />, text: 'Vul dagelijks in hoe je je voelt' },
+      { iconEl: <IconEye />, text: 'Zorgverleners bekijken je ingevuld dagboeken.' },
     ],
     next: '/onboarding/gids',
     nextLabel: 'Volgende',
@@ -62,8 +141,8 @@ const FEATURES = {
     icon: <GidsIcon />,
     iconLabel: 'Gids',
     bullets: [
-      { icon: 'ℹ', text: 'Meer uitleg over het gevoel in je lichaam.' },
-      { icon: 'ℹ', text: 'Meer uitleg over onderwerpen die handig zijn tijdens herstel.' },
+      { iconEl: <IconInfo />, text: 'Meer uitleg over het gevoel in je lichaam.' },
+      { iconEl: <IconInfo />, text: 'Meer uitleg over onderwerpen die handig zijn tijdens herstel.' },
     ],
     next: '/onboarding/berichten',
     nextLabel: 'Volgende',
@@ -76,8 +155,8 @@ const FEATURES = {
     icon: <BerichtenIcon />,
     iconLabel: 'Berichten',
     bullets: [
-      { icon: '💬', text: 'Staat je vraag niet in de Gids? Stuur zorgverleners een bericht!' },
-      { icon: '💬', text: 'Zorgverleners kunnen ook berichten naar jou sturen.' },
+      { iconEl: <IconChat />, text: 'Staat je vraag niet in de Gids? Stuur zorgverleners een bericht!' },
+      { iconEl: <IconChat />, text: 'Zorgverleners kunnen ook berichten naar jou sturen.' },
     ],
     next: '/registreren',
     nextLabel: 'Klaar',
@@ -119,7 +198,7 @@ export default function OnboardingFeature({ feature }) {
             <div style={styles.bullets}>
               {config.bullets.map((b, i) => (
                 <div key={i} style={styles.bulletRow}>
-                  <span style={styles.bulletIcon}>{b.icon}</span>
+                  {b.iconEl}
                   <span style={styles.bulletText}>{b.text}</span>
                 </div>
               ))}
@@ -130,7 +209,7 @@ export default function OnboardingFeature({ feature }) {
         <div style={styles.actions}>
           <button style={styles.button} onClick={handleNext}>
             {config.nextLabel}
-            {config.nextCheck ? ' ✓' : ' ›'}
+            {config.nextCheck ? ' ✓' : ' >'}
           </button>
           {config.hasSkip && (
             <button style={styles.linkBtn} onClick={handleSkip}>
@@ -207,17 +286,11 @@ const styles = {
   },
   bulletRow: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: '12px',
     background: '#ffffff',
     borderRadius: '12px',
     padding: '12px 14px',
-  },
-  bulletIcon: {
-    fontSize: '18px',
-    minWidth: '24px',
-    textAlign: 'center',
-    marginTop: '1px',
   },
   bulletText: {
     fontSize: '15px',
