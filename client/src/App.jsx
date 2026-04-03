@@ -10,8 +10,11 @@ import GuidePage from './pages/guide/GuidePage';
 import ArticlePage from './pages/guide/ArticlePage';
 import MessagesPage from './pages/messages/MessagesPage';
 import ProfilePage from './pages/profile/ProfilePage';
+import OnboardingWelcome from './pages/onboarding/OnboardingWelcome';
+import OnboardingPrivacy from './pages/onboarding/OnboardingPrivacy';
+import OnboardingActivatiecode from './pages/onboarding/OnboardingActivatiecode';
+import OnboardingFeature from './pages/onboarding/OnboardingFeature';
 
-// Wire auth store into axios interceptors once
 configureApiAuth({
   getAccessToken: () => useAuthStore.getState().accessToken,
   getRefreshToken: () => useAuthStore.getState().refreshToken,
@@ -19,14 +22,22 @@ configureApiAuth({
   clearAuth: () => useAuthStore.getState().clear(),
 });
 
+function RootRedirect() {
+  const { accessToken, refreshToken } = useAuthStore();
+  const onboardingDone = localStorage.getItem('onboardingComplete') === 'true';
+
+  if (accessToken || refreshToken) return <Navigate to="/dagboek" replace />;
+  if (!onboardingDone) return <Navigate to="/onboarding" replace />;
+  return <Navigate to="/login" replace />;
+}
+
 export default function App() {
   const { refreshToken, setTokens, clear } = useAuthStore();
 
-  // On app boot: if we have a refreshToken, exchange it for a new accessToken
   useEffect(() => {
     if (!refreshToken) return;
-
-    fetch('/api/auth/refresh', {
+    const apiBase = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api';
+    fetch(`${apiBase}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refreshToken }),
@@ -39,16 +50,28 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Onboarding */}
+        <Route path="/onboarding" element={<OnboardingWelcome />} />
+        <Route path="/onboarding/privacy" element={<OnboardingPrivacy />} />
+        <Route path="/onboarding/activatiecode" element={<OnboardingActivatiecode />} />
+        <Route path="/onboarding/dagboek" element={<OnboardingFeature feature="dagboek" />} />
+        <Route path="/onboarding/gids" element={<OnboardingFeature feature="gids" />} />
+        <Route path="/onboarding/berichten" element={<OnboardingFeature feature="berichten" />} />
+
+        {/* Auth */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registreren" element={<RegisterPage />} />
+
+        {/* App */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Navigate to="/dagboek" replace />} />
           <Route path="/dagboek" element={<DiaryPage />} />
           <Route path="/gids" element={<GuidePage />} />
           <Route path="/gids/:id" element={<ArticlePage />} />
           <Route path="/berichten" element={<MessagesPage />} />
           <Route path="/profiel" element={<ProfilePage />} />
         </Route>
+
+        <Route path="/" element={<RootRedirect />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
