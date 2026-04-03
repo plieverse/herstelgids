@@ -1,41 +1,30 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import OnboardingLayout from './OnboardingLayout';
 
 function PrivacyOverlay({ onClose }) {
   return (
-    <div style={overlay.backdrop} onClick={onClose}>
-      <div style={overlay.sheet} onClick={(e) => e.stopPropagation()}>
+    <div style={ov.backdrop} onClick={onClose}>
+      <div style={ov.sheet} onClick={e => e.stopPropagation()}>
+        {/* Decorative circle */}
+        <div style={ov.decorCircle} />
         {/* Close button */}
-        <button style={overlay.closeBtn} onClick={onClose} aria-label="Sluiten">
+        <button style={ov.closeBtn} onClick={onClose} aria-label="Sluiten">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="16" fill="#377b8a" />
+            <circle cx="16" cy="16" r="16" fill="#377B8A" />
             <path d="M11 11l10 10M21 11l-10 10" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </button>
-
-        {/* Decorative circle behind title */}
-        <div style={overlay.decorCircle} />
-
-        <h2 style={overlay.title}>Je gegevens en{'\n'}privacy</h2>
-
-        <p style={overlay.body}>
+        <h2 style={ov.title}>Je gegevens en privacy</h2>
+        <p style={ov.body}>
           Heb je een vraag over je gegevens en de privacy daarvan? Lees dan de{' '}
-          <a href="#" style={overlay.link}>privacy-informatie</a>.
+          <a href="#" style={ov.link}>privacy-informatie</a>.
         </p>
-
-        <p style={overlay.body}>
+        <p style={ov.body}>
           Of neem contact op met medewerkers van de Lichaamsgids.
         </p>
-
-        <ul style={overlay.list}>
-          <li style={overlay.listItem}>
-            Stuur een e-mail naar{' '}
-            <a href="mailto:info@lichaamsgids.nl" style={overlay.link}>info@lichaamsgids.nl</a>
-          </li>
-          <li style={overlay.listItem}>
-            Bel ons op 06-12345678. We zijn bereikbaar op werkdagen van 8.00 – 16.30
-          </li>
+        <ul style={ov.list}>
+          <li style={ov.listItem}>Stuur een e-mail naar <a href="mailto:info@lichaamsgids.nl" style={ov.link}>info@lichaamsgids.nl</a></li>
+          <li style={ov.listItem}>Bel ons op 06-12345678. We zijn bereikbaar op werkdagen van 8.00 – 16.30</li>
         </ul>
       </div>
     </div>
@@ -46,126 +35,251 @@ export default function OnboardingPrivacy() {
   const navigate = useNavigate();
   const [showOverlay, setShowOverlay] = useState(false);
 
-  function handleAkkoord() {
-    navigate('/onboarding/activatiecode');
-  }
-
   return (
     <>
-      <OnboardingLayout step={1} onBack={() => navigate('/onboarding')}>
-        <div style={styles.page}>
-          {/* Decorative circles */}
-          <div style={{ ...styles.deco, top: 0, right: 20, width: 60, height: 60 }} />
-          <div style={{ ...styles.deco, top: 30, right: 50, width: 20, height: 20, opacity: 0.5 }} />
+      {/* Full-screen container: 414×736 from Figma */}
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: '414px',
+        height: '100dvh',
+        minHeight: '736px',
+        margin: '0 auto',
+        background: '#FFFFFF',
+        fontFamily: 'Inter, sans-serif',
+        overflow: 'hidden',
+      }}>
 
-          <div style={styles.content}>
-            <h2 style={styles.title}>Je gegevens en privacy</h2>
+        {/* ── Ellipse 33: decorative circle in header ── */}
+        <div style={{
+          position: 'absolute',
+          width: '48px',
+          height: '48px',
+          left: '44.2%',
+          top: '15px',
+          borderRadius: '50%',
+          background: '#E6F4F2',
+        }} />
 
-            <p style={styles.body}>
-              <strong>De Lichaamsgids app verzamelt een aantal van jouw gegevens.</strong>{' '}
-              Dit doen we zodat je samen met zorgverleners je lichaam opnieuw kan leren kennen.
-            </p>
+        {/* ── Ellipse 34: small decorative circle ── */}
+        <div style={{
+          position: 'absolute',
+          width: '16px',
+          height: '16px',
+          left: '54.35%',
+          top: '59px',
+          borderRadius: '50%',
+          background: '#E6F4F2',
+        }} />
 
-            <p style={styles.body}>
-              We verzamelen en gebruiken gegevens over je gezondheid om je beter te helpen.
-              Alleen zorgverleners van Ziekenhuis Groep Twente (ZGT) kunnen de gegevens bekijken.
-            </p>
-
-            <p style={styles.body}>
-              Lees meer hierover in de{' '}
-              <a href="#" style={styles.link}>privacyinformatie</a>.
-            </p>
+        {/* ── Back button ── */}
+        <button
+          onClick={() => navigate('/onboarding')}
+          aria-label="Terug"
+          style={{
+            position: 'absolute',
+            width: '46px',
+            height: '46px',
+            left: '1px',
+            top: '0px',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '10px',
+          }}
+        >
+          <div style={{
+            width: '26px',
+            height: '26px',
+            borderRadius: '50%',
+            background: '#E6F4F2',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <svg width="15" height="10" viewBox="0 0 15 10" fill="none">
+              <path d="M10 1L5 5L10 9" stroke="#377B8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
+        </button>
 
-          <div style={styles.actions}>
-            <button style={styles.button} onClick={handleAkkoord}>
-              Akkoord &nbsp;›
-            </button>
-            <button style={styles.linkBtn} onClick={() => setShowOverlay(true)}>
-              Ik heb een vraag
-            </button>
-          </div>
+        {/* ── "De Lichaamsgids" header title ──
+            left: 11.35%, right: 11.59%, top: 16.45% of 152px topbar = ~25px */}
+        <div style={{
+          position: 'absolute',
+          left: '11.35%',
+          right: '11.59%',
+          top: '25px',
+          height: '29px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: 'Inter',
+          fontWeight: 700,
+          fontSize: '24px',
+          lineHeight: '29px',
+          color: '#377B8A',
+          textAlign: 'center',
+        }}>
+          De Lichaamsgids
         </div>
-      </OnboardingLayout>
+
+        {/* ── Progress bar: left 20px, top 90px, 5 segments, gap 5px ── */}
+        <div style={{
+          position: 'absolute',
+          left: '20px',
+          top: '90px',
+          width: '374px',
+          height: '6px',
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '5px',
+        }}>
+          {/* Rectangle 19 – active */}
+          <div style={{ flex: 1, height: '6px', background: '#377B8A', opacity: 0.5, borderRadius: '3px' }} />
+          {/* Rectangle 15–18 – inactive */}
+          <div style={{ flex: 1, height: '6px', background: '#CFEBE8', opacity: 0.5, borderRadius: '3px' }} />
+          <div style={{ flex: 1, height: '6px', background: '#CFEBE8', opacity: 0.5, borderRadius: '3px' }} />
+          <div style={{ flex: 1, height: '6px', background: '#CFEBE8', opacity: 0.5, borderRadius: '3px' }} />
+          <div style={{ flex: 1, height: '6px', background: '#CFEBE8', opacity: 0.5, borderRadius: '3px' }} />
+        </div>
+
+        {/* ── Rectangle 28: grey content area, top 113px, radius 20px 20px 0 0 ── */}
+        <div style={{
+          position: 'absolute',
+          left: '0px',
+          top: '113px',
+          width: '414px',
+          bottom: '0px',
+          background: '#F6F6F6',
+          borderRadius: '20px 20px 0px 0px',
+        }} />
+
+        {/* ── Ellipse 29: teal circle behind title ── */}
+        <div style={{
+          position: 'absolute',
+          width: '76px',
+          height: '76px',
+          left: '172px',
+          top: '142px',
+          borderRadius: '50%',
+          background: '#CFEBE8',
+        }} />
+
+        {/* ── "Je gegevens en privacy" title ──
+            left 91px, top 152px, width 231px, height 57px */}
+        <div style={{
+          position: 'absolute',
+          width: '231px',
+          left: '91px',
+          top: '152px',
+          height: '57px',
+          fontFamily: 'Inter',
+          fontWeight: 700,
+          fontSize: '24px',
+          lineHeight: '29px',
+          color: '#377B8A',
+          textAlign: 'center',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          Je gegevens en privacy
+        </div>
+
+        {/* ── Body text ──
+            left 20px, top 262px, width 373px */}
+        <div style={{
+          position: 'absolute',
+          width: '373px',
+          left: '20px',
+          top: '262px',
+          fontFamily: 'Inter',
+          fontSize: '16px',
+          lineHeight: '19px',
+          color: '#727272',
+        }}>
+          <strong>De Lichaamsgids app verzamelt een aantal van jouw gegevens.</strong>
+          {' '}Dit doen we zodat je samen met zorgverleners je lichaam opnieuw kan leren kennen.
+          <br /><br />
+          We verzamelen en gebruiken gegevens over je gezondheid om je beter te helpen.
+          Alleen zorgverleners van Ziekenhuis Groep Twente (ZGT) kunnen de gegevens bekijken.
+          <br /><br />
+          Lees meer hierover in de{' '}
+          <span style={{ color: '#377B8A', textDecoration: 'underline', cursor: 'pointer' }}>
+            privacyinformatie
+          </span>.
+        </div>
+
+        {/* ── "Akkoord" button ──
+            width 170px, height 50px, left 121px, top 538px, radius 20px */}
+        <button
+          onClick={() => navigate('/onboarding/activatiecode')}
+          style={{
+            position: 'absolute',
+            width: '170px',
+            height: '50px',
+            left: '121px',
+            top: '538px',
+            background: '#377B8A',
+            borderRadius: '20px',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+            fontFamily: 'Inter',
+            fontWeight: 400,
+            fontSize: '24px',
+            lineHeight: '29px',
+            color: '#FFFFFF',
+          }}
+        >
+          Akkoord
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7 4l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        {/* ── "Ik heb een vraag" link ──
+            width 144px, height 66px, left 130px, top 588px */}
+        <button
+          onClick={() => setShowOverlay(true)}
+          style={{
+            position: 'absolute',
+            width: '144px',
+            height: '66px',
+            left: '130px',
+            top: '588px',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            fontFamily: 'Inter',
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '19px',
+            color: '#377B8A',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Ik heb een vraag
+        </button>
+      </div>
 
       {showOverlay && <PrivacyOverlay onClose={() => setShowOverlay(false)} />}
     </>
   );
 }
 
-const styles = {
-  page: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    background: '#ffffff',
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  deco: {
-    position: 'absolute',
-    borderRadius: '50%',
-    background: '#e6f4f2',
-    opacity: 0.8,
-  },
-  content: {
-    flex: 1,
-    padding: '32px 24px 16px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-    position: 'relative',
-    zIndex: 1,
-  },
-  title: {
-    fontSize: '26px',
-    fontWeight: '700',
-    color: '#377b8a',
-    textAlign: 'center',
-    lineHeight: 1.25,
-    marginBottom: '8px',
-  },
-  body: {
-    fontSize: '16px',
-    color: '#727272',
-    lineHeight: 1.65,
-  },
-  link: {
-    color: '#377b8a',
-    textDecoration: 'underline',
-  },
-  actions: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '16px 24px 48px',
-    gap: '20px',
-  },
-  button: {
-    background: '#377b8a',
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '50px',
-    padding: '16px 48px',
-    fontSize: '20px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    fontFamily: 'inherit',
-    minHeight: '56px',
-    minWidth: '200px',
-  },
-  linkBtn: {
-    background: 'none',
-    border: 'none',
-    color: '#377b8a',
-    fontSize: '16px',
-    cursor: 'pointer',
-    fontFamily: 'inherit',
-    minHeight: '44px',
-  },
-};
-
-const overlay = {
+const ov = {
   backdrop: {
     position: 'fixed',
     inset: 0,
@@ -176,13 +290,24 @@ const overlay = {
     justifyContent: 'center',
   },
   sheet: {
-    background: '#ffffff',
+    background: '#FFFFFF',
     borderRadius: '24px 24px 0 0',
-    padding: '40px 28px 48px',
+    padding: '48px 28px 48px',
     width: '100%',
-    maxWidth: '480px',
+    maxWidth: '414px',
     position: 'relative',
     overflow: 'hidden',
+  },
+  decorCircle: {
+    position: 'absolute',
+    top: '-40px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '120px',
+    height: '120px',
+    borderRadius: '50%',
+    background: '#CFEBE8',
+    zIndex: 0,
   },
   closeBtn: {
     position: 'absolute',
@@ -194,36 +319,26 @@ const overlay = {
     padding: 0,
     zIndex: 1,
   },
-  decorCircle: {
-    position: 'absolute',
-    top: '-40px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '120px',
-    height: '120px',
-    borderRadius: '50%',
-    background: '#e6f4f2',
-    zIndex: 0,
-  },
   title: {
-    fontSize: '26px',
-    fontWeight: '700',
-    color: '#377b8a',
+    fontFamily: 'Inter',
+    fontWeight: 700,
+    fontSize: '24px',
+    lineHeight: '29px',
+    color: '#377B8A',
     textAlign: 'center',
-    lineHeight: 1.25,
     marginBottom: '20px',
     position: 'relative',
     zIndex: 1,
-    whiteSpace: 'pre-line',
   },
   body: {
+    fontFamily: 'Inter',
     fontSize: '16px',
+    lineHeight: 1.6,
     color: '#2a2a2a',
-    lineHeight: 1.65,
     marginBottom: '12px',
   },
   link: {
-    color: '#377b8a',
+    color: '#377B8A',
     textDecoration: 'underline',
   },
   list: {
@@ -233,8 +348,9 @@ const overlay = {
     gap: '8px',
   },
   listItem: {
+    fontFamily: 'Inter',
     fontSize: '16px',
-    color: '#2a2a2a',
     lineHeight: 1.6,
+    color: '#2a2a2a',
   },
 };
