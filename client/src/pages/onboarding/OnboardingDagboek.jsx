@@ -221,16 +221,26 @@ export default function OnboardingDagboek() {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
           {/* Document body */}
-          <rect x="14" y="8" width="38" height="50" rx="4" fill="#377B8A" />
+          <rect x="8" y="5" width="48" height="60" rx="6" fill="#377B8A" />
           {/* Page lines */}
-          <rect x="20" y="18" width="26" height="3" rx="1.5" fill="#E6F4F2" />
-          <rect x="20" y="26" width="26" height="3" rx="1.5" fill="#E6F4F2" />
-          <rect x="20" y="34" width="18" height="3" rx="1.5" fill="#E6F4F2" />
-          {/* Pencil */}
-          <rect x="42" y="44" width="7" height="22" rx="2" fill="#CFEBE8" transform="rotate(-40 48 52)" />
-          <rect x="41" y="43" width="7" height="5" rx="1" fill="#377B8A" transform="rotate(-40 48 52)" />
+          <rect x="16" y="17" width="32" height="4" rx="2" fill="#E6F4F2" />
+          <rect x="16" y="27" width="32" height="4" rx="2" fill="#E6F4F2" />
+          <rect x="16" y="37" width="22" height="4" rx="2" fill="#E6F4F2" />
+          {/* Pen — upright, rotated -40deg, tip points bottom-left */}
+          <g transform="translate(68,68) rotate(-40) translate(-7,-34)">
+            {/* Pen eraser cap */}
+            <rect x="1" y="0" width="12" height="8" rx="3" fill="#2a6070" />
+            {/* Pen body */}
+            <rect x="1" y="7" width="12" height="34" rx="2" fill="#4a9db0" />
+            {/* Pen grip band */}
+            <rect x="1" y="41" width="12" height="7" rx="2" fill="#2a6070" />
+            {/* Pen nib */}
+            <polygon points="1,48 13,48 7,60" fill="#377B8A" />
+            {/* Shine stripe */}
+            <rect x="4" y="10" width="3.5" height="26" rx="1.5" fill="#CFEBE8" opacity="0.5" />
+          </g>
         </svg>
       </div>
 
