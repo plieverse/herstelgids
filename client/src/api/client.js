@@ -13,7 +13,8 @@ export function configureApiAuth({ getAccessToken, getRefreshToken, setTokens, c
   _clearAuth = clearAuth;
 }
 
-const api = axios.create({ baseURL: '/api' });
+const BASE_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api';
+const api = axios.create({ baseURL: BASE_URL });
 
 api.interceptors.request.use((config) => {
   const token = _getAccessToken();
@@ -56,7 +57,7 @@ api.interceptors.response.use(
     }
 
     try {
-      const { data } = await axios.post('/api/auth/refresh', { refreshToken });
+      const { data } = await axios.post(`${BASE_URL}/auth/refresh`, { refreshToken });
       _setTokens(data.accessToken, data.refreshToken);
       original.headers.Authorization = `Bearer ${data.accessToken}`;
       processQueue(null, data.accessToken);
