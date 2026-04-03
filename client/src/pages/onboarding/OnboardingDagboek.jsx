@@ -221,27 +221,11 @@ export default function OnboardingDagboek() {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-          {/* Document body */}
-          <rect x="8" y="5" width="48" height="60" rx="6" fill="#377B8A" />
-          {/* Page lines */}
-          <rect x="16" y="17" width="32" height="4" rx="2" fill="#E6F4F2" />
-          <rect x="16" y="27" width="32" height="4" rx="2" fill="#E6F4F2" />
-          <rect x="16" y="37" width="22" height="4" rx="2" fill="#E6F4F2" />
-          {/* Pen — upright, rotated -40deg, tip points bottom-left */}
-          <g transform="translate(68,68) rotate(-40) translate(-7,-34)">
-            {/* Pen eraser cap */}
-            <rect x="1" y="0" width="12" height="8" rx="3" fill="#2a6070" />
-            {/* Pen body */}
-            <rect x="1" y="7" width="12" height="34" rx="2" fill="#4a9db0" />
-            {/* Pen grip band */}
-            <rect x="1" y="41" width="12" height="7" rx="2" fill="#2a6070" />
-            {/* Pen nib */}
-            <polygon points="1,48 13,48 7,60" fill="#377B8A" />
-            {/* Shine stripe */}
-            <rect x="4" y="10" width="3.5" height="26" rx="1.5" fill="#CFEBE8" opacity="0.5" />
-          </g>
-        </svg>
+        <span className="material-symbols-outlined" style={{
+          fontSize: '72px',
+          color: '#377B8A',
+          userSelect: 'none',
+        }}>contract_edit</span>
       </div>
 
       {/* ── "Dagboek" label ──
@@ -299,9 +283,12 @@ export default function OnboardingDagboek() {
             borderRadius: '50%',
             background: '#CFEBE8',
           }} />
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style={{ position: 'relative', zIndex: 1 }}>
-            <path d="M16 8v16M8 16h16" stroke="#377B8A" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
+          <span className="material-symbols-outlined" style={{
+            position: 'relative', zIndex: 1,
+            fontSize: '22px', color: '#377B8A',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: '32px', height: '32px', userSelect: 'none',
+          }}>add_2</span>
         </div>
         <span style={{
           fontFamily: 'Inter',
@@ -347,10 +334,12 @@ export default function OnboardingDagboek() {
             borderRadius: '50%',
             background: '#CFEBE8',
           }} />
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style={{ position: 'relative', zIndex: 1 }}>
-            <ellipse cx="16" cy="16" rx="10" ry="6.5" stroke="#377B8A" strokeWidth="2" />
-            <circle cx="16" cy="16" r="3" fill="#377B8A" />
-          </svg>
+          <span className="material-symbols-outlined" style={{
+            position: 'relative', zIndex: 1,
+            fontSize: '22px', color: '#377B8A',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: '32px', height: '32px', userSelect: 'none',
+          }}>visibility</span>
         </div>
         <span style={{
           fontFamily: 'Inter',
