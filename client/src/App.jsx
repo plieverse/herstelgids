@@ -26,12 +26,10 @@ configureApiAuth({
 });
 
 function RootRedirect() {
-  const { accessToken, refreshToken } = useAuthStore();
   const onboardingDone = localStorage.getItem('onboardingComplete') === 'true';
 
-  if (accessToken || refreshToken) return <Navigate to="/dagboek" replace />;
   if (!onboardingDone) return <Navigate to="/onboarding" replace />;
-  return <Navigate to="/login" replace />;
+  return <Navigate to="/dagboek" replace />;
 }
 
 export default function App() {

@@ -5,7 +5,7 @@ export default function OnboardingBerichten() {
 
   function handleBegrepen() {
     localStorage.setItem('onboardingComplete', 'true');
-    navigate('/registreren');
+    navigate('/dagboek');
   }
 
   return (

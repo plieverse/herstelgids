@@ -9,7 +9,7 @@ export default function OnboardingGids() {
 
   function handleOverslaan() {
     localStorage.setItem('onboardingComplete', 'true');
-    navigate('/registreren');
+    navigate('/dagboek');
   }
 
   return (
