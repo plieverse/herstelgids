@@ -1,218 +1,161 @@
 import { useNavigate } from 'react-router-dom';
 
-// Circles based on exact Figma positions (relative to 414x736 frame)
-// Figma frame origin y=-1128, so relative_y = figma_y - (-1128) = figma_y + 1128
-const CIRCLES = [
-  { x: 78,  y: 122, size: 129, color: '#eff6f5' }, // Ellipse 20 - large mint
-  { x: 181, y: 251, size: 71,  color: '#ebe9cf' }, // Ellipse 21 - yellow
-  { x: 43,  y: 235, size: 51,  color: '#f4d2bc' }, // Ellipse 23 - orange
-  { x: 238, y: 159, size: 77,  color: '#ebcfde' }, // Ellipse 19 - pink
-  { x: 217, y: 101, size: 42,  color: '#f4d2bc' }, // Ellipse 19 - orange small
-  { x: 47,  y: 105, size: 35,  color: '#cfebd4' }, // Ellipse 18 - green small
-  { x: 322, y: 151, size: 35,  color: '#cfebd4' }, // Ellipse 24 - green
-  { x: 271, y: 276, size: 35,  color: '#dfcfeb' }, // Ellipse 22 - purple
-  { x: 252, y: 326, size: 18,  color: '#eff6f5' }, // Ellipse 26 - teal tiny
-];
-
-function BookIllustration() {
-  return (
-    <svg
-      viewBox="0 0 385 96"
-      width="100%"
-      style={{ maxWidth: 320, display: 'block', margin: '0 auto' }}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Shadow / glow under book */}
-      <ellipse cx="192" cy="90" rx="140" ry="8" fill="#c8e6e2" opacity="0.5" />
-
-      {/* Left page */}
-      <path
-        d="M192 8 C160 4 80 8 12 22 C8 23 6 26 8 28 L16 82 C14 84 16 86 20 85 C76 72 152 68 192 72 Z"
-        fill="#b8ddd8"
-      />
-      {/* Right page */}
-      <path
-        d="M192 8 C224 4 304 8 372 22 C376 23 378 26 376 28 L368 82 C370 84 368 86 364 85 C308 72 232 68 192 72 Z"
-        fill="#c8e8e3"
-      />
-
-      {/* Left page lines */}
-      <line x1="40"  y1="34" x2="180" y2="28" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-      <line x1="38"  y1="46" x2="178" y2="40" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-      <line x1="36"  y1="58" x2="176" y2="53" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-      <line x1="36"  y1="70" x2="140" y2="65" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-
-      {/* Right page lines */}
-      <line x1="204" y1="28" x2="344" y2="34" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-      <line x1="206" y1="40" x2="346" y2="46" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-      <line x1="208" y1="53" x2="348" y2="58" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-      <line x1="244" y1="65" x2="348" y2="70" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-
-      {/* Spine */}
-      <path
-        d="M188 6 C186 6 184 8 184 10 L184 74 C184 76 186 78 188 78 L196 78 C198 78 200 76 200 74 L200 10 C200 8 198 6 196 6 Z"
-        fill="#377b8a"
-      />
-
-      {/* Left cover flap */}
-      <path
-        d="M8 26 C8 24 10 22 12 22 L16 24 L20 82 L16 84 C14 84 12 82 12 80 Z"
-        fill="#377b8a"
-      />
-      {/* Right cover flap */}
-      <path
-        d="M376 26 C376 24 374 22 372 22 L368 24 L364 82 L368 84 C370 84 372 82 372 80 Z"
-        fill="#377b8a"
-      />
-
-      {/* Left bookmark ribbon */}
-      <path d="M20 22 L20 52 L24 48 L28 52 L28 22 Z" fill="#377b8a" opacity="0.8"/>
-      {/* Right bookmark ribbon */}
-      <path d="M357 22 L357 45 L361 41 L365 45 L365 22 Z" fill="#377b8a" opacity="0.8"/>
-
-      {/* Page curl top center */}
-      <path
-        d="M186 6 Q192 2 198 6"
-        stroke="#2a5c6a"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.4"
-      />
-    </svg>
-  );
-}
-
 export default function OnboardingWelcome() {
   const navigate = useNavigate();
 
+  function handleBegrepen() {
+    navigate('/onboarding/privacy');
+  }
+
   return (
-    <div style={styles.page}>
-      {/* Top illustration area — white background */}
-      <div style={styles.illustrationArea}>
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      maxWidth: '414px',
+      height: '100dvh',
+      minHeight: '736px',
+      margin: '0 auto',
+      background: '#FFFFFF',
+      fontFamily: 'Inter, sans-serif',
+      overflow: 'hidden',
+    }}>
 
-        {/* Decorative circles at exact Figma positions */}
-        {CIRCLES.map((c, i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              left: `${(c.x / 414) * 100}%`,
-              top: c.y,
-              width: c.size,
-              height: c.size,
-              borderRadius: '50%',
-              background: c.color,
-              transform: 'none',
-            }}
-          />
-        ))}
+      {/* ── Ellipse 31: large grey background circle (bottom) ── */}
+      <div style={{
+        position: 'absolute',
+        width: '700px',
+        height: '700px',
+        left: '-143px',
+        top: '465px',
+        borderRadius: '50%',
+        background: '#F6F6F6',
+      }} />
 
-        {/* Title — positioned like Figma: x=47, y=174 */}
-        <div style={styles.titleWrap}>
-          <span style={styles.de}>De</span>
-          <span style={styles.appName}>Lichaamsgids</span>
-        </div>
+      {/* ── Decorative circles ── */}
 
-        {/* Book illustration — positioned like Figma: y≈348 */}
-        <div style={styles.bookWrap}>
-          <BookIllustration />
-        </div>
+      {/* Ellipse 20: 129×129, left:78, top:122, #EFF6F5 */}
+      <div style={{ position: 'absolute', width: '129px', height: '129px', left: '78px', top: '122px', borderRadius: '50%', background: '#EFF6F5' }} />
+
+      {/* Ellipse 21: 71×71, left:181, top:251, #EBE9CF */}
+      <div style={{ position: 'absolute', width: '71px', height: '71px', left: '181px', top: '251px', borderRadius: '50%', background: '#EBE9CF' }} />
+
+      {/* Ellipse 23: 51×51, left:43, top:235, #F4D2BC */}
+      <div style={{ position: 'absolute', width: '51px', height: '51px', left: '43px', top: '235px', borderRadius: '50%', background: '#F4D2BC' }} />
+
+      {/* Ellipse 19 (first): 77×77, left:238, top:159, #EBCFDE */}
+      <div style={{ position: 'absolute', width: '77px', height: '77px', left: '238px', top: '159px', borderRadius: '50%', background: '#EBCFDE' }} />
+
+      {/* Ellipse 19 (second): 42×42, left:217, top:101, #F4D2BC */}
+      <div style={{ position: 'absolute', width: '42px', height: '42px', left: '217px', top: '101px', borderRadius: '50%', background: '#F4D2BC' }} />
+
+      {/* Ellipse 18: 35×35, left:47, top:105, #CFEBD4 */}
+      <div style={{ position: 'absolute', width: '35px', height: '35px', left: '47px', top: '105px', borderRadius: '50%', background: '#CFEBD4' }} />
+
+      {/* Ellipse 24: 35×35, left:322, top:151, #CFEBD4 */}
+      <div style={{ position: 'absolute', width: '35px', height: '35px', left: '322px', top: '151px', borderRadius: '50%', background: '#CFEBD4' }} />
+
+      {/* Ellipse 22: 35×35, left:271, top:276, #DFCFEB */}
+      <div style={{ position: 'absolute', width: '35px', height: '35px', left: '271px', top: '276px', borderRadius: '50%', background: '#DFCFEB' }} />
+
+      {/* Ellipse 26: 18×18, left:252, top:326, #EFF6F5 */}
+      <div style={{ position: 'absolute', width: '18px', height: '18px', left: '252px', top: '326px', borderRadius: '50%', background: '#EFF6F5' }} />
+
+      {/* Ellipse 25: 35×35, left:136, top:318, #EFF6F5 */}
+      <div style={{ position: 'absolute', width: '35px', height: '35px', left: '136px', top: '318px', borderRadius: '50%', background: '#EFF6F5' }} />
+
+      {/* ── "De Lichaamsgids" title ──
+          width:319, height:88, left:47, top:174, 24px bold, #377B8A */}
+      <div style={{
+        position: 'absolute',
+        width: '319px',
+        height: '88px',
+        left: '47px',
+        top: '174px',
+        fontFamily: 'Inter',
+        fontWeight: 700,
+        fontSize: '24px',
+        lineHeight: '29px',
+        color: '#377B8A',
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        De Lichaamsgids
       </div>
 
-      {/* Bottom card — gray rounded top, like Figma */}
-      <div style={styles.card}>
-        <p style={styles.cardText}>
-          Ontdek samen met je zorg-<br />
-          verleners je lichaam opnieuw met{' '}
-          <strong>de Lichaamsgids</strong>
-        </p>
-        <button style={styles.button} onClick={() => navigate('/onboarding/privacy')}>
-          Beginnen &nbsp;›
-        </button>
+      {/* ── Book illustration (Group 1) ──
+          Group: left:14.5px, top:348px, width:385px
+          Vector 4: left:16.73, top:348, width:379.77, height:96 → #377B8A
+          Vector 5: left:14.5, top:387 (y+39 from group), width:31.5, height:50 → left cover
+          Vector 6: left:374, top:398 (y+50 from group), width:25.53, height:38.5 → right cover */}
+      <svg
+        style={{ position: 'absolute', left: '0px', top: '348px' }}
+        width="414"
+        height="96"
+        viewBox="0 0 414 96"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Vector 5: left cover (slightly left of Vector 4) */}
+        <rect x="14.5" y="39" width="31.5" height="50" fill="#377B8A" />
+        {/* Vector 6: right cover (slightly right of Vector 4) */}
+        <rect x="374" y="50" width="25.53" height="38.5" fill="#377B8A" />
+        {/* Vector 4: main book body (on top) */}
+        <rect x="16.73" y="0" width="379.77" height="96" fill="#377B8A" />
+      </svg>
+
+      {/* ── Subtitle ──
+          width:331, height:66, left:41, top:529, 20px, #727272 */}
+      <div style={{
+        position: 'absolute',
+        width: '331px',
+        height: '66px',
+        left: '41px',
+        top: '529px',
+        fontFamily: 'Inter',
+        fontWeight: 400,
+        fontSize: '20px',
+        lineHeight: '24px',
+        color: '#727272',
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        Ontdek samen met je zorgverleners je lichaam opnieuw met de Lichaamsgids
       </div>
+
+      {/* ── "Begrepen" button ──
+          width:170, height:50, left:122, top:621, radius:20px */}
+      <button
+        onClick={handleBegrepen}
+        style={{
+          position: 'absolute',
+          width: '170px',
+          height: '50px',
+          left: '122px',
+          top: '621px',
+          background: '#377B8A',
+          borderRadius: '20px',
+          border: 'none',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+          fontFamily: 'Inter',
+          fontWeight: 400,
+          fontSize: '24px',
+          lineHeight: '29px',
+          color: '#FFFFFF',
+        }}
+      >
+        Begrepen
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7 4l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </div>
   );
 }
-
-const styles = {
-  page: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100dvh',
-    background: '#ffffff',
-    maxWidth: '480px',
-    margin: '0 auto',
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  illustrationArea: {
-    position: 'relative',
-    flex: 1,
-    background: '#ffffff',
-    overflow: 'hidden',
-    minHeight: 0,
-  },
-  titleWrap: {
-    position: 'absolute',
-    left: '47px',
-    top: '174px',
-    zIndex: 2,
-    display: 'flex',
-    flexDirection: 'column',
-    lineHeight: 1.15,
-  },
-  de: {
-    fontSize: '22px',
-    fontWeight: '400',
-    color: '#377b8a',
-    fontFamily: 'Inter, sans-serif',
-  },
-  appName: {
-    fontSize: '42px',
-    fontWeight: '700',
-    color: '#377b8a',
-    fontFamily: 'Inter, sans-serif',
-    letterSpacing: '-0.5px',
-  },
-  bookWrap: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: '348px',
-    padding: '0 16px',
-    zIndex: 2,
-  },
-  card: {
-    background: '#f6f6f6',
-    borderRadius: '32px 32px 0 0',
-    padding: '28px 42px 44px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '20px',
-    flexShrink: 0,
-  },
-  cardText: {
-    fontSize: '18px',
-    fontWeight: '400',
-    color: '#727272',
-    textAlign: 'center',
-    lineHeight: 1.6,
-    margin: 0,
-    fontFamily: 'Inter, sans-serif',
-  },
-  button: {
-    background: '#377b8a',
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '50px',
-    padding: '14px 36px',
-    fontSize: '18px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    fontFamily: 'Inter, sans-serif',
-    minHeight: '52px',
-    letterSpacing: '0.2px',
-  },
-};
