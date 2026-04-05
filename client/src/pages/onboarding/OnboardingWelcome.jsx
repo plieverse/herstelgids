@@ -84,26 +84,19 @@ export default function OnboardingWelcome() {
         De Lichaamsgids
       </div>
 
-      {/* ── Book illustration (Group 1) ──
-          Group: left:14.5px, top:348px, width:385px
-          Vector 4: left:16.73, top:348, width:379.77, height:96 → #377B8A
-          Vector 5: left:14.5, top:387 (y+39 from group), width:31.5, height:50 → left cover
-          Vector 6: left:374, top:398 (y+50 from group), width:25.53, height:38.5 → right cover */}
-      <svg
-        style={{ position: 'absolute', left: '0px', top: '348px' }}
-        width="414"
-        height="96"
-        viewBox="0 0 414 96"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* Vector 5: left cover (slightly left of Vector 4) */}
-        <rect x="14.5" y="39" width="31.5" height="50" fill="#377B8A" />
-        {/* Vector 6: right cover (slightly right of Vector 4) */}
-        <rect x="374" y="50" width="25.53" height="38.5" fill="#377B8A" />
-        {/* Vector 4: main book body (on top) */}
-        <rect x="16.73" y="0" width="379.77" height="96" fill="#377B8A" />
-      </svg>
+      {/* ── Book illustration ──
+          Group 1: left:14.5px, top:348px, width:385.03px */}
+      <img
+        src="/boek.png"
+        alt="Boek illustratie"
+        style={{
+          position: 'absolute',
+          left: '14.5px',
+          top: '348px',
+          width: '385px',
+          height: 'auto',
+        }}
+      />
 
       {/* ── Subtitle ──
           width:331, height:66, left:41, top:529, 20px, #727272 */}
