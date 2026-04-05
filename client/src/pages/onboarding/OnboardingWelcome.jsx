@@ -151,7 +151,7 @@ export default function OnboardingWelcome() {
           color: '#FFFFFF',
         }}
       >
-        Begrepen
+        Starten
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M7 4l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
