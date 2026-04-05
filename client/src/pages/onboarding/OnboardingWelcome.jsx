@@ -57,11 +57,11 @@ export default function OnboardingWelcome() {
       {/* Ellipse 22: 35×35, left:271, top:276, #DFCFEB */}
       <div style={{ position: 'absolute', width: '35px', height: '35px', left: '271px', top: '276px', borderRadius: '50%', background: '#DFCFEB' }} />
 
-      {/* Ellipse 26: 18×18, left:252, top:326, #EFF6F5 */}
+      {/* Ellipse 26: 18×18, left:252, top:326, #EFF6F5 — voor het boek */}
       <div style={{ position: 'absolute', width: '18px', height: '18px', left: '252px', top: '326px', borderRadius: '50%', background: '#EFF6F5', zIndex: 2 }} />
 
-      {/* Ellipse 25: 35×35, left:136, top:318, #EFF6F5 */}
-      <div style={{ position: 'absolute', width: '35px', height: '35px', left: '136px', top: '318px', borderRadius: '50%', background: '#EFF6F5', zIndex: 2 }} />
+      {/* Ellipse 25: 35×35, left:136, top:318, #EFF6F5 — achter het boek */}
+      <div style={{ position: 'absolute', width: '35px', height: '35px', left: '136px', top: '318px', borderRadius: '50%', background: '#EFF6F5', zIndex: 0 }} />
 
       {/* ── "De Lichaamsgids" title ──
           width:319, height:88, left:47, top:174, 24px bold, #377B8A */}
@@ -95,6 +95,7 @@ export default function OnboardingWelcome() {
           top: '348px',
           width: '385px',
           height: 'auto',
+          zIndex: 1,
         }}
       />
 
