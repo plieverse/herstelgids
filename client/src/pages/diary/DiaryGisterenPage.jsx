@@ -8,9 +8,10 @@ const DUTCH_MONTHS = [
 
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// iconColor matches the circle shade: green→#378A6C, yellow→#C5A500, orange→#CB6E02, red→#AF1E1E
+// Icon color = darker version of the circle color (same logic as vandaag summary in Figma)
+// #CFEBD4 green → #378A6C | #F2EFC2 yellow → #C5A500 | #F0C8AD/#F4D2BC orange → #CB6E02 | #EEC7C7 red → #AF1E1E
 const ICON_COLOR = {
-  '#B2DEB6': '#378A6C',
+  '#B2DEB6': '#2E7D4F',
   '#CFEBD4': '#378A6C',
   '#F2EFC2': '#C5A500',
   '#F0C8AD': '#CB6E02',
@@ -201,21 +202,21 @@ export default function DiaryGisterenPage() {
         </div>
       </div>
 
-      {/* ── Ellipse 25: 54×54, left:31, top:144 ── */}
+      {/* ── Ellipse 25: 54×54, left:25, top:136 ── */}
       <div style={{
         position: 'absolute', width: '54px', height: '54px',
-        left: '31px', top: '144px', borderRadius: '50%', background: '#CFEBE8',
+        left: '25px', top: '136px', borderRadius: '50%', background: '#CFEBE8',
       }} />
 
-      {/* ── Ellipse 26: 14×14, left:78, top:191 ── */}
+      {/* ── Ellipse 26: 14×14, left:72, top:183 ── */}
       <div style={{
         position: 'absolute', width: '14px', height: '14px',
-        left: '78px', top: '191px', borderRadius: '50%', background: '#CFEBE8',
+        left: '72px', top: '183px', borderRadius: '50%', background: '#CFEBE8',
       }} />
 
-      {/* ── "Samenvatting" title: left:43, top:151 ── */}
+      {/* ── "Samenvatting" title: left:37, top:144 ── */}
       <div style={{
-        position: 'absolute', left: '43px', top: '151px',
+        position: 'absolute', left: '37px', top: '144px',
         width: '218px', height: '39px',
         fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
         lineHeight: '39px', color: '#377B8A',
@@ -224,9 +225,9 @@ export default function DiaryGisterenPage() {
         Samenvatting
       </div>
 
-      {/* ── Frame 46: 5 rows, left:37, top:215 ── */}
+      {/* ── Frame 46: 5 rows, left:25, top:221 ── */}
       <div style={{
-        position: 'absolute', width: '346px', left: '37px', top: '215px',
+        position: 'absolute', width: '346px', left: '25px', top: '221px',
         display: 'flex', flexDirection: 'column', gap: '10px',
       }}>
         {summaryRows.map((row) => (
