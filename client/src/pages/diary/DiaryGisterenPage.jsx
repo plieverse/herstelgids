@@ -8,75 +8,80 @@ const DUTCH_MONTHS = [
 
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+// iconColor matches the circle shade: green→#378A6C, yellow→#C5A500, orange→#CB6E02, red→#AF1E1E
+const ICON_COLOR = {
+  '#B2DEB6': '#378A6C',
+  '#CFEBD4': '#378A6C',
+  '#F2EFC2': '#C5A500',
+  '#F0C8AD': '#CB6E02',
+  '#EEC7C7': '#AF1E1E',
+  '#F4D2BC': '#CB6E02',
+};
+
 const CATEGORIES = [
   {
     id: 1,
     category: 'Vergelijking gisteren',
     icon: 'health_metrics',
-    iconColor: '#C5A500',
     isText: false,
     options: [
-      { answerBold: 'Veel beter.',   answerNormal: ' Ik voel me veel beter. Ik heb bijna geen last.', circleColor: '#B2DEB6' },
-      { answerBold: 'Iets beter.',   answerNormal: ' Ik voel me iets beter. Ik heb nog wel een beetje last.', circleColor: '#CFEBD4' },
-      { answerBold: 'Hetzelfde.',    answerNormal: ' Ik voel me hetzelfde als gisteren.', circleColor: '#F2EFC2' },
-      { answerBold: 'Iets slechter.', answerNormal: ' Ik voel me iets slechter. Ik heb meer last.', circleColor: '#F0C8AD' },
-      { answerBold: 'Veel slechter.', answerNormal: ' Ik voel me veel slechter. Ik heb heel veel last.', circleColor: '#EEC7C7' },
+      { answerBold: 'Veel beter.',    answerNormal: ' Ik voel me veel beter. Ik heb bijna geen last.',          circleColor: '#B2DEB6' },
+      { answerBold: 'Iets beter.',    answerNormal: ' Ik voel me iets beter. Ik heb nog wel een beetje last.',  circleColor: '#CFEBD4' },
+      { answerBold: 'Hetzelfde.',     answerNormal: ' Ik voel me hetzelfde als gisteren.',                      circleColor: '#F2EFC2' },
+      { answerBold: 'Iets slechter.', answerNormal: ' Ik voel me iets slechter. Ik heb meer last.',             circleColor: '#F0C8AD' },
+      { answerBold: 'Veel slechter.', answerNormal: ' Ik voel me veel slechter. Ik heb heel veel last.',        circleColor: '#EEC7C7' },
     ],
   },
   {
     id: 2,
     category: 'Eten',
     icon: 'nutrition',
-    iconColor: '#378A6C',
     isText: false,
     options: [
-      { answerBold: 'Heel goed.',   answerNormal: ' Ik heb geen problemen met eten.', circleColor: '#B2DEB6' },
-      { answerBold: 'Goed.',        answerNormal: ' Ik heb af en toe last, maar het gaat nog goed.', circleColor: '#CFEBD4' },
-      { answerBold: 'Middelmatig.', answerNormal: ' Ik heb duidelijk moeite met eten, maar het lukt wel.', circleColor: '#F2EFC2' },
-      { answerBold: 'Moeilijk.',    answerNormal: ' Ik kan moeilijk mijn eten doorslikken.', circleColor: '#F0C8AD' },
-      { answerBold: 'Heel moeilijk.', answerNormal: ' Ik kan mijn eten bijna niet doorslikken.', circleColor: '#EEC7C7' },
+      { answerBold: 'Heel goed.',     answerNormal: ' Ik heb geen problemen met eten.',                         circleColor: '#B2DEB6' },
+      { answerBold: 'Goed.',          answerNormal: ' Ik heb af en toe last, maar het gaat nog goed.',          circleColor: '#CFEBD4' },
+      { answerBold: 'Middelmatig.',   answerNormal: ' Ik heb duidelijk moeite met eten, maar het lukt wel.',    circleColor: '#F2EFC2' },
+      { answerBold: 'Moeilijk.',      answerNormal: ' Ik kan moeilijk mijn eten doorslikken.',                  circleColor: '#F0C8AD' },
+      { answerBold: 'Heel moeilijk.', answerNormal: ' Ik kan mijn eten bijna niet doorslikken.',                circleColor: '#EEC7C7' },
     ],
   },
   {
     id: 3,
     category: 'Ademen',
     icon: 'pulmonology',
-    iconColor: '#CB6E02',
     isText: false,
     options: [
-      { answerBold: 'Heel goed.',   answerNormal: ' Ik kan goed door ademen.', circleColor: '#B2DEB6' },
-      { answerBold: 'Goed.',        answerNormal: ' Ik heb af en toe moeite met ademen. Maar het gaat nog goed.', circleColor: '#CFEBD4' },
-      { answerBold: 'Middelmatig.', answerNormal: ' Ik heb duidelijk moeite met ademen. Maar het lukt wel.', circleColor: '#F2EFC2' },
-      { answerBold: 'Moeilijk.',    answerNormal: ' Ik kan niet goed ademen.', circleColor: '#F0C8AD' },
-      { answerBold: 'Heel moeilijk.', answerNormal: ' Ik kan bijna niet ademen.', circleColor: '#EEC7C7' },
+      { answerBold: 'Heel goed.',     answerNormal: ' Ik kan goed door ademen.',                                circleColor: '#B2DEB6' },
+      { answerBold: 'Goed.',          answerNormal: ' Ik heb af en toe moeite met ademen. Maar het gaat nog goed.', circleColor: '#CFEBD4' },
+      { answerBold: 'Middelmatig.',   answerNormal: ' Ik heb duidelijk moeite met ademen. Maar het lukt wel.', circleColor: '#F2EFC2' },
+      { answerBold: 'Moeilijk.',      answerNormal: ' Ik kan niet goed ademen.',                               circleColor: '#F0C8AD' },
+      { answerBold: 'Heel moeilijk.', answerNormal: ' Ik kan bijna niet ademen.',                              circleColor: '#EEC7C7' },
     ],
   },
   {
     id: 4,
     category: 'Pijn',
     icon: 'bolt',
-    iconColor: '#AF1E1E',
     isText: false,
     options: [
-      { answerBold: 'Geen pijn.',      answerNormal: ' Ik voel helemaal geen pijn.', circleColor: '#B2DEB6' },
-      { answerBold: 'Weinig pijn.',    answerNormal: ' Ik voel het, maar het gaat.', circleColor: '#CFEBD4' },
+      { answerBold: 'Geen pijn.',      answerNormal: ' Ik voel helemaal geen pijn.',                           circleColor: '#B2DEB6' },
+      { answerBold: 'Weinig pijn.',    answerNormal: ' Ik voel het, maar het gaat.',                           circleColor: '#CFEBD4' },
       { answerBold: 'Pijn.',           answerNormal: ' Ik voel duidelijk pijn. Maar het is nog vol te houden.', circleColor: '#F2EFC2' },
-      { answerBold: 'Veel pijn.',      answerNormal: ' Ik heb veel pijn.', circleColor: '#F0C8AD' },
-      { answerBold: 'Heel veel pijn.', answerNormal: ' Ik heb heel veel last van pijn.', circleColor: '#EEC7C7' },
+      { answerBold: 'Veel pijn.',      answerNormal: ' Ik heb veel pijn.',                                     circleColor: '#F0C8AD' },
+      { answerBold: 'Heel veel pijn.', answerNormal: ' Ik heb heel veel last van pijn.',                       circleColor: '#EEC7C7' },
     ],
   },
   {
     id: 5,
     category: 'Poep',
     icon: 'WC',
-    iconColor: '#378A6C',
     isText: true,
     options: [
-      { answerBold: 'Diarree.',     answerNormal: ' Mijn poep is heel dun of waterig.', circleColor: '#F4D2BC' },
-      { answerBold: 'Wat dunner.',  answerNormal: ' Mijn poep was wat dunner dan normaal.', circleColor: '#F2EFC2' },
-      { answerBold: 'Normaal.',     answerNormal: ' Mijn poep is normaal.', circleColor: '#CFEBD4' },
-      { answerBold: 'Wat harder.',  answerNormal: ' Mijn poep is wat harder of vaster dan normaal.', circleColor: '#F2EFC2' },
-      { answerBold: 'Verstopping.', answerNormal: ' Mijn poep is hard. Ik kan moeilijk poepen.', circleColor: '#F4D2BC' },
+      { answerBold: 'Diarree.',     answerNormal: ' Mijn poep is heel dun of waterig.',                        circleColor: '#F4D2BC' },
+      { answerBold: 'Wat dunner.',  answerNormal: ' Mijn poep was wat dunner dan normaal.',                    circleColor: '#F2EFC2' },
+      { answerBold: 'Normaal.',     answerNormal: ' Mijn poep is normaal.',                                    circleColor: '#CFEBD4' },
+      { answerBold: 'Wat harder.',  answerNormal: ' Mijn poep is wat harder of vaster dan normaal.',           circleColor: '#F2EFC2' },
+      { answerBold: 'Verstopping.', answerNormal: ' Mijn poep is hard. Ik kan moeilijk poepen.',               circleColor: '#F4D2BC' },
     ],
   },
 ];
@@ -87,9 +92,12 @@ export default function DiaryGisterenPage() {
   const yesterday = new Date(Date.now() - 86400000);
   const dateString = `${yesterday.getDate()} ${DUTCH_MONTHS[yesterday.getMonth()]}`;
 
-  // Pick random answers once per page mount
+  // Pick random answers once per page mount; derive iconColor from circleColor
   const summaryRows = useMemo(() =>
-    CATEGORIES.map((cat) => ({ ...cat, ...pick(cat.options) })),
+    CATEGORIES.map((cat) => {
+      const option = pick(cat.options);
+      return { ...cat, ...option, iconColor: ICON_COLOR[option.circleColor] };
+    }),
   []);
 
   return (
