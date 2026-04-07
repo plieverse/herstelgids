@@ -272,7 +272,7 @@ export default function DiaryBevestigingPage() {
           {/* "Begrepen" button: 170×50px centered */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button
-              onClick={() => navigate('/dagboek')}
+              onClick={() => navigate('/dagboek/samenvatting')}
               style={{
                 width: '170px',
                 height: '50px',
