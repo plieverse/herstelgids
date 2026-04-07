@@ -3,26 +3,113 @@ import { useNavigate } from 'react-router-dom';
 
 function GeenCodeOverlay({ onClose }) {
   return (
-    <div style={ov.backdrop} onClick={onClose}>
-      <div style={ov.sheet} onClick={e => e.stopPropagation()}>
-        <div style={ov.decorCircle} />
-        <button style={ov.closeBtn} onClick={onClose} aria-label="Sluiten">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="16" fill="#377B8A" />
-            <path d="M11 11l10 10M21 11l-10 10" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.4)',
+        zIndex: 200,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      {/* Card: 361×343px, white, border-radius 20px */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: 'relative',
+          width: 361,
+          height: 343,
+          background: '#FFFFFF',
+          borderRadius: 20,
+        }}
+      >
+        {/* Ellipse 30: 76×76, left:146, top:25, #CFEBE8 */}
+        <div style={{
+          position: 'absolute',
+          width: 76,
+          height: 76,
+          left: 146,
+          top: 25,
+          borderRadius: '50%',
+          background: '#CFEBE8',
+        }} />
+
+        {/* Title "Activatiecode": left:65, top:35, width:231, height:57 */}
+        <div style={{
+          position: 'absolute',
+          left: 65,
+          top: 35,
+          width: 231,
+          height: 57,
+          fontFamily: 'Inter',
+          fontStyle: 'normal',
+          fontWeight: 700,
+          fontSize: 24,
+          lineHeight: '29px',
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          justifyContent: 'center',
+          color: '#377B8A',
+        }}>
+          Activatiecode
+        </div>
+
+        {/* Body text: left:6.65%=24, top:33.82%=116, right:2.22%=8, bottom:26.53%=91 → height:136 */}
+        <div style={{
+          position: 'absolute',
+          left: 24,
+          top: 116,
+          width: 329,
+          height: 136,
+          fontFamily: 'Inter',
+          fontStyle: 'normal',
+          fontWeight: 400,
+          fontSize: 16,
+          lineHeight: '19px',
+          display: 'flex',
+          alignItems: 'center',
+          color: '#727272',
+        }}>
+          Van het ziekenhuis ontvang je een e-mail met een persoonlijke activatiecode. Heb je geen e-mail ontvangen? Neem dan contact op met je zorgverlener.
+        </div>
+
+        {/* Close button: left:307, top:7, width:46, height:46 */}
+        <button
+          onClick={onClose}
+          aria-label="Sluiten"
+          style={{
+            position: 'absolute',
+            left: 307,
+            top: 7,
+            width: 46,
+            height: 46,
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div style={{
+            width: 26,
+            height: 26,
+            borderRadius: '50%',
+            background: '#377B8A',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 2l10 10M12 2L2 12" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </div>
         </button>
-        <h2 style={ov.title}>Geen activatiecode ontvangen?</h2>
-        <p style={ov.body}>
-          Je activatiecode is verstuurd naar het e-mailadres dat bij je zorgverlener bekend is.
-        </p>
-        <p style={ov.body}>
-          Controleer ook je spam-map. Heb je nog steeds geen code ontvangen? Neem dan contact op:
-        </p>
-        <ul style={ov.list}>
-          <li style={ov.listItem}>Stuur een e-mail naar <a href="mailto:info@lichaamsgids.nl" style={ov.link}>info@lichaamsgids.nl</a></li>
-          <li style={ov.listItem}>Bel ons op 06-12345678 (ma–vr, 8.00–16.30)</li>
-        </ul>
       </div>
     </div>
   );
@@ -352,65 +439,3 @@ export default function OnboardingActivatiecode() {
   );
 }
 
-const ov = {
-  backdrop: {
-    position: 'fixed',
-    inset: 0,
-    background: 'rgba(0,0,0,0.4)',
-    zIndex: 200,
-    display: 'flex',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-  },
-  sheet: {
-    background: '#FFFFFF',
-    borderRadius: '24px 24px 0 0',
-    padding: '48px 28px 48px',
-    width: '100%',
-    maxWidth: '414px',
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  decorCircle: {
-    position: 'absolute',
-    top: '-40px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '120px',
-    height: '120px',
-    borderRadius: '50%',
-    background: '#CFEBE8',
-    zIndex: 0,
-  },
-  closeBtn: {
-    position: 'absolute',
-    top: '20px',
-    right: '20px',
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    padding: 0,
-    zIndex: 1,
-  },
-  title: {
-    fontFamily: 'Inter',
-    fontWeight: 700,
-    fontSize: '24px',
-    lineHeight: '29px',
-    color: '#377B8A',
-    textAlign: 'center',
-    marginBottom: '20px',
-    position: 'relative',
-    zIndex: 1,
-  },
-  body: {
-    fontFamily: 'Inter',
-    fontSize: '16px',
-    lineHeight: 1.6,
-    color: '#2a2a2a',
-    marginBottom: '12px',
-  },
-  link: { color: '#377B8A', textDecoration: 'underline' },
-  list: { paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '8px' },
-  listItem: { fontFamily: 'Inter', fontSize: '16px', lineHeight: 1.6, color: '#2a2a2a' },
-};
