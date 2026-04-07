@@ -151,7 +151,7 @@ export default function DiaryVraag3Page() {
             justifyContent: 'center',
           }}>
             <span className="material-symbols-outlined" style={{
-              fontSize: '37px',
+              fontSize: '48px',
               color: '#377B8A',
               userSelect: 'none',
             }}>pulmonology</span>

@@ -151,7 +151,7 @@ export default function DiaryVraag1Page() {
             justifyContent: 'center',
           }}>
             <span className="material-symbols-outlined" style={{
-              fontSize: '37px',
+              fontSize: '48px',
               color: '#377B8A',
               userSelect: 'none',
             }}>health_metrics</span>
