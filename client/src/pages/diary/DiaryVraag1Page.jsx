@@ -99,13 +99,13 @@ export default function DiaryVraag1Page() {
         </div>
       </div>
 
-      {/* ── Rectangle 28: grey area, top:98 ── */}
+      {/* ── Rectangle 28: grey area, top:98 to bottom nav ── */}
       <div style={{
         position: 'absolute',
         left: 0,
         top: '98px',
         width: '414px',
-        height: '580px',
+        bottom: '58px',
         background: '#F6F6F6',
         borderRadius: '20px 20px 0px 0px',
       }} />
@@ -190,7 +190,7 @@ export default function DiaryVraag1Page() {
                 position: 'relative',
                 width: '344px',
                 height: `${opt.height}px`,
-                background: '#FFFFFF',
+                background: selected === opt.id ? '#E6F4F2' : '#FFFFFF',
                 borderRadius: '20px',
                 border: selected === opt.id ? '2px solid #377B8A' : '2px solid transparent',
                 cursor: 'pointer',
@@ -210,12 +210,13 @@ export default function DiaryVraag1Page() {
                 background: opt.color,
               }} />
 
-              {/* Text: left:10.11%, top:11.69% */}
+              {/* Text: vertically centered, left:10.11%, right:17.49% */}
               <div style={{
                 position: 'absolute',
                 left: `${Math.round(0.1011 * 344)}px`,
-                top: `${Math.round(0.1169 * opt.height)}px`,
                 right: `${Math.round(0.1749 * 344)}px`,
+                top: '50%',
+                transform: 'translateY(-50%)',
               }}>
                 <div style={{
                   fontFamily: 'Inter',
