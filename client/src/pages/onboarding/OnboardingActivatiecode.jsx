@@ -70,7 +70,8 @@ function GeenCodeOverlay({ onClose }) {
           lineHeight: '19px',
           color: '#727272',
         }}>
-          Van het ziekenhuis ontvang je een e-mail met een persoonlijke activatiecode. Heb je geen e-mail ontvangen? Neem dan contact op met je zorgverlener.
+          <p style={{ margin: '0 0 12px 0' }}>Van het ziekenhuis ontvang je een e-mail met een persoonlijke activatiecode.</p>
+          <p style={{ margin: 0 }}>Heb je geen e-mail ontvangen? Neem dan contact op met je zorgverlener.</p>
         </div>
 
         {/* Sluitknop: rechtsbovenin */}
