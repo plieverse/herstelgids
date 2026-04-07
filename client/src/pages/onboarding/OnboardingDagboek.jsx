@@ -209,13 +209,13 @@ export default function OnboardingDagboek() {
         background: '#CFEBE8',
       }} />
 
-      {/* ── Dagboek icon (contract_edit) ── gecentreerd op Ellipse 32 (left:150, top:334) */}
+      {/* ── Dagboek icon (contract_edit) ── */}
       <div style={{
         position: 'absolute',
         width: '130px',
         height: '130px',
-        left: '150px',
-        top: '334px',
+        left: '142px',
+        top: '309px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -283,10 +283,11 @@ export default function OnboardingDagboek() {
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
-            position: 'relative', zIndex: 1,
+            position: 'absolute', zIndex: 1,
             fontSize: '22px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             width: '32px', height: '32px', userSelect: 'none',
+            top: 0, left: 0,
           }}>add_2</span>
         </div>
         <span style={{
@@ -334,10 +335,11 @@ export default function OnboardingDagboek() {
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
-            position: 'relative', zIndex: 1,
+            position: 'absolute', zIndex: 1,
             fontSize: '22px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             width: '32px', height: '32px', userSelect: 'none',
+            top: 0, left: 0,
           }}>visibility</span>
         </div>
         <span style={{
