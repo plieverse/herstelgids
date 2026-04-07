@@ -4,89 +4,111 @@ import BottomNav from '../../components/layout/BottomNav';
 const TILES = [
   {
     id: 1,
-    title: 'Voor het eten',
-    subtitle: 'Vol gevoel en geen honger',
-    icon: 'gastroenterology',
-    circleColor: '#E6F4F2',
-    iconColor: '#377B8A',
+    title: 'Eten',
+    subtitle: 'Portie grootte, gewichtsverlies en meer...',
+    icon: 'nutrition',
+    circleColor: '#EBCFCF',
+    iconColor: '#932323',
     tileLeft: 0, tileTop: 0,
-    iconTop: 10,
-    circle: { w: 60, h: 60, l: 57, t: 29 },
+    iconTop: 16,
+    titleRows: 1,
+    circle: { w: 60, h: 60, l: 50, t: 34 },
     dots: [
-      { w: 17, h: 17, l: 133, t: 6 },
-      { w: 14, h: 14, l: 148, t: 20 },
-      { w: 9,  h: 9,  l: 136, t: 25 },
+      { w: 9,  h: 9,  l: 72, t: 18 },
+      { w: 9,  h: 9,  l: 58, t: 16 },
+      { w: 9,  h: 9,  l: 55, t: 28 },
     ],
   },
   {
     id: 2,
-    title: 'Tijdens het eten',
-    subtitle: 'Slikken, boeren, veel slijm en meer...',
-    icon: 'flatware',
-    circleColor: '#F4D2BC',
-    iconColor: '#CB6E02',
-    tileLeft: 186, tileTop: 0,
+    title: 'Drinken',
+    subtitle: 'Drinkvoeding, alcohol, en meer...',
+    icon: 'coffee',
+    circleColor: '#CFEBD4',
+    iconColor: '#378A6C',
+    tileLeft: 189, tileTop: 0,
     iconTop: 10,
+    titleRows: 1,
     circle: { w: 60, h: 60, l: 57, t: 29 },
     dots: [
-      { w: 7,  h: 7,  l: 20, t: 79 },
-      { w: 10, h: 10, l: 8,  t: 73 },
-      { w: 12, h: 12, l: 8,  t: 86 },
+      { w: 7,  h: 7,  l: 18, t: 12 },
+      { w: 10, h: 10, l: 6,  t: 6  },
+      { w: 12, h: 12, l: 6,  t: 19 },
     ],
   },
   {
     id: 3,
-    title: 'Kort na het eten',
-    subtitle: 'Buikkrampen, diarree, dumping en meer...',
-    icon: 'clock_loader_10',
-    circleColor: '#DFCFEB',
-    iconColor: '#4A378A',
-    tileLeft: 0, tileTop: 174,
-    iconTop: 16,
-    circle: { w: 60, h: 60, l: 46, t: 34 },
+    title: 'Medicijnen en hulpmiddelen',
+    subtitle: 'Sondevoeding, JP drain en meer...',
+    icon: 'pill',
+    circleColor: '#E6F4F2',
+    iconColor: '#377B8A',
+    tileLeft: 0, tileTop: 172,
+    iconTop: 3,
+    titleRows: 2,
+    circle: { w: 56, h: 56, l: 56, t: 18 },
     dots: [
-      { w: 7, h: 7, l: 103, t: 23 },
-      { w: 7, h: 7, l: 113, t: 32 },
-      { w: 7, h: 7, l: 119, t: 45 },
+      { w: 9,  h: 9,  l: 127, t: 26 },
+      { w: 9,  h: 9,  l: 115, t: 31 },
+      { w: 12, h: 12, l: 115, t: 16 },
     ],
   },
   {
     id: 4,
-    title: 'Lang na het eten',
-    subtitle: 'Dumping, winderigheid en meer...',
-    icon: 'clock_loader_60',
-    circleColor: '#CFEBD4',
-    iconColor: '#378A6C',
-    tileLeft: 186, tileTop: 174,
-    iconTop: 16,
-    circle: { w: 60, h: 60, l: 60, t: 22 },
+    title: 'Slaap',
+    subtitle: 'Houding in bed, moeilijk in slaap komen en meer...',
+    icon: 'hotel',
+    circleColor: '#EBE9CF',
+    iconColor: '#C5A500',
+    tileLeft: 189, tileTop: 172,
+    iconTop: 28,
+    titleRows: 1,
+    circle: { w: 56, h: 56, l: 56, t: 40 },
     dots: [
-      { w: 7, h: 7, l: 113, t: 22 },
-      { w: 7, h: 7, l: 120, t: 32 },
-      { w: 7, h: 7, l: 123, t: 23 },
+      { w: 9, h: 9, l: 119, t: 45 },
+      { w: 9, h: 9, l: 124, t: 57 },
+      { w: 9, h: 9, l: 124, t: 70 },
     ],
   },
   {
     id: 5,
-    title: 'Langdurig',
-    subtitle: 'Pijn, gewichtsverlies, hoesten en meer...',
-    icon: 'all_inclusive',
+    title: 'Ervaringen andere patiënten',
+    subtitle: 'Verhalen en videos over andere patiënten',
+    icon: 'diversity_3',
     circleColor: '#EBCFDE',
     iconColor: '#8A3773',
-    tileLeft: 0, tileTop: 348,
-    iconTop: 16,
-    circle: { w: 54, h: 54, l: 58, t: 26 },
+    tileLeft: 0, tileTop: 344,
+    iconTop: 3,
+    titleRows: 2,
+    circle: { w: 56, h: 56, l: 56, t: 18 },
     dots: [
-      { w: 15, h: 15, l: 108, t: 65 },
-      { w: 7,  h: 7,  l: 101, t: 76 },
-      { w: 15, h: 15, l: 42,  t: 38 },
-      { w: 7,  h: 7,  l: 55,  t: 32 },
+      { w: 9,  h: 9,  l: 36, t: 70 },
+      { w: 7,  h: 7,  l: 29, t: 77 },
+      { w: 12, h: 12, l: 24, t: 63 },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Bewegen',
+    subtitle: 'Beginnen met bewegen en meer...',
+    icon: 'directions_run',
+    circleColor: '#F4D2BC',
+    iconColor: '#CB6E02',
+    tileLeft: 189, tileTop: 344,
+    iconTop: 15,
+    titleRows: 1,
+    circle: { w: 56, h: 56, l: 56, t: 30 },
+    dots: [
+      { w: 9,  h: 9,  l: 25, t: 67 },
+      { w: 7,  h: 7,  l: 12, t: 60 },
+      { w: 12, h: 12, l: 36, t: 52 },
     ],
   },
 ];
 
-export default function GuidePage() {
+export default function GuideUitlegPage() {
   const navigate = useNavigate();
+
   return (
     <div style={{
       position: 'relative', width: '100%', maxWidth: '414px',
@@ -134,13 +156,22 @@ export default function GuidePage() {
           </div>
         </div>
 
-        {/* Tab switcher: Problemen (active) | Uitleg (inactive) */}
+        {/* Tab switcher: Problemen (inactive) | Uitleg (active) */}
         <div style={{
           width: '380px', height: '39px',
           background: '#F5F5F5', borderRadius: '20px',
           display: 'flex', flexDirection: 'row', alignItems: 'center',
           padding: '3px 5px', boxSizing: 'border-box',
         }}>
+          <div
+            onClick={() => navigate('/gids')}
+            style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+          >
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+              lineHeight: '24px', color: '#B3B2B2', textAlign: 'center',
+            }}>Problemen</span>
+          </div>
           <div style={{
             width: '189px', height: '33px',
             background: '#377B8A', borderRadius: '20px',
@@ -149,24 +180,15 @@ export default function GuidePage() {
             <span style={{
               fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
               lineHeight: '24px', color: '#FFFFFF', textAlign: 'center',
-            }}>Problemen</span>
-          </div>
-          <div
-            onClick={() => navigate('/gids/uitleg')}
-            style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
-          >
-            <span style={{
-              fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
-              lineHeight: '24px', color: '#B3B2B2', textAlign: 'center',
             }}>Uitleg</span>
           </div>
         </div>
       </div>
 
-      {/* ── Tiles grid (Frame 50) ── */}
+      {/* ── Tiles grid (Frame 58) ── */}
       <div style={{
-        position: 'absolute', width: '355px', height: '503px',
-        left: '38px', top: '150px',
+        position: 'absolute', width: '358px', height: '499px',
+        left: '28px', top: '144px',
       }}>
         {TILES.map((tile) => (
           <div key={tile.id} style={{
@@ -194,7 +216,7 @@ export default function GuidePage() {
               }} />
             ))}
 
-            {/* Icon zone: left:24.85%=42px, width:85px, height:85px, top per tile */}
+            {/* Icon zone: left:42, top:iconTop, 85×85 */}
             <div style={{
               position: 'absolute', left: '42px', top: `${tile.iconTop}px`,
               width: '85px', height: '85px',
@@ -208,7 +230,8 @@ export default function GuidePage() {
 
             {/* Title + subtitle */}
             <div style={{
-              position: 'absolute', left: '0px', top: '104px',
+              position: 'absolute', left: '0px',
+              top: tile.titleRows === 2 ? '86px' : '104px',
               width: '169px',
               display: 'flex', flexDirection: 'column', alignItems: 'center',
               padding: '0 5px', boxSizing: 'border-box',
