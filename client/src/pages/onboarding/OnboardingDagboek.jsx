@@ -284,10 +284,10 @@ export default function OnboardingDagboek() {
           }} />
           <span className="material-symbols-outlined" style={{
             position: 'absolute', zIndex: 1,
-            fontSize: '22px', color: '#377B8A',
+            fontSize: '18px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', userSelect: 'none',
-            top: 0, left: 0,
+            width: '27px', height: '27px', userSelect: 'none',
+            left: '-3px', top: '1px',
           }}>add_2</span>
         </div>
         <span style={{
@@ -336,10 +336,10 @@ export default function OnboardingDagboek() {
           }} />
           <span className="material-symbols-outlined" style={{
             position: 'absolute', zIndex: 1,
-            fontSize: '22px', color: '#377B8A',
+            fontSize: '18px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', userSelect: 'none',
-            top: 0, left: 0,
+            width: '27px', height: '27px', userSelect: 'none',
+            left: '-3px', top: '1px',
           }}>visibility</span>
         </div>
         <span style={{
