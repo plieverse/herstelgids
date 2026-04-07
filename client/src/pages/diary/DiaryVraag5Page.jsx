@@ -314,7 +314,7 @@ export default function DiaryVraag5Page() {
 
         {/* Klaar: 182×30, teal */}
         <button
-          onClick={() => navigate('/dagboek')}
+          onClick={() => navigate('/dagboek/bevestiging')}
           style={{
             width: '182px',
             height: '30px',
