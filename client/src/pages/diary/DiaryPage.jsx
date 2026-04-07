@@ -134,18 +134,18 @@ export default function DiaryPage() {
               }}>chevron_left</span>
             </button>
 
-            {/* Date label: "Vandaag" + date on two lines, both 20px */}
+            {/* Date label: "Vandaag" 20px, date 12px */}
             <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              color: '#377B8A',
               fontFamily: 'Inter',
               fontWeight: 400,
-              fontSize: '20px',
-              lineHeight: '24px',
-              color: '#377B8A',
-              textAlign: 'center',
-              width: '85px',
-              height: '36px',
             }}>
-              Vandaag<br />{dateString}
+              <span style={{ fontSize: '20px', lineHeight: '24px' }}>Vandaag</span>
+              <span style={{ fontSize: '12px', lineHeight: '15px' }}>{dateString}</span>
             </div>
 
             {/* Right arrow (disabled/today) */}
