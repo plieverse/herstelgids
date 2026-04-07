@@ -37,21 +37,17 @@ export default function OnboardingWelcome() {
       <div style={{
         position: 'absolute',
         width: 319,
-        height: 88,
         left: 47,
-        top: 174,
+        top: 155,
         fontFamily: 'Inter',
         fontStyle: 'normal',
         fontWeight: 700,
-        fontSize: 24,
-        lineHeight: '29px',
-        display: 'flex',
-        alignItems: 'center',
+        fontSize: 45,
+        lineHeight: '52px',
         textAlign: 'center',
-        justifyContent: 'center',
         color: '#377B8A',
       }}>
-        De Lichaamsgids
+        De<br />Lichaamsgids
       </div>
 
       {/* Book illustration – left:14.5, top:348, width:385 */}
