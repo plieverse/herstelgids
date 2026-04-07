@@ -1,113 +1,229 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../../api/client';
-import Card from '../../components/ui/Card';
-import Input from '../../components/ui/Input';
+import BottomNav from '../../components/layout/BottomNav';
 
-const CATEGORIES = [
-  { id: 'voeding', label: 'Eten & drinken', emoji: '🥗' },
-  { id: 'bewegen', label: 'Bewegen & rust', emoji: '🚶' },
-  { id: 'herstel', label: 'Klachten & wond', emoji: '💊' },
-  { id: 'vragen', label: 'Veelgestelde vragen', emoji: '❓' },
+const TILES = [
+  {
+    id: 1,
+    title: 'Voor het eten',
+    subtitle: 'Vol gevoel en geen honger',
+    icon: 'gastroenterology',
+    circleColor: '#E6F4F2',
+    iconColor: '#377B8A',
+    tileLeft: 0,
+    tileTop: 0,
+    circle: { w: 60, h: 60, l: 57, t: 29 },
+    dots: [
+      { w: 17, h: 17, l: 133, t: 6 },
+      { w: 14, h: 14, l: 148, t: 20 },
+      { w: 9,  h: 9,  l: 136, t: 25 },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Tijdens het eten',
+    subtitle: 'Slikken, boeren, veel slijm en meer...',
+    icon: 'flatware',
+    circleColor: '#F4D2BC',
+    iconColor: '#CB6E02',
+    tileLeft: 186,
+    tileTop: 0,
+    circle: { w: 60, h: 60, l: 57, t: 29 },
+    dots: [
+      { w: 7,  h: 7,  l: 20, t: 79 },
+      { w: 10, h: 10, l: 8,  t: 73 },
+      { w: 12, h: 12, l: 8,  t: 86 },
+    ],
+  },
+  {
+    id: 3,
+    title: 'Kort na het eten',
+    subtitle: 'Buikkrampen, diarree, dumping en meer...',
+    icon: 'clock_loader_10',
+    circleColor: '#DFCFEB',
+    iconColor: '#4A378A',
+    tileLeft: 0,
+    tileTop: 174,
+    circle: { w: 60, h: 60, l: 46, t: 34 },
+    dots: [
+      { w: 7, h: 7, l: 103, t: 23 },
+      { w: 7, h: 7, l: 113, t: 32 },
+      { w: 7, h: 7, l: 119, t: 45 },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Lang na het eten',
+    subtitle: 'Dumping, winderigheid en meer...',
+    icon: 'clock_loader_60',
+    circleColor: '#CFEBD4',
+    iconColor: '#378A6C',
+    tileLeft: 186,
+    tileTop: 174,
+    circle: { w: 60, h: 60, l: 60, t: 22 },
+    dots: [
+      { w: 7, h: 7, l: 113, t: 22 },
+      { w: 7, h: 7, l: 120, t: 32 },
+      { w: 7, h: 7, l: 123, t: 23 },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Langdurig',
+    subtitle: 'Pijn, gewichtsverlies, hoesten en meer...',
+    icon: 'all_inclusive',
+    circleColor: '#EBCFDE',
+    iconColor: '#8A3773',
+    tileLeft: 0,
+    tileTop: 348,
+    circle: { w: 54, h: 54, l: 58, t: 26 },
+    dots: [
+      { w: 15, h: 15, l: 108, t: 65 },
+      { w: 7,  h: 7,  l: 101, t: 76 },
+      { w: 15, h: 15, l: 42,  t: 38 },
+      { w: 7,  h: 7,  l: 55,  t: 32 },
+    ],
+  },
 ];
 
 export default function GuidePage() {
-  const navigate = useNavigate();
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState(null);
-
-  useEffect(() => {
-    api.get('/articles').then(({ data }) => setArticles(data)).finally(() => setLoading(false));
-  }, []);
-
-  const filtered = articles.filter((a) => {
-    const matchesCategory = !activeCategory || a.category === activeCategory;
-    const matchesQuery =
-      !query ||
-      a.title.toLowerCase().includes(query.toLowerCase()) ||
-      a.intro.toLowerCase().includes(query.toLowerCase());
-    return matchesCategory && matchesQuery;
-  });
-
-  if (loading) return <div style={styles.loading}>Laden…</div>;
-
   return (
-    <main className="page">
-      <h1 className="page-title">Gids</h1>
+    <div style={{
+      position: 'relative', width: '100%', maxWidth: '414px',
+      height: '100dvh', minHeight: '736px', margin: '0 auto',
+      background: '#F6F6F6', fontFamily: 'Inter, sans-serif', overflow: 'hidden',
+    }}>
 
-      <Input
-        id="search"
-        type="search"
-        placeholder="Zoek een onderwerp…"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{ marginBottom: 'var(--space-5)' }}
-      />
+      {/* ── Topbar ── */}
+      <div style={{
+        position: 'absolute', left: 0, top: 0, width: '414px', height: '110px',
+        background: '#FFFFFF',
+        display: 'flex', flexDirection: 'column',
+        justifyContent: 'center', alignItems: 'center', gap: '20px',
+      }}>
+        {/* Title row */}
+        <div style={{
+          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+          alignItems: 'center', padding: '0px 10px', width: '414px', height: '40px',
+          boxSizing: 'border-box',
+        }}>
+          <div style={{
+            position: 'relative', display: 'flex', flexDirection: 'row',
+            alignItems: 'center', padding: '0px 0px 0px 10px',
+            isolation: 'isolate', width: '150px', height: '34px',
+          }}>
+            <div style={{
+              position: 'absolute', width: '29px', height: '29px',
+              left: '0px', top: '3px', borderRadius: '50%',
+              background: '#E6F4F2', zIndex: 1,
+            }} />
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
+              lineHeight: '29px', color: '#377B8A',
+              position: 'relative', zIndex: 2,
+            }}>Gids</span>
+          </div>
 
-      <div style={styles.categories}>
-        <button
-          style={{ ...styles.catBtn, ...(activeCategory === null ? styles.catBtnActive : {}) }}
-          onClick={() => setActiveCategory(null)}
-        >
-          Alles
-        </button>
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            style={{ ...styles.catBtn, ...(activeCategory === cat.id ? styles.catBtnActive : {}) }}
-            onClick={() => setActiveCategory(activeCategory === cat.id ? null : cat.id)}
-          >
-            {cat.emoji} {cat.label}
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
+            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
+            </div>
+            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Tab switcher: Problemen (active) | Uitleg (inactive) */}
+        <div style={{
+          width: '380px', height: '39px',
+          background: '#F5F5F5', borderRadius: '20px',
+          display: 'flex', flexDirection: 'row', alignItems: 'center',
+          padding: '3px 5px', boxSizing: 'border-box',
+        }}>
+          <div style={{
+            width: '189px', height: '33px',
+            background: '#377B8A', borderRadius: '20px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+              lineHeight: '24px', color: '#FFFFFF', textAlign: 'center',
+            }}>Problemen</span>
+          </div>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+              lineHeight: '24px', color: '#B3B2B2', textAlign: 'center',
+            }}>Uitleg</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Tiles grid (Frame 50) ── */}
+      <div style={{
+        position: 'absolute', width: '355px', height: '503px',
+        left: '38px', top: '150px',
+      }}>
+        {TILES.map((tile) => (
+          <div key={tile.id} style={{
+            position: 'absolute',
+            width: '169px', height: '155px',
+            left: `${tile.tileLeft}px`, top: `${tile.tileTop}px`,
+            background: '#FFFFFF', borderRadius: '7px',
+            overflow: 'hidden',
+          }}>
+            {/* Main colored circle */}
+            <div style={{
+              position: 'absolute',
+              width: `${tile.circle.w}px`, height: `${tile.circle.h}px`,
+              left: `${tile.circle.l}px`, top: `${tile.circle.t}px`,
+              borderRadius: '50%', background: tile.circleColor,
+            }} />
+
+            {/* Decorative dots */}
+            {tile.dots.map((dot, i) => (
+              <div key={i} style={{
+                position: 'absolute',
+                width: `${dot.w}px`, height: `${dot.h}px`,
+                left: `${dot.l}px`, top: `${dot.t}px`,
+                borderRadius: '50%', background: tile.circleColor,
+              }} />
+            ))}
+
+            {/* Icon centered on the icon zone (left:42, top:10, 85×85) */}
+            <div style={{
+              position: 'absolute', left: '42px', top: '10px',
+              width: '85px', height: '85px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <span className="material-symbols-outlined" style={{
+                fontSize: '48px', color: tile.iconColor, userSelect: 'none',
+              }}>{tile.icon}</span>
+            </div>
+
+            {/* Title + subtitle */}
+            <div style={{
+              position: 'absolute', left: '0px', top: '104px',
+              width: '169px',
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              padding: '0 5px', boxSizing: 'border-box',
+            }}>
+              <div style={{
+                fontFamily: 'Inter', fontWeight: 700, fontSize: '15px',
+                lineHeight: '18px', color: '#1C1B1F', textAlign: 'center',
+                width: '160px',
+              }}>{tile.title}</div>
+              <div style={{
+                fontFamily: 'Inter', fontWeight: 400, fontSize: '13px',
+                lineHeight: '16px', color: '#B3B2B2', textAlign: 'center',
+                width: '160px', marginTop: '2px',
+              }}>{tile.subtitle}</div>
+            </div>
+          </div>
         ))}
       </div>
 
-      {filtered.length === 0 ? (
-        <p style={styles.empty}>Geen artikelen gevonden.</p>
-      ) : (
-        <div style={styles.list}>
-          {filtered.map((article) => (
-            <Card
-              key={article.id}
-              onClick={() => navigate(`/gids/${article.id}`)}
-              style={styles.articleCard}
-            >
-              <div style={styles.catTag}>
-                {CATEGORIES.find((c) => c.id === article.category)?.emoji}{' '}
-                {CATEGORIES.find((c) => c.id === article.category)?.label || article.category}
-              </div>
-              <h2 style={styles.articleTitle}>{article.title}</h2>
-              <p style={styles.articleIntro}>{article.intro}</p>
-              <span style={styles.readMore}>Lees meer →</span>
-            </Card>
-          ))}
-        </div>
-      )}
-    </main>
+      {/* ── Bottom Nav ── */}
+      <BottomNav />
+    </div>
   );
 }
-
-const styles = {
-  loading: { display: 'flex', justifyContent: 'center', padding: '48px', color: 'var(--color-text-muted)' },
-  categories: { display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', marginBottom: 'var(--space-5)' },
-  catBtn: {
-    padding: '8px 16px', borderRadius: 'var(--radius-full)',
-    border: '2px solid var(--color-border)', background: 'var(--color-surface)',
-    fontSize: 'var(--text-sm)', fontWeight: '600', color: 'var(--color-text-muted)',
-    cursor: 'pointer', minHeight: '40px', whiteSpace: 'nowrap',
-    transition: 'all 0.15s',
-  },
-  catBtnActive: {
-    background: 'var(--color-primary)', color: '#fff',
-    borderColor: 'var(--color-primary)',
-  },
-  list: { display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' },
-  articleCard: { cursor: 'pointer', transition: 'box-shadow 0.15s', ':hover': { boxShadow: 'var(--shadow-md)' } },
-  catTag: { fontSize: 'var(--text-xs)', fontWeight: '700', color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 'var(--space-2)' },
-  articleTitle: { fontSize: 'var(--text-lg)', fontWeight: '700', color: 'var(--color-text)', marginBottom: 'var(--space-2)', lineHeight: 1.3 },
-  articleIntro: { fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: 'var(--space-3)' },
-  readMore: { fontSize: 'var(--text-sm)', fontWeight: '600', color: 'var(--color-primary)' },
-  empty: { color: 'var(--color-text-muted)', textAlign: 'center', padding: 'var(--space-8)' },
-};
