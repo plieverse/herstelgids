@@ -20,17 +20,6 @@ export default function OnboardingWelcome() {
       overflow: 'hidden',
     }}>
 
-      {/* ── Ellipse 31: large grey background circle (bottom) ── */}
-      <div style={{
-        position: 'absolute',
-        width: '700px',
-        height: '700px',
-        left: '-143px',
-        top: '465px',
-        borderRadius: '50%',
-        background: '#F6F6F6',
-      }} />
-
       {/* ── Decorative circles ── */}
 
       {/* Ellipse 20: 129×129, left:78, top:122, #EFF6F5 */}
@@ -91,6 +80,17 @@ export default function OnboardingWelcome() {
           height: 'auto',
         }}
       />
+
+      {/* ── Ellipse 31: large grey background circle — voor het boek ── */}
+      <div style={{
+        position: 'absolute',
+        width: '700px',
+        height: '700px',
+        left: '-143px',
+        top: '465px',
+        borderRadius: '50%',
+        background: '#F6F6F6',
+      }} />
 
       {/* Ellipse 26: 18×18, left:252, top:326, #EFF6F5 — voor het boek */}
       <div style={{ position: 'absolute', width: '18px', height: '18px', left: '252px', top: '326px', borderRadius: '50%', background: '#EFF6F5' }} />
