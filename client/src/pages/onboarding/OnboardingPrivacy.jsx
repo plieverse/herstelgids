@@ -58,20 +58,31 @@ function PrivacyOverlay({ onClose }) {
           Je gegevens en privacy
         </div>
 
-        {/* Body text: left:24, top:116, width:329 */}
+        {/* Body text: left:6.65%=24, top:33.82%=116, right:2.22%=8, bottom:5.54%=19 */}
         <div style={{
           position: 'absolute',
           left: 24,
           top: 116,
           width: 329,
+          height: 208,
           fontFamily: 'Inter',
           fontStyle: 'normal',
           fontWeight: 400,
           fontSize: 16,
           lineHeight: '19px',
+          display: 'flex',
+          alignItems: 'center',
           color: '#727272',
         }}>
-          Heb je een vraag over je gegevens en de privacy daarvan? Lees dan de privacy-informatie. Of neem contact op met medewerkers van de Lichaamsgids. Stuur een e-mail naar info@lichaamsgids.nl. Bel ons op 06-12345678. We zijn bereikbaar op werkdagen van 8.00 - 16.30.
+          <div>
+            <p style={{ margin: '0 0 12px 0' }}>
+              Heb je een vraag over je gegevens en de privacy daarvan? Lees dan de privacy-informatie. Of neem contact op met medewerkers van de Lichaamsgids.
+            </p>
+            <ul style={{ margin: 0, paddingLeft: 18 }}>
+              <li style={{ marginBottom: 8 }}>Stuur een e-mail naar info@lichaamsgids.nl</li>
+              <li>Bel ons op 06-12345678. We zijn bereikbaar op werkdagen van 8.00 - 16.30</li>
+            </ul>
+          </div>
         </div>
 
         {/* Close button: left:307, top:7, width:46, height:46 */}
