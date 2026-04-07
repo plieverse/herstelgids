@@ -169,12 +169,12 @@ export default function GuidePage() {
         left: '38px', top: '150px',
       }}>
         {TILES.map((tile) => (
-          <div key={tile.id} style={{
+          <div key={tile.id} onClick={() => navigate(`/gids/${tile.id}`)} style={{
             position: 'absolute',
             width: '169px', height: '155px',
             left: `${tile.tileLeft}px`, top: `${tile.tileTop}px`,
             background: '#FFFFFF', borderRadius: '7px',
-            overflow: 'hidden',
+            overflow: 'hidden', cursor: 'pointer',
           }}>
             {/* Main colored circle */}
             <div style={{
