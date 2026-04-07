@@ -7,6 +7,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DiaryPage from './pages/diary/DiaryPage';
 import DiaryVraag1Page from './pages/diary/DiaryVraag1Page';
+import DiaryVraag2Page from './pages/diary/DiaryVraag2Page';
 import GuidePage from './pages/guide/GuidePage';
 import ArticlePage from './pages/guide/ArticlePage';
 import MessagesPage from './pages/messages/MessagesPage';
@@ -68,6 +69,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dagboek" element={<DiaryPage />} />
           <Route path="/dagboek/invullen" element={<DiaryVraag1Page />} />
+          <Route path="/dagboek/invullen/vraag2" element={<DiaryVraag2Page />} />
           <Route path="/gids" element={<GuidePage />} />
           <Route path="/gids/:id" element={<ArticlePage />} />
           <Route path="/berichten" element={<MessagesPage />} />
