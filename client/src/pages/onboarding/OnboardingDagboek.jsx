@@ -209,14 +209,13 @@ export default function OnboardingDagboek() {
         background: '#CFEBE8',
       }} />
 
-      {/* ── Dagboek icon (contract_edit) ──
-          130×130px, left 142px, top 309px */}
+      {/* ── Dagboek icon (contract_edit) ── gecentreerd op Ellipse 32 (left:150, top:334) */}
       <div style={{
         position: 'absolute',
         width: '130px',
         height: '130px',
-        left: '142px',
-        top: '309px',
+        left: '150px',
+        top: '334px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -348,7 +347,7 @@ export default function OnboardingDagboek() {
           lineHeight: '18px',
           color: '#727272',
         }}>
-          Zorgverleners bekijken je ingevuld dagboeken.
+          Zorgverleners bekijken je ingevulde dagboeken.
         </span>
       </div>
 
