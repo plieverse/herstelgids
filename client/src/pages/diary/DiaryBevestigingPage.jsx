@@ -195,7 +195,7 @@ export default function DiaryBevestigingPage() {
         left: '38px',
         top: '200px',
         width: '338px',
-        height: '376px',
+        height: '420px',
         background: '#FFFFFF',
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         borderRadius: '20px',
