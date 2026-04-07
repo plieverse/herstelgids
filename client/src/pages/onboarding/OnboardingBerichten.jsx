@@ -270,10 +270,11 @@ export default function OnboardingBerichten() {
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
-            position: 'relative', zIndex: 1,
-            fontSize: '22px', color: '#377B8A',
+            position: 'absolute', zIndex: 1,
+            fontSize: '18px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', userSelect: 'none',
+            width: '27px', height: '27px', userSelect: 'none',
+            left: '-3px', top: '1px',
           }}>chat</span>
         </div>
         <span style={{
@@ -302,8 +303,8 @@ export default function OnboardingBerichten() {
         position: 'absolute',
         left: '72px',
         top: '541px',
-        width: '260px',
-        height: '32px',
+        width: '256px',
+        height: '30px',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -320,10 +321,11 @@ export default function OnboardingBerichten() {
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
-            position: 'relative', zIndex: 1,
-            fontSize: '22px', color: '#377B8A',
+            position: 'absolute', zIndex: 1,
+            fontSize: '18px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', userSelect: 'none',
+            width: '27px', height: '27px', userSelect: 'none',
+            left: '-3px', top: '1px',
           }}>chat</span>
         </div>
         <span style={{
