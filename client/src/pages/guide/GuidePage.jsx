@@ -8,8 +8,8 @@ const TILES = [
     icon: 'gastroenterology',
     circleColor: '#E6F4F2',
     iconColor: '#377B8A',
-    tileLeft: 0,
-    tileTop: 0,
+    tileLeft: 0, tileTop: 0,
+    iconTop: 10,
     circle: { w: 60, h: 60, l: 57, t: 29 },
     dots: [
       { w: 17, h: 17, l: 133, t: 6 },
@@ -24,8 +24,8 @@ const TILES = [
     icon: 'flatware',
     circleColor: '#F4D2BC',
     iconColor: '#CB6E02',
-    tileLeft: 186,
-    tileTop: 0,
+    tileLeft: 186, tileTop: 0,
+    iconTop: 10,
     circle: { w: 60, h: 60, l: 57, t: 29 },
     dots: [
       { w: 7,  h: 7,  l: 20, t: 79 },
@@ -40,8 +40,8 @@ const TILES = [
     icon: 'clock_loader_10',
     circleColor: '#DFCFEB',
     iconColor: '#4A378A',
-    tileLeft: 0,
-    tileTop: 174,
+    tileLeft: 0, tileTop: 174,
+    iconTop: 16,
     circle: { w: 60, h: 60, l: 46, t: 34 },
     dots: [
       { w: 7, h: 7, l: 103, t: 23 },
@@ -56,8 +56,8 @@ const TILES = [
     icon: 'clock_loader_60',
     circleColor: '#CFEBD4',
     iconColor: '#378A6C',
-    tileLeft: 186,
-    tileTop: 174,
+    tileLeft: 186, tileTop: 174,
+    iconTop: 16,
     circle: { w: 60, h: 60, l: 60, t: 22 },
     dots: [
       { w: 7, h: 7, l: 113, t: 22 },
@@ -72,8 +72,8 @@ const TILES = [
     icon: 'all_inclusive',
     circleColor: '#EBCFDE',
     iconColor: '#8A3773',
-    tileLeft: 0,
-    tileTop: 348,
+    tileLeft: 0, tileTop: 348,
+    iconTop: 16,
     circle: { w: 54, h: 54, l: 58, t: 26 },
     dots: [
       { w: 15, h: 15, l: 108, t: 65 },
@@ -189,14 +189,15 @@ export default function GuidePage() {
               }} />
             ))}
 
-            {/* Icon centered on the icon zone (left:42, top:10, 85×85) */}
+            {/* Icon zone: left:24.85%=42px, width:85px, height:85px, top per tile */}
             <div style={{
-              position: 'absolute', left: '42px', top: '10px',
+              position: 'absolute', left: '42px', top: `${tile.iconTop}px`,
               width: '85px', height: '85px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <span className="material-symbols-outlined" style={{
-                fontSize: '85px', color: tile.iconColor, userSelect: 'none',
+                fontSize: '85px', lineHeight: '1', display: 'block',
+                color: tile.iconColor, userSelect: 'none',
               }}>{tile.icon}</span>
             </div>
 
