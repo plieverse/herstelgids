@@ -9,6 +9,7 @@ import DiaryPage from './pages/diary/DiaryPage';
 import DiaryVraag1Page from './pages/diary/DiaryVraag1Page';
 import DiaryVraag2Page from './pages/diary/DiaryVraag2Page';
 import DiaryVraag3Page from './pages/diary/DiaryVraag3Page';
+import DiaryVraag4Page from './pages/diary/DiaryVraag4Page';
 import GuidePage from './pages/guide/GuidePage';
 import ArticlePage from './pages/guide/ArticlePage';
 import MessagesPage from './pages/messages/MessagesPage';
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="/dagboek/invullen" element={<DiaryVraag1Page />} />
           <Route path="/dagboek/invullen/vraag2" element={<DiaryVraag2Page />} />
           <Route path="/dagboek/invullen/vraag3" element={<DiaryVraag3Page />} />
+          <Route path="/dagboek/invullen/vraag4" element={<DiaryVraag4Page />} />
           <Route path="/gids" element={<GuidePage />} />
           <Route path="/gids/:id" element={<ArticlePage />} />
           <Route path="/berichten" element={<MessagesPage />} />
