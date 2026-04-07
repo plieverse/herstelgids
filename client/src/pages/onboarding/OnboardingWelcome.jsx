@@ -54,15 +54,15 @@ export default function OnboardingWelcome() {
         height: '88px',
         left: '47px',
         top: '174px',
-        fontFamily: 'Inter',
+        fontFamily: "'Inter'",
+        fontStyle: 'normal',
         fontWeight: 700,
         fontSize: '24px',
         lineHeight: '29px',
-        color: '#377B8A',
-        textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        textAlign: 'center',
+        color: '#377B8A',
       }}>
         De Lichaamsgids
       </div>
