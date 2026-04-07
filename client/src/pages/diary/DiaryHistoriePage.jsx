@@ -147,12 +147,19 @@ export default function DiaryHistoriePage() {
               <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>chevron_left</span>
             </button>
 
-            {/* Only the date — no "Gisteren" label */}
+            {/* Date label — show "Gisteren" above date when daysAgo === 1 */}
             <div style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center',
               textAlign: 'center', color: '#377B8A', fontFamily: 'Inter', fontWeight: 400,
             }}>
-              <span style={{ fontSize: '20px', lineHeight: '24px' }}>{dateString}</span>
+              {daysAgo === 1 ? (
+                <>
+                  <span style={{ fontSize: '20px', lineHeight: '24px' }}>Gisteren</span>
+                  <span style={{ fontSize: '12px', lineHeight: '15px' }}>{dateString}</span>
+                </>
+              ) : (
+                <span style={{ fontSize: '20px', lineHeight: '24px' }}>{dateString}</span>
+              )}
             </div>
 
             <button onClick={goForward} style={{
