@@ -37,7 +37,7 @@ const TILES = [
     id: 3,
     title: 'Kort na het eten',
     subtitle: 'Buikkrampen, diarree, dumping en meer...',
-    icon: 'clock_loader_80',
+    icon: 'clock_loader_10',
     circleColor: '#DFCFEB',
     iconColor: '#4A378A',
     tileLeft: 0, tileTop: 174,
