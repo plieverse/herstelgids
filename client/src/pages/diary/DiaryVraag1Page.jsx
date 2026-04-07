@@ -289,7 +289,8 @@ export default function DiaryVraag1Page() {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            padding: '0px 0px 0px 9px',
+            justifyContent: 'center',
+            padding: 0,
             gap: '8px',
             cursor: 'pointer',
           }}
