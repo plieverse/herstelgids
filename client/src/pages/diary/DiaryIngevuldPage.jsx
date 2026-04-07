@@ -157,7 +157,9 @@ export default function DiaryIngevuldPage() {
           height: '46px',
         }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', height: '36px' }}>
-            <button style={{
+            <button
+              onClick={() => navigate('/dagboek/gisteren')}
+              style={{
               width: '30px', height: '30px', background: '#E6F4F2',
               border: '0.5px solid #CFEBE8', borderRadius: '4px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
