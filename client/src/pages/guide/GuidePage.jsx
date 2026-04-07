@@ -196,7 +196,7 @@ export default function GuidePage() {
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <span className="material-symbols-outlined" style={{
-                fontSize: '48px', color: tile.iconColor, userSelect: 'none',
+                fontSize: '85px', color: tile.iconColor, userSelect: 'none',
               }}>{tile.icon}</span>
             </div>
 
