@@ -142,6 +142,13 @@ export default function DiaryPage() {
               lineHeight: '24px',
               color: '#377B8A',
               textAlign: 'center',
+              width: '85px',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              wordBreak: 'break-word',
             }}>
               Vandaag {dateString}
             </span>
