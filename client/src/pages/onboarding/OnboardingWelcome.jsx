@@ -89,7 +89,6 @@ export default function OnboardingWelcome() {
           top: '348px',
           width: '385px',
           height: 'auto',
-          zIndex: 1,
         }}
       />
 
