@@ -15,18 +15,21 @@ function GeenCodeOverlay({ onClose }) {
         justifyContent: 'center',
       }}
     >
-      {/* Card: 361×343px, white, border-radius 20px */}
+      {/* Card: breedte 361px, hoogte past zich aan content aan */}
       <div
         onClick={e => e.stopPropagation()}
         style={{
           position: 'relative',
           width: 361,
-          height: 343,
           background: '#FFFFFF',
           borderRadius: 20,
+          paddingTop: 110,
+          paddingBottom: 24,
+          paddingLeft: 24,
+          paddingRight: 8,
         }}
       >
-        {/* Ellipse 30: 76×76, left:146, top:25, #CFEBE8 */}
+        {/* Ellipse 30: 76×76, gecentreerd bovenin */}
         <div style={{
           position: 'absolute',
           width: 76,
@@ -37,7 +40,7 @@ function GeenCodeOverlay({ onClose }) {
           background: '#CFEBE8',
         }} />
 
-        {/* Title "Activatiecode": left:65, top:35, width:231, height:57 */}
+        {/* Title "Activatiecode" */}
         <div style={{
           position: 'absolute',
           left: 65,
@@ -58,32 +61,25 @@ function GeenCodeOverlay({ onClose }) {
           Activatiecode
         </div>
 
-        {/* Body text: left:6.65%=24, top:33.82%=116, right:2.22%=8, bottom:26.53%=91 → height:136 */}
+        {/* Body tekst: doorlopend, geen witregel */}
         <div style={{
-          position: 'absolute',
-          left: 24,
-          top: 116,
-          width: 329,
-          height: 136,
           fontFamily: 'Inter',
           fontStyle: 'normal',
           fontWeight: 400,
           fontSize: 16,
           lineHeight: '19px',
-          display: 'flex',
-          alignItems: 'center',
           color: '#727272',
         }}>
           Van het ziekenhuis ontvang je een e-mail met een persoonlijke activatiecode. Heb je geen e-mail ontvangen? Neem dan contact op met je zorgverlener.
         </div>
 
-        {/* Close button: left:307, top:7, width:46, height:46 */}
+        {/* Sluitknop: rechtsbovenin */}
         <button
           onClick={onClose}
           aria-label="Sluiten"
           style={{
             position: 'absolute',
-            left: 307,
+            right: 8,
             top: 7,
             width: 46,
             height: 46,
