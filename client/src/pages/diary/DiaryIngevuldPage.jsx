@@ -9,7 +9,8 @@ const SUMMARY_ROWS = [
   {
     id: 1,
     category: 'Vergelijking gisteren',
-    answer: 'Hetzelfde. Ik voel me hetzelfde als gisteren.',
+    answerBold: 'Hetzelfde.',
+    answerNormal: ' Ik voel me hetzelfde als gisteren.',
     circleColor: '#EBE9CF',
     iconColor: '#C5A500',
     icon: 'health_metrics',
@@ -18,7 +19,8 @@ const SUMMARY_ROWS = [
   {
     id: 2,
     category: 'Eten',
-    answer: 'Goed. Ik heb af en toe last, maar het gaat.',
+    answerBold: 'Goed.',
+    answerNormal: ' Ik heb af en toe last, maar het gaat.',
     circleColor: '#CFEBD4',
     iconColor: '#378A6C',
     icon: 'nutrition',
@@ -27,7 +29,8 @@ const SUMMARY_ROWS = [
   {
     id: 3,
     category: 'Ademen',
-    answer: 'Moeilijk. Ik kan niet goed ademen.',
+    answerBold: 'Moeilijk.',
+    answerNormal: ' Ik kan niet goed ademen.',
     circleColor: '#F4D2BC',
     iconColor: '#CB6E02',
     icon: 'pulmonology',
@@ -36,7 +39,8 @@ const SUMMARY_ROWS = [
   {
     id: 4,
     category: 'Pijn',
-    answer: 'Heel veel pijn. Ik heb heel veel last van pijn.',
+    answerBold: 'Heel veel pijn.',
+    answerNormal: ' Ik heb heel veel last van pijn.',
     circleColor: '#EBCFCF',
     iconColor: '#AF1E1E',
     icon: 'bolt',
@@ -45,7 +49,8 @@ const SUMMARY_ROWS = [
   {
     id: 5,
     category: 'Poep',
-    answer: 'Normaal. Mijn poep was normaal.',
+    answerBold: 'Normaal.',
+    answerNormal: ' Mijn poep was normaal.',
     circleColor: '#CFEBD4',
     iconColor: '#378A6C',
     icon: 'WC',
@@ -306,12 +311,12 @@ export default function DiaryIngevuldPage() {
               </div>
               <div style={{
                 fontFamily: 'Inter',
-                fontWeight: 700,
                 fontSize: '15px',
                 lineHeight: '18px',
                 color: '#727272',
               }}>
-                {row.answer}
+                <span style={{ fontWeight: 700 }}>{row.answerBold}</span>
+                <span style={{ fontWeight: 400 }}>{row.answerNormal}</span>
               </div>
             </div>
           </div>
