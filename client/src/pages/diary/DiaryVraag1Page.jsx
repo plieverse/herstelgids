@@ -4,36 +4,36 @@ import { useNavigate } from 'react-router-dom';
 const PAIN_OPTIONS = [
   {
     id: 1,
-    label: 'Geen pijn',
-    desc: 'Ik voel helemaal geen pijn.',
+    label: 'Veel beter',
+    desc: 'Ik voel me veel beter. Ik heb bijna geen last.',
     color: '#B2DEB6',
     height: 71,
   },
   {
     id: 2,
-    label: 'Lichte pijn',
-    desc: 'Ik voel een beetje pijn, maar het stoort niet erg.',
+    label: 'Iets beter',
+    desc: 'Ik voel me iets beter. Ik heb nog wel een beetje last.',
     color: '#CFEBD4',
     height: 77,
   },
   {
     id: 3,
-    label: 'Matige pijn',
-    desc: 'Duidelijke pijn, maar ik kan het verdragen.',
+    label: 'Hetzelfde',
+    desc: 'Ik voel me hetzelfde als gisteren.',
     color: '#F2EFC2',
     height: 71,
   },
   {
     id: 4,
-    label: 'Ernstige pijn',
-    desc: 'De pijn is moeilijk te verdragen.',
+    label: 'Iets slechter',
+    desc: 'Ik voel me iets slechter. Ik heb meer last.',
     color: '#F0C8AD',
     height: 71,
   },
   {
     id: 5,
-    label: 'Ondraaglijke pijn',
-    desc: 'De pijn is ondraaglijk, ik kan het niet meer verdragen.',
+    label: 'Veel slechter',
+    desc: 'Ik voel me veel slechter. Ik heb heel veel last.',
     color: '#EEC7C7',
     height: 77,
   },
@@ -77,7 +77,7 @@ export default function DiaryVraag1Page() {
           lineHeight: '29px',
           color: '#377B8A',
         }}>
-          Vraag 1 van de 3
+          Vraag 1 van de 5
         </div>
 
         {/* Progress bar: 1 active, 4 inactive — left:16, top:52, width:374 */}
@@ -167,7 +167,7 @@ export default function DiaryVraag1Page() {
             color: '#377B8A',
             textAlign: 'center',
           }}>
-            Hoeveel pijn heb je vandaag?
+            Hoe voel je je vandaag vergeleken met gisteren?
           </div>
         </div>
 
