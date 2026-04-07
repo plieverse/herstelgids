@@ -70,13 +70,13 @@ export default function OnboardingGids() {
           width: '26px',
           height: '26px',
           borderRadius: '50%',
-          background: '#E6F4F2',
+          background: '#377B8A',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
           <svg width="15" height="10" viewBox="0 0 15 10" fill="none">
-            <path d="M10 1L5 5L10 9" stroke="#377B8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M10 1L5 5L10 9" stroke="#E6F4F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       </button>
@@ -178,8 +178,7 @@ export default function OnboardingGids() {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        Fijn dat je er bent! Samen met zorgverleners ga je je lichaam opnieuw leren kennen.
-        De gids helpt je om bij te houden hoe je je voelt.
+        Na de operatie voelt veel anders. De gids legt uit welke problemen je kan ervaren en geeft extra uitleg.
       </div>
 
       {/* ── White card (Rectangle 33) ── */}
@@ -275,10 +274,11 @@ export default function OnboardingGids() {
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
-            position: 'relative', zIndex: 1,
-            fontSize: '22px', color: '#377B8A',
+            position: 'absolute', zIndex: 1,
+            fontSize: '18px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', userSelect: 'none',
+            width: '27px', height: '27px', userSelect: 'none',
+            left: '-3px', top: '1px',
           }}>contact_support</span>
         </div>
         <span style={{
@@ -325,10 +325,11 @@ export default function OnboardingGids() {
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
-            position: 'relative', zIndex: 1,
-            fontSize: '22px', color: '#377B8A',
+            position: 'absolute', zIndex: 1,
+            fontSize: '18px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', userSelect: 'none',
+            width: '27px', height: '27px', userSelect: 'none',
+            left: '-3px', top: '1px',
           }}>contact_support</span>
         </div>
         <span style={{
