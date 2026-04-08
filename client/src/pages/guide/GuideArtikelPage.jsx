@@ -180,59 +180,57 @@ export default function GuideArtikelPage() {
         </div>
       </div>
 
-      {/* ── Content card: left:34, top:149, width:374, height:515 ── */}
+      {/* ── Content card: auto height ── */}
       <div style={{
         position: 'absolute', left: '34px', top: '149px',
-        width: '374px', height: '515px',
+        width: '374px',
         background: '#FFFFFF', borderRadius: '20px',
+        display: 'flex', flexDirection: 'column',
+        paddingBottom: '24px',
       }}>
 
-        {/* Decorative ellipses */}
-        {/* Ellipse 4: 9×9 at left:41, top:49 */}
+        {/* Decorative ellipses (absolute, don't affect height) */}
         <div style={{
           position: 'absolute', width: '9px', height: '9px',
           left: '41px', top: '49px',
           borderRadius: '50%', background: cat.circleColor,
         }} />
-        {/* Ellipse 2: 25×25 at left:21, top:58 */}
         <div style={{
           position: 'absolute', width: '25px', height: '25px',
           left: '21px', top: '58px',
           borderRadius: '50%', background: cat.circleColor,
         }} />
 
-        {/* "Lees voor" button: left:245, top:15, width:98, height:24 */}
-        <div style={{
-          position: 'absolute', left: '245px', top: '15px',
-          width: '98px', height: '24px',
-          background: '#377B8A', borderRadius: '5px',
-          display: 'flex', flexDirection: 'row', alignItems: 'center',
-          padding: '0px 6px 0px 5px', gap: '5px', boxSizing: 'border-box',
-          cursor: 'pointer',
-        }}>
-          <span className="material-symbols-outlined" style={{
-            fontSize: '16px', lineHeight: '1', display: 'block',
-            color: '#FFFFFF', userSelect: 'none', flexShrink: 0,
-          }}>voice_selection</span>
-          <span style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '12px',
-            lineHeight: '15px', color: '#FFFFFF', whiteSpace: 'nowrap',
-          }}>Lees voor</span>
+        {/* Top row: Lees voor button right-aligned */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '15px 21px 0 0' }}>
+          <div style={{
+            width: '98px', height: '24px',
+            background: '#377B8A', borderRadius: '5px',
+            display: 'flex', flexDirection: 'row', alignItems: 'center',
+            padding: '0px 6px 0px 5px', gap: '5px', boxSizing: 'border-box',
+            cursor: 'pointer',
+          }}>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '16px', lineHeight: '1', display: 'block',
+              color: '#FFFFFF', userSelect: 'none', flexShrink: 0,
+            }}>voice_selection</span>
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '12px',
+              lineHeight: '15px', color: '#FFFFFF', whiteSpace: 'nowrap',
+            }}>Lees voor</span>
+          </div>
         </div>
 
-        {/* Frame 53: title + body text — left:26, top:59, width:303, gap:15 */}
+        {/* Title + body text */}
         <div style={{
-          position: 'absolute', left: '26px', top: '59px',
-          width: '303px',
+          marginLeft: '26px', marginRight: '21px', marginTop: '8px',
           display: 'flex', flexDirection: 'column', gap: '15px',
-          lineHeight: '16px',
         }}>
           <div style={{
             fontFamily: 'Inter', fontWeight: 700, fontSize: '20px',
             lineHeight: '24px', color: cat.color,
-            width: '261px',
           }}>{article.title}</div>
-          <div style={{ width: '303px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {article.body.split('\n\n').map((para, i) => (
               <div key={i} style={{
                 fontFamily: 'Inter', fontWeight: 400, fontSize: '13px',
@@ -243,12 +241,13 @@ export default function GuideArtikelPage() {
           </div>
         </div>
 
-        {/* Video thumbnail — left:21, top:286, width:317, height:178 */}
+        {/* Video thumbnail with play button */}
         <div style={{
-          position: 'absolute', left: '21px', top: '286px',
+          position: 'relative',
+          marginLeft: '21px', marginTop: '20px',
           width: '317px', height: '178px',
           borderRadius: '8px', overflow: 'hidden',
-          background: '#D0E9E5',
+          background: '#D0E9E5', flexShrink: 0,
         }}>
           <img
             src="/tumbnail-video.png"
@@ -256,19 +255,18 @@ export default function GuideArtikelPage() {
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             onError={(e) => { e.target.style.display = 'none'; }}
           />
-        </div>
-
-        {/* Play button — centered on image: left:147, top:342, width:65, height:65 */}
-        <div style={{
-          position: 'absolute', left: '147px', top: '342px',
-          width: '65px', height: '65px',
-          background: '#377B8A', borderRadius: '50%',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer',
-        }}>
-          <span className="material-symbols-outlined" style={{
-            fontSize: '40px', color: '#FFFFFF', userSelect: 'none',
-          }}>play_arrow</span>
+          <div style={{
+            position: 'absolute', left: '50%', top: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '65px', height: '65px',
+            background: '#377B8A', borderRadius: '50%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+          }}>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '40px', color: '#FFFFFF', userSelect: 'none',
+            }}>play_arrow</span>
+          </div>
         </div>
       </div>
 
