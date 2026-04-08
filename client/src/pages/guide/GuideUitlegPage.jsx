@@ -191,12 +191,12 @@ export default function GuideUitlegPage() {
         left: '28px', top: '144px',
       }}>
         {TILES.map((tile) => (
-          <div key={tile.id} style={{
+          <div key={tile.id} onClick={() => navigate(`/gids/uitleg/${tile.id}`)} style={{
             position: 'absolute',
             width: '169px', height: '155px',
             left: `${tile.tileLeft}px`, top: `${tile.tileTop}px`,
             background: '#FFFFFF', borderRadius: '7px',
-            overflow: 'hidden',
+            overflow: 'hidden', cursor: 'pointer',
           }}>
             {/* Main colored circle */}
             <div style={{
