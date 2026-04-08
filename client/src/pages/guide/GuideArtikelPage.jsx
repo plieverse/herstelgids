@@ -213,13 +213,20 @@ export default function GuideArtikelPage() {
           }}>{article.body}</div>
         </div>
 
-        {/* Video thumbnail placeholder — left:21, top:286, width:317, height:178 */}
+        {/* Video thumbnail — left:21, top:286, width:317, height:178 */}
         <div style={{
           position: 'absolute', left: '21px', top: '286px',
           width: '317px', height: '178px',
-          background: '#D0E9E5', borderRadius: '8px',
-          overflow: 'hidden',
-        }} />
+          borderRadius: '8px', overflow: 'hidden',
+          background: '#D0E9E5',
+        }}>
+          <img
+            src="/thumbnail-video.jpg"
+            alt="Video thumbnail"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={(e) => { e.target.style.display = 'none'; }}
+          />
+        </div>
 
         {/* Play button — centered on image: left:147, top:342, width:65, height:65 */}
         <div style={{
