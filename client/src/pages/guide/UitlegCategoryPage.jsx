@@ -148,7 +148,7 @@ export default function UitlegCategoryPage() {
       {/* ── Topbar ── */}
       <div style={{
         position: 'absolute', left: 0, top: 0, width: '414px', height: '110px',
-        background: '#FFFFFF',
+        background: '#FFFFFF', zIndex: 10,
         display: 'flex', flexDirection: 'column',
         justifyContent: 'center', alignItems: 'center', gap: '20px',
       }}>
@@ -212,7 +212,7 @@ export default function UitlegCategoryPage() {
           position: 'absolute', left: '0px', top: '112px',
           width: '46px', height: '46px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer',
+          cursor: 'pointer', zIndex: 10,
         }}
       >
         <div style={{
