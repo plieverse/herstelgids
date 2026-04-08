@@ -67,12 +67,20 @@ const UITLEG_ARTICLE_DATA = {
 
   /* ── Slaap ── */
   '4-0': {
-    title: 'Houding in bed',
-    body: 'Na de operatie kan het moeilijk zijn om comfortabel te slapen. Je lichaam is veranderd en soms heb je pijn.\n\nHet is beter om niet plat te liggen. Slaap met je hoofd iets omhoog. Dit voorkomt dat maagzuur omhoogkomt.\n\nEen extra kussen kan helpen. Of je kunt het hoofdeinde van je bed iets hoger zetten.\n\nIn de video leggen we uit welke slaaphoudingen het beste zijn na de operatie.',
+    title: 'Slaaphouding',
+    body: 'Na de operatie is het belangrijk hoe je ligt als je slaapt. Plat liggen kan problemen geven.\n\nSlaap met je hoofd en bovenlichaam iets omhoog. Dit voorkomt dat maagzuur omhoogkomt 's nachts.\n\nGebruik een extra kussen of zet het hoofdeinde van je bed iets hoger. Dit helpt ook als je pijn hebt.\n\nIn de video leggen we uit welke slaaphouding het beste is na de operatie.',
   },
   '4-1': {
-    title: 'Moeilijk in slaap komen',
-    body: 'Na de operatie kunnen sommige mensen moeilijk slapen. Dit kan komen door pijn, angst of een veranderd ritme.\n\nProbeer elke dag op dezelfde tijd naar bed te gaan. Dit helpt je lichaam een vast ritme te vinden.\n\nVermijd cafeïne in de avond. En kijk niet te lang naar een scherm voor het slapengaan.\n\nIn de video leggen we meer tips uit om beter te slapen na de operatie.',
+    title: "Maagzuur 's nachts",
+    body: "Sommige mensen hebben 's nachts last van maagzuur na de operatie. Je kunt wakker worden van een brandend gevoel in je keel of borst.\n\nDit komt omdat maagzuur omhoogkomt als je plat ligt. Hoog slapen helpt hiertegen.\n\nEet ook niet vlak voor het slapengaan. Wacht minstens twee uur na het avondeten voordat je naar bed gaat.\n\nIn de video leggen we meer uit over maagzuur 's nachts en hoe je dat kunt verminderen.",
+  },
+  '4-2': {
+    title: 'Eten voor het slapen',
+    body: 'Na de operatie is het beter om niet vlak voor het slapengaan te eten. Je maag heeft tijd nodig om voedsel te verwerken.\n\nEet je avondmaaltijd minstens twee uur voor het slapengaan. Kies een lichte maaltijd in de avond.\n\nEen volle maag kan ook je slaap verstoren. Je kunt je dan oncomfortabel voelen 's nachts.\n\nIn de video leggen we uit wat je het beste kunt eten en drinken voor het slapengaan.',
+  },
+  '4-3': {
+    title: 'Vermoeidheid',
+    body: 'Na de operatie kun je je heel moe voelen. Dit is normaal. Je lichaam werkt hard om te herstellen.\n\nRust genoeg. Doe rustig aan en neem de tijd. Forceer jezelf niet om te snel weer actief te zijn.\n\nDe vermoeidheid wordt meestal minder naarmate je herstelt. Dit kan weken tot maanden duren.\n\nIn de video leggen we uit hoe je goed kunt omgaan met vermoeidheid na de operatie.',
   },
 
   /* ── Ervaringen andere patiënten ── */
