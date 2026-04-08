@@ -67,16 +67,24 @@ const ARTICLE_DATA = {
     body: 'Na de operatie gaat eten soms te snel door je maag. Daardoor kun je dunne ontlasting krijgen. Dit heet diarree.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '5-0': {
-    title: 'Pijn',
-    body: 'Na de operatie kun je soms pijn in je buik hebben. Dit kan verschillende oorzaken hebben. Bespreek dit altijd met je zorgverlener.\n\nIn de video leggen we uit wat mogelijke oorzaken zijn.',
+    title: 'Moeheid',
+    body: 'Na de operatie kun je je moe voelen. Dit kan lang aanhouden. Je lichaam heeft tijd nodig om te herstellen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '5-1': {
+    title: 'Hoesten',
+    body: 'Na de operatie kun je last hebben van hoesten. Dit kan komen door maagzuur dat omhoogkomt.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+  },
+  '5-2': {
     title: 'Gewichtsverlies',
     body: 'Na de operatie kun je afvallen. Dit is soms gewenst, maar het kan ook te veel zijn. Het is belangrijk dat je goed blijft eten.\n\nIn de video leggen we uit hoe je je gewicht gezond houdt.',
   },
-  '5-2': {
-    title: 'Hoesten',
-    body: 'Na de operatie kun je last hebben van hoesten. Dit kan komen door maagzuur dat omhoogkomt.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+  '5-3': {
+    title: 'Slijm',
+    body: 'Na de operatie kun je meer slijm hebben in je keel of maag. Dit kan vervelend zijn en lang duren.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+  },
+  '5-4': {
+    title: 'Diarree',
+    body: 'Na de operatie gaat eten soms te snel door je maag. Daardoor kun je dunne ontlasting krijgen. Dit heet diarree.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
 };
 
