@@ -173,10 +173,10 @@ export default function ArticlePage() {
         }}>{cat.icon}</span>
       </div>
 
-      {/* ── White content card (top:257, rounded top corners) ── */}
+      {/* ── White content card (top:257, rounded top corners, fills to bottom nav) ── */}
       <div style={{
         position: 'absolute', left: '0px', top: '257px',
-        width: '414px', height: '421px',
+        width: '414px', bottom: '0px',
         background: '#F6F6F6', borderRadius: '20px 20px 0px 0px',
       }} />
 
