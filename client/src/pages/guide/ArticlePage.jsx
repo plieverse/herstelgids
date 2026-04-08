@@ -203,9 +203,9 @@ export default function ArticlePage() {
         display: 'flex', flexDirection: 'column', gap: '15px',
       }}>
         {cat.problems.map((problem, i) => (
-          <div key={i} style={{
+          <div key={i} onClick={() => navigate(`/gids/${id}/${i}`)} style={{
             position: 'relative', width: '367px', height: '58px',
-            background: '#FFFFFF', borderRadius: '20px',
+            background: '#FFFFFF', borderRadius: '20px', cursor: 'pointer',
           }}>
             {/* Circle behind icon */}
             <div style={{

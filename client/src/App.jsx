@@ -18,6 +18,7 @@ import DiaryHistoriePage from './pages/diary/DiaryHistoriePage';
 import GuidePage from './pages/guide/GuidePage';
 import GuideUitlegPage from './pages/guide/GuideUitlegPage';
 import ArticlePage from './pages/guide/ArticlePage';
+import GuideArtikelPage from './pages/guide/GuideArtikelPage';
 import MessagesPage from './pages/messages/MessagesPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import OnboardingWelcome from './pages/onboarding/OnboardingWelcome';
@@ -87,6 +88,7 @@ export default function App() {
           <Route path="/dagboek/historie/:daysAgo" element={<DiaryHistoriePage />} />
           <Route path="/gids" element={<GuidePage />} />
           <Route path="/gids/uitleg" element={<GuideUitlegPage />} />
+          <Route path="/gids/:categoryId/:problemIndex" element={<GuideArtikelPage />} />
           <Route path="/gids/:id" element={<ArticlePage />} />
           <Route path="/berichten" element={<MessagesPage />} />
           <Route path="/profiel" element={<ProfilePage />} />
