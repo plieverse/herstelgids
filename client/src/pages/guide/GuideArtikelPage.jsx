@@ -4,7 +4,7 @@ import BottomNav from '../../components/layout/BottomNav';
 const ARTICLE_DATA = {
   '1-0': {
     title: 'Vol gevoel',
-    body: 'Na de operatie kun je sneller een vol gevoel hebben. Dat komt doordat je maag kleiner is of anders werkt dan vroeger. Soms kan je dan al vóór het eten vol zitten. Daardoor heb je soms minder zin om te eten of is beginnen met eten moeilijk. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    body: 'Na de operatie kun je sneller een vol gevoel hebben. Dat komt doordat je maag kleiner is of anders werkt dan vroeger.\n\nSoms kan je dan al vóór het eten vol zitten. Daardoor heb je soms minder zin om te eten of is beginnen met eten moeilijk.\n\nIn deze video leggen we uit hoe dat komt en wat kan helpen.',
   },
   '1-1': {
     title: 'Geen honger',
@@ -207,13 +207,15 @@ export default function GuideArtikelPage() {
             lineHeight: '24px', color: '#377B8A',
             width: '261px',
           }}>{article.title}</div>
-          <div style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '13px',
-            lineHeight: '16px', color: '#727272',
-            width: '303px',
-            whiteSpace: 'normal',
-            margin: 0, padding: 0,
-          }}>{article.body}</div>
+          <div style={{ width: '303px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {article.body.split('\n\n').map((para, i) => (
+              <div key={i} style={{
+                fontFamily: 'Inter', fontWeight: 400, fontSize: '13px',
+                lineHeight: '16px', color: '#727272',
+                margin: 0, padding: 0,
+              }}>{para}</div>
+            ))}
+          </div>
         </div>
 
         {/* Video thumbnail — left:21, top:286, width:317, height:178 */}
