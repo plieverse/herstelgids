@@ -214,23 +214,23 @@ export default function GuideArtikelPage() {
           marginLeft: '26px', marginRight: '21px', marginTop: '8px',
           display: 'flex', flexDirection: 'column', gap: '15px',
         }}>
-          <div style={{
-            fontFamily: 'Inter', fontWeight: 700, fontSize: '20px',
-            lineHeight: '24px', color: cat.color,
-          }}>{article.title}</div>
-
-          {/* Decorative circles below title */}
-          <div style={{ position: 'relative', height: '16px', flexShrink: 0 }}>
+          <div style={{ position: 'relative' }}>
+            {/* Decorative circles behind title */}
             <div style={{
               position: 'absolute', width: '9px', height: '9px',
-              left: '20px', top: '0px',
-              borderRadius: '50%', background: cat.circleColor,
+              left: '15px', top: '-10px',
+              borderRadius: '50%', background: cat.circleColor, zIndex: 0,
             }} />
             <div style={{
               position: 'absolute', width: '25px', height: '25px',
-              left: '0px', top: '-4px',
-              borderRadius: '50%', background: cat.circleColor,
+              left: '-5px', top: '-5px',
+              borderRadius: '50%', background: cat.circleColor, zIndex: 0,
             }} />
+            <div style={{
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '20px',
+              lineHeight: '24px', color: cat.color,
+              position: 'relative', zIndex: 1,
+            }}>{article.title}</div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
