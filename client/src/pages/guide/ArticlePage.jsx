@@ -110,11 +110,10 @@ const CATEGORY_DATA = {
     iconLeft: 225, iconTop: 102,
     tilesLeft: 17, tilesWidth: 372,
     problems: [
-      { label: 'Moeheid',        icon: 'hotel' },
-      { label: 'Hoesten',        icon: 'voice_selection' },
+      { label: 'Moeheid',         icon: 'hotel' },
+      { label: 'Hoesten',         icon: 'voice_selection' },
       { label: 'Gewichtsverlies', icon: 'balance' },
-      { label: 'Slijm',          icon: 'water_drops' },
-      { label: 'Diarree',        icon: 'WC' },
+      { label: 'Slijm',           icon: 'water_drops' },
     ],
   },
 };
