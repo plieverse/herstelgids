@@ -1,62 +1,74 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
 
+const CATEGORY_COLORS = {
+  '1': { color: '#377B8A', circleColor: '#E6F4F2' },
+  '2': { color: '#CB6E02', circleColor: '#F4D2BC' },
+  '3': { color: '#4A378A', circleColor: '#DFCFEB' },
+  '4': { color: '#378A6C', circleColor: '#CFEBD4' },
+  '5': { color: '#8A3773', circleColor: '#EBCFDE' },
+};
+
 const ARTICLE_DATA = {
   '1-0': {
     title: 'Vol gevoel',
-    body: 'Na de operatie kun je sneller een vol gevoel hebben. Dat komt doordat je maag kleiner is of anders werkt dan vroeger.\n\nSoms kan je dan al vóór het eten vol zitten. Daardoor heb je soms minder zin om te eten of is beginnen met eten moeilijk.\n\nIn deze video leggen we uit hoe dat komt en wat kan helpen.',
+    body: 'Na de operatie wordt je maag kleiner. Daardoor kun je sneller een vol gevoel hebben.\n\nSoms zit je al vol vóór het eten. Dan is het moeilijk om te beginnen met eten.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '1-1': {
-    title: 'Geen honger',
-    body: 'Na de operatie kan het voorkomen dat je minder of geen honger meer voelt. Dit is normaal en heeft te maken met veranderingen in je maag en de signalen die naar je hersenen worden gestuurd. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    title: 'Geen honger gevoel',
+    body: 'Na de operatie kun je minder honger hebben. Dit is normaal. Je maag geeft dan andere signalen aan je hersenen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '2-0': {
     title: 'Moeite met slikken',
-    body: 'Moeite met slikken kan voorkomen na een maagoperatie. Het heeft te maken met de veranderingen in je slokdarm en maag. In deze video leggen we uit waarom dit kan happen en wat je eraan kunt doen.',
+    body: 'Na de operatie kun je moeite hebben met slikken. Dit komt door de veranderingen in je keel en maag.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '2-1': {
     title: 'Gevoel dat het eten niet zakt',
-    body: 'Soms zakt eten niet goed. Het kan voelen alsof eten blijft hangen. Dit komt vaker voor na de operatie. Toch kan het lastig maken om te eten.\n\nIn deze video leggen we uit wat er gebeurt en wat kan helpen.',
+    body: 'Soms zakt eten niet goed naar beneden. Het kan voelen alsof het eten blijft hangen. Dit kan na de operatie vaker voorkomen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '2-2': {
     title: 'Boeren',
-    body: 'Na een maagoperatie kan het voorkomen dat je meer boert dan voorheen. Dit heeft te maken met de veranderde werking van je maag en slokdarm. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    body: 'Na de operatie kun je meer boeren dan vroeger. Dit komt door de veranderingen in je maag.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '2-3': {
     title: 'Veel slijm',
-    body: 'Veel slijm in de keel of maag kan een vervelend bijverschijnsel zijn na een operatie. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    body: 'Na de operatie kun je meer slijm hebben in je keel of maag. Dit kan vervelend zijn.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '3-0': {
-    title: 'Buikkrampen',
-    body: 'Buikkrampen kort na het eten kunnen optreden als gevolg van veranderingen in je spijsvertering. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    title: 'Gevoel dat het eten terugkomt',
+    body: 'Na de operatie kan eten soms terugkomen in je keel. Dit kan een zuur of bittere smaak geven.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '3-1': {
-    title: 'Diarree',
-    body: 'Diarree na het eten kan voorkomen doordat je maag het voedsel sneller doorgeeft aan je darmen. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    title: 'Dumping (vroeg)',
+    body: 'Vroege dumping betekent dat eten te snel door je maag gaat. Dit kan kort na het eten gebeuren. Je kunt je dan misselijk, zweterig of duizelig voelen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '3-2': {
-    title: 'Dumping',
-    body: 'Dumping is een veelvoorkomend verschijnsel na maagoperaties waarbij voedsel te snel in de dunne darm terechtkomt. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    title: 'Buikkrampen',
+    body: 'Kort na het eten kun je buikkrampen krijgen. Dit komt door de veranderingen in je spijsvertering.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+  },
+  '3-3': {
+    title: 'Diarree',
+    body: 'Na de operatie kan eten sneller door je maag gaan. Daardoor kun je diarree krijgen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '4-0': {
-    title: 'Dumping',
-    body: 'Late dumping treedt op één tot drie uur na het eten op en hangt samen met een te snelle stijging en daling van de bloedsuikerspiegel. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    title: 'Dumping (laat)',
+    body: 'Late dumping gebeurt één tot drie uur na het eten. Je bloedsuiker gaat dan te snel omhoog en daarna te snel omlaag. Je kunt je dan moe, zweterig of trillerig voelen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '4-1': {
     title: 'Winderigheid',
-    body: 'Winderigheid na het eten kan toenemen na een maagoperatie. Dit heeft te maken met veranderingen in de spijsvertering. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    body: 'Na de operatie kun je meer last hebben van winderigheid. Dit komt door de veranderingen in je spijsvertering.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '5-0': {
     title: 'Pijn',
-    body: 'Langdurige pijn na een maagoperatie kan verschillende oorzaken hebben. Het is belangrijk dit te bespreken met uw zorgverlener. In deze video leggen we uit wat mogelijke oorzaken zijn en wat kan helpen.',
+    body: 'Na de operatie kun je soms pijn in je buik hebben. Dit kan verschillende oorzaken hebben. Bespreek dit altijd met je zorgverlener.\n\nIn de video leggen we uit wat mogelijke oorzaken zijn.',
   },
   '5-1': {
     title: 'Gewichtsverlies',
-    body: 'Gewichtsverlies na een maagoperatie is vaak gewenst, maar kan ook te ver gaan. In deze video leggen we uit hoe u een gezond gewicht kunt behouden.',
+    body: 'Na de operatie kun je afvallen. Dit is soms gewenst, maar het kan ook te veel zijn. Het is belangrijk dat je goed blijft eten.\n\nIn de video leggen we uit hoe je je gewicht gezond houdt.',
   },
   '5-2': {
     title: 'Hoesten',
-    body: 'Aanhoudend hoesten kan na een maagoperatie optreden, soms door terugvloeiing van maagzuur. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    body: 'Na de operatie kun je last hebben van hoesten. Dit kan komen door maagzuur dat omhoogkomt.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
 };
 
@@ -70,6 +82,7 @@ export default function GuideArtikelPage() {
   const { categoryId, problemIndex } = useParams();
   const key = `${categoryId}-${problemIndex}`;
   const article = ARTICLE_DATA[key] || DEFAULT_ARTICLE;
+  const cat = CATEGORY_COLORS[categoryId] || CATEGORY_COLORS['1'];
 
   return (
     <div style={{
@@ -171,13 +184,13 @@ export default function GuideArtikelPage() {
         <div style={{
           position: 'absolute', width: '9px', height: '9px',
           left: '41px', top: '49px',
-          borderRadius: '50%', background: '#E6F4F2',
+          borderRadius: '50%', background: cat.circleColor,
         }} />
         {/* Ellipse 2: 25×25 at left:21, top:58 */}
         <div style={{
           position: 'absolute', width: '25px', height: '25px',
           left: '21px', top: '58px',
-          borderRadius: '50%', background: '#E6F4F2',
+          borderRadius: '50%', background: cat.circleColor,
         }} />
 
         {/* "Lees voor" button: left:245, top:15, width:98, height:24 */}
@@ -208,7 +221,7 @@ export default function GuideArtikelPage() {
         }}>
           <div style={{
             fontFamily: 'Inter', fontWeight: 700, fontSize: '20px',
-            lineHeight: '24px', color: '#377B8A',
+            lineHeight: '24px', color: cat.color,
             width: '261px',
           }}>{article.title}</div>
           <div style={{ width: '303px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
