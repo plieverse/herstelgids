@@ -221,7 +221,7 @@ export default function GuideArtikelPage() {
           background: '#D0E9E5',
         }}>
           <img
-            src="/thumbnail-video.jpg"
+            src="/tumbnail-video.png"
             alt="Video thumbnail"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             onError={(e) => { e.target.style.display = 'none'; }}
