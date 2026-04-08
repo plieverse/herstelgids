@@ -42,8 +42,8 @@ const UITLEG_CATEGORY_DATA = {
     iconLeft: 238, iconTop: 98,
     tilesLeft: 17, tilesWidth: 372,
     problems: [
-      { label: 'Drinkvoeding', icon: 'gastroenterology' },
-      { label: 'Koffie en thee', icon: 'coffee' },
+      { label: 'Porties',      icon: 'gastroenterology' },
+      { label: 'Drinkvoeding', icon: 'coffee' },
       { label: 'Alcohol',      icon: 'wine_bar' },
     ],
   },

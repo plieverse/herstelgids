@@ -31,12 +31,12 @@ const UITLEG_ARTICLE_DATA = {
 
   /* ── Drinken ── */
   '2-0': {
-    title: 'Drinkvoeding',
-    body: 'Soms kun je na de operatie niet genoeg eten. Dan kan drinkvoeding helpen.\n\nDrinkvoeding is een vloeibare maaltijd met veel voedingsstoffen. Je kunt het drinken als aanvulling op je gewone eten.\n\nEr zijn veel soorten drinkvoeding. Je diëtist kan je helpen kiezen welke het beste bij jou past.\n\nIn de video leggen we meer uit over drinkvoeding en hoe je het kunt gebruiken.',
+    title: 'Porties',
+    body: 'Na de operatie is het belangrijk om goed op te letten hoeveel je drinkt per keer.\n\nDrink kleine hoeveelheden tegelijk. Grote slokken kunnen een naar gevoel geven.\n\nDrink niet tijdens het eten. Wacht minstens 30 minuten na het eten voordat je iets drinkt.\n\nIn de video leggen we uit hoeveel je per keer kunt drinken en hoe je dat goed kunt bijhouden.',
   },
   '2-1': {
-    title: 'Koffie en thee',
-    body: 'Na de operatie kun je gewoon koffie en thee drinken. Maar let op hoeveel je drinkt.\n\nKoffie en thee bevatten cafeïne. Cafeïne kan je maag prikkelen. Drink daarom niet te veel.\n\nDrink koffie of thee niet tijdens het eten. Wacht tot 30 minuten na het eten.\n\nIn de video leggen we meer uit over wat je kunt drinken na de operatie.',
+    title: 'Drinkvoeding',
+    body: 'Soms kun je na de operatie niet genoeg eten. Dan kan drinkvoeding helpen.\n\nDrinkvoeding is een vloeibare maaltijd met veel voedingsstoffen. Je kunt het drinken als aanvulling op je gewone eten.\n\nEr zijn veel soorten drinkvoeding. Je diëtist kan je helpen kiezen welke het beste bij jou past.\n\nIn de video leggen we meer uit over drinkvoeding en hoe je het kunt gebruiken.',
   },
   '2-2': {
     title: 'Alcohol',
