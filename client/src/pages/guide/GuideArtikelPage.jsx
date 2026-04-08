@@ -189,18 +189,6 @@ export default function GuideArtikelPage() {
         paddingBottom: '24px',
       }}>
 
-        {/* Decorative ellipses (absolute, don't affect height) */}
-        <div style={{
-          position: 'absolute', width: '9px', height: '9px',
-          left: '41px', top: '49px',
-          borderRadius: '50%', background: cat.circleColor,
-        }} />
-        <div style={{
-          position: 'absolute', width: '25px', height: '25px',
-          left: '21px', top: '58px',
-          borderRadius: '50%', background: cat.circleColor,
-        }} />
-
         {/* Top row: Lees voor button right-aligned */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '15px 21px 0 0' }}>
           <div style={{
@@ -230,6 +218,21 @@ export default function GuideArtikelPage() {
             fontFamily: 'Inter', fontWeight: 700, fontSize: '20px',
             lineHeight: '24px', color: cat.color,
           }}>{article.title}</div>
+
+          {/* Decorative circles below title */}
+          <div style={{ position: 'relative', height: '16px', flexShrink: 0 }}>
+            <div style={{
+              position: 'absolute', width: '9px', height: '9px',
+              left: '20px', top: '0px',
+              borderRadius: '50%', background: cat.circleColor,
+            }} />
+            <div style={{
+              position: 'absolute', width: '25px', height: '25px',
+              left: '0px', top: '-4px',
+              borderRadius: '50%', background: cat.circleColor,
+            }} />
+          </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {article.body.split('\n\n').map((para, i) => (
               <div key={i} style={{
