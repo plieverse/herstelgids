@@ -35,16 +35,16 @@ const UITLEG_CATEGORY_DATA = {
     decorColor: '#B2DBBA',
     decorCircles: [
       { w: 118, h: 118, l: 246, t: 135 },
-      { w: 15,  h: 15,  l: 263, t: 104 },
-      { w: 15,  h: 15,  l: 259, t: 125 },
-      { w: 15,  h: 15,  l: 290, t: 105 },
+      { w: 15,  h: 15,  l: 213, t: 210 },
+      { w: 15,  h: 15,  l: 231, t: 215 },
+      { w: 15,  h: 15,  l: 223, t: 194 },
     ],
-    iconLeft: 223, iconTop: 93,
+    iconLeft: 238, iconTop: 98,
     tilesLeft: 17, tilesWidth: 372,
     problems: [
-      { label: 'Drinkvoeding', icon: 'coffee' },
-      { label: 'Alcohol',      icon: 'local_bar' },
-      { label: 'Water',        icon: 'water_drop' },
+      { label: 'Drinkvoeding', icon: 'gastroenterology' },
+      { label: 'Koffie en thee', icon: 'coffee' },
+      { label: 'Alcohol',      icon: 'wine_bar' },
     ],
   },
   3: {

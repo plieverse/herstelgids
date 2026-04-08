@@ -35,12 +35,12 @@ const UITLEG_ARTICLE_DATA = {
     body: 'Soms kun je na de operatie niet genoeg eten. Dan kan drinkvoeding helpen.\n\nDrinkvoeding is een vloeibare maaltijd met veel voedingsstoffen. Je kunt het drinken als aanvulling op je gewone eten.\n\nEr zijn veel soorten drinkvoeding. Je diëtist kan je helpen kiezen welke het beste bij jou past.\n\nIn de video leggen we meer uit over drinkvoeding en hoe je het kunt gebruiken.',
   },
   '2-1': {
-    title: 'Alcohol',
-    body: 'Na de operatie is het beter om geen alcohol te drinken.\n\nJe lichaam neemt alcohol sneller op dan vroeger. Daardoor kun je al snel dronken zijn van een kleine hoeveelheid.\n\nAlcohol kan ook je maag en darmen irriteren. Dit kan pijn of misselijkheid geven.\n\nIn de video leggen we uit waarom alcohol gevaarlijk kan zijn na de operatie.',
+    title: 'Koffie en thee',
+    body: 'Na de operatie kun je gewoon koffie en thee drinken. Maar let op hoeveel je drinkt.\n\nKoffie en thee bevatten cafeïne. Cafeïne kan je maag prikkelen. Drink daarom niet te veel.\n\nDrink koffie of thee niet tijdens het eten. Wacht tot 30 minuten na het eten.\n\nIn de video leggen we meer uit over wat je kunt drinken na de operatie.',
   },
   '2-2': {
-    title: 'Water',
-    body: 'Voldoende drinken is belangrijk na de operatie. Probeer elke dag minstens 1,5 liter te drinken.\n\nDrink niet tijdens het eten. Wacht tot 30 minuten na het eten voordat je iets drinkt. Dit helpt je beter te eten.\n\nKies water, thee of bouillon. Vermijd suikerhoudende dranken.\n\nIn de video leggen we meer uit over drinken na de operatie.',
+    title: 'Alcohol',
+    body: 'Na de operatie is het beter om geen alcohol te drinken.\n\nJe lichaam neemt alcohol sneller op dan vroeger. Daardoor kun je al snel dronken zijn van een kleine hoeveelheid.\n\nAlcohol kan ook je maag en darmen prikkelen. Dit kan pijn of misselijkheid geven.\n\nIn de video leggen we uit waarom alcohol gevaarlijk kan zijn na de operatie.',
   },
 
   /* ── Medicijnen en hulpmiddelen ── */
