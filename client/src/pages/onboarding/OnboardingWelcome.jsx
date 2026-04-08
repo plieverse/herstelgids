@@ -98,7 +98,7 @@ export default function OnboardingWelcome() {
         justifyContent: 'center',
         color: '#727272',
       }}>
-        Ontdek samen met je zorgverleners je lichaam opnieuw met de Lichaamsgids
+        Leer samen met je zorgverleners je lichaam opnieuw kennen met de Lichaamsgids
       </div>
 
       {/* Button – left:122, top:621, width:170, height:50 */}
