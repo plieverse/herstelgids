@@ -89,7 +89,7 @@ const UITLEG_CATEGORY_DATA = {
     tilesLeft: 17, tilesWidth: 372,
     problems: [
       { label: 'Slaaphouding',        icon: 'hotel' },
-      { label: 'Maagzuur \'s nachts', icon: 'gastroenterology' },
+      { label: 'Maagzuur in de nacht', icon: 'gastroenterology' },
       { label: 'Eten voor het slapen', icon: 'flatware' },
       { label: 'Vermoeidheid',         icon: 'hotel' },
     ],
