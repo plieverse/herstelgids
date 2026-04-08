@@ -104,11 +104,19 @@ const UITLEG_ARTICLE_DATA = {
   /* ── Bewegen ── */
   '6-0': {
     title: 'Beginnen met bewegen',
-    body: 'Na de operatie is bewegen belangrijk voor je herstel. Maar begin rustig.\n\nStart met korte wandelingen. Ga elke dag een beetje meer lopen. Luister goed naar je lichaam.\n\nBeweeg niet te veel in het begin. Als je pijn hebt, stop dan en rust uit.\n\nIn de video leggen we uit hoe je stap voor stap kunt beginnen met bewegen na de operatie.',
+    body: 'Na de operatie word je in het ziekenhuis al geholpen om te beginnen met bewegen. Thuis moet je dat zelf doen.\n\nRustig beginnen met bewegen is normaal en belangrijk. Je hoeft niet veel te doen, maar wel regelmatig kleine stapjes. Begin bijvoorbeeld met wandelen in huis. Daarna in de straat. En dn daarna in de wijk.\n\nDe video hieronder geeft meer uitleg en tips.',
   },
   '6-1': {
-    title: 'Oefeningen',
-    body: 'Er zijn speciale oefeningen die helpen bij je herstel. Deze oefeningen zijn gemaakt voor mensen die net geopereerd zijn.\n\nDe oefeningen zijn rustig en veilig. Je kunt ze thuis doen.\n\nBegin altijd met opwarmen. Stop als je pijn voelt.\n\nIn de video laten we zien welke oefeningen goed zijn na de operatie en hoe je ze goed doet.',
+    title: 'Bewegen en ademhalen',
+    body: 'Bewegen en ademhalen hangen samen. Als je beweegt, ademt je dieper. Dat is goed voor je longen.\n\nNa de operatie kunnen je longen wat minder goed werken. Regelmatig bewegen helpt om ze weer sterker te maken.\n\nProbeer elke dag buiten te lopen. Frisse lucht en bewegen samen helpen je sneller te herstellen.\n\nIn de video leggen we uit hoe bewegen en ademhalen elkaar versterken na de operatie.',
+  },
+  '6-2': {
+    title: 'Waarom bewegen belangrijk is',
+    body: 'Bewegen na de operatie is heel belangrijk. Het helpt je lichaam om sneller te herstellen.\n\nAls je beweegt, gaat je bloed beter stromen. Dat vermindert het risico op problemen zoals trombose.\n\nBewegen helpt ook tegen vermoeidheid. Hoe meer je beweegt, hoe meer energie je krijgt.\n\nIn de video leggen we uit waarom bewegen zo belangrijk is na de operatie.',
+  },
+  '6-3': {
+    title: 'Wat je nog niet kan doen',
+    body: 'Na de operatie zijn er dingen die je nog niet kunt doen. Dat is normaal. Je lichaam heeft tijd nodig.\n\nTil geen zware dingen op. Doe geen zware sport. Vermijd activiteiten waarbij je buik gespannen wordt.\n\nVraag je arts of fysiotherapeut wat wel en niet mag in jouw situatie.\n\nIn de video leggen we uit welke activiteiten je beter kunt vermijden na de operatie en wanneer je meer kunt gaan doen.',
   },
 };
 
