@@ -40,10 +40,10 @@ const CATEGORY_DATA = {
     iconLeft: 236, iconTop: 105,
     tilesLeft: 15, tilesWidth: 372,
     problems: [
-      { label: 'Moeite met slikken', icon: 'ent' },
-      { label: 'Veel boeren',        icon: 'gastroenterology' },
-      { label: 'Terugvloeiing',      icon: 'voice_selection' },
-      { label: 'Veel slijm',         icon: 'water_drops' },
+      { label: 'Moeite met slikken',           icon: 'ent' },
+      { label: 'Gevoel dat het eten niet zakt', icon: 'gastroenterology' },
+      { label: 'Boeren',                        icon: 'voice_selection' },
+      { label: 'Veel slijm',                    icon: 'water_drops' },
     ],
   },
   3: {

@@ -15,10 +15,14 @@ const ARTICLE_DATA = {
     body: 'Moeite met slikken kan voorkomen na een maagoperatie. Het heeft te maken met de veranderingen in je slokdarm en maag. In deze video leggen we uit waarom dit kan happen en wat je eraan kunt doen.',
   },
   '2-1': {
-    title: 'Veel boeren',
-    body: 'Na een maagoperatie kan het voorkomen dat je meer boert dan voorheen. Dit heeft te maken met de veranderde werking van je maag en slokdarm. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+    title: 'Gevoel dat het eten niet zakt',
+    body: 'Soms zakt eten niet goed. Het kan voelen alsof eten blijft hangen. Dit komt vaker voor na de operatie. Toch kan het lastig maken om te eten.\n\nIn deze video leggen we uit wat er gebeurt en wat kan helpen.',
   },
   '2-2': {
+    title: 'Boeren',
+    body: 'Na een maagoperatie kan het voorkomen dat je meer boert dan voorheen. Dit heeft te maken met de veranderde werking van je maag en slokdarm. In deze video leggen we uit hoe dat komt en wat kan helpen.',
+  },
+  '2-3': {
     title: 'Veel slijm',
     body: 'Veel slijm in de keel of maag kan een vervelend bijverschijnsel zijn na een operatie. In deze video leggen we uit hoe dat komt en wat kan helpen.',
   },
