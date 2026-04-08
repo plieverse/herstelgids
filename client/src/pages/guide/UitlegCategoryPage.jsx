@@ -111,10 +111,10 @@ const UITLEG_CATEGORY_DATA = {
     iconLeft: 225, iconTop: 102,
     tilesLeft: 17, tilesWidth: 372,
     problems: [
-      { label: 'Lotgenotencontact', icon: 'diversity_3' },
-      { label: 'Medicijnen',        icon: 'pill' },
-      { label: 'Eten en drinken',   icon: 'flatware' },
-      { label: 'Verhalen',          icon: 'diversity_3' },
+      { label: 'Verhaal over familie',      icon: 'diversity_3' },
+      { label: 'Verhaal over vitaminen',    icon: 'pill' },
+      { label: 'Verhaal over uiteten gaan', icon: 'flatware' },
+      { label: 'SPSK',                      icon: 'diversity_3' },
     ],
   },
   6: {

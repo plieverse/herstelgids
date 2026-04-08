@@ -85,20 +85,20 @@ const UITLEG_ARTICLE_DATA = {
 
   /* ── Ervaringen andere patiënten ── */
   '5-0': {
-    title: 'Lotgenotencontact',
-    body: 'Het kan fijn zijn om te praten met iemand die hetzelfde heeft meegemaakt als jij.\n\nLotgenoten zijn mensen die dezelfde operatie hebben gehad. Zij begrijpen wat jij doormaakt.\n\nJe kunt vragen stellen en ervaringen delen. Dat kan je helpen om je minder alleen te voelen.\n\nIn de video leggen we uit hoe je in contact kunt komen met andere patiënten.',
+    title: 'Verhaal over familie',
+    body: 'Een operatie heeft niet alleen invloed op jou, maar ook op je familie. Familieleden maken zich zorgen en willen helpen.\n\nIn dit verhaal vertelt een patient hoe zijn of haar familie reageerde na de operatie. En hoe ze samen door het herstel zijn gegaan.\n\nHet kan fijn zijn om te horen hoe anderen dat hebben ervaren.\n\nBekijk de video om het verhaal te horen.',
   },
   '5-1': {
-    title: 'Medicijnen',
-    body: 'Andere patiënten hebben ook ervaringen met medicijnen na de operatie. Die ervaringen kunnen voor jou nuttig zijn.\n\nSommige mensen vinden bepaalde medicijnen moeilijk te slikken. Anderen hebben last van bijwerkingen.\n\nHet helpt om te horen hoe andere patiënten hiermee zijn omgegaan.\n\nIn de video vertellen andere patiënten over hun ervaringen met medicijnen na de operatie.',
+    title: 'Verhaal over vitaminen',
+    body: 'Na de operatie heeft je lichaam extra vitaminen nodig. Sommige patienten merken pas later dat ze tekorten hebben.\n\nIn dit verhaal vertelt Piet hoe hij zich erg moe voelde na de operatie. Hij ontdekte dat hij te weinig vitaminen had. Na het aanvullen voelde hij zich veel beter.\n\nBekijk de video om zijn verhaal te horen.',
   },
   '5-2': {
-    title: 'Eten en drinken',
-    body: 'Eten en drinken verandert na de operatie. Andere patiënten hebben daar al ervaring mee opgedaan.\n\nSommigen hebben geleerd welke voeding goed voor hen werkt. Anderen vertellen over fouten die ze maakten en wat ze ervan geleerd hebben.\n\nDeze ervaringen kunnen jou helpen om je eigen weg te vinden.\n\nIn de video vertellen andere patiënten over hun ervaringen met eten en drinken na de operatie.',
+    title: 'Verhaal over uiteten gaan',
+    body: 'Na de operatie vraag je je misschien af of je nog gewoon uit eten kunt gaan. Dat kan, maar je moet wel op een paar dingen letten.\n\nIn dit verhaal vertelt een patient over zijn of haar eerste keer uit eten na de operatie. Wat ging goed en wat was lastig?\n\nBekijk de video om te horen hoe je dat het beste kunt aanpakken.',
   },
   '5-3': {
-    title: 'Verhalen',
-    body: 'Andere patiënten hebben hun verhaal opgeschreven of verteld op video. Die verhalen zijn heel persoonlijk.\n\nJe leest en ziet hoe het herstel er voor anderen uitzag. Wat hielp, wat moeilijk was en hoe het nu gaat.\n\nDeze verhalen kunnen je hoop geven en laten zien dat herstel mogelijk is.\n\nIn de video vertellen andere patiënten hun persoonlijke verhaal over de operatie en het herstel.',
+    title: 'SPSK',
+    body: 'SPSK staat voor Stichting voor patienten na een slokdarm- of maagoperatie. Zij helpen mensen die dezelfde operatie hebben gehad.\n\nBij SPSK kun je in contact komen met andere patienten. Je kunt ervaringen delen en vragen stellen.\n\nVeel mensen vinden het fijn om te praten met iemand die begrijpt wat je doormaakt.\n\nBekijk de video voor meer informatie over SPSK en hoe je lid kunt worden.',
   },
 
   /* ── Bewegen ── */
