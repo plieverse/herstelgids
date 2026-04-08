@@ -45,10 +45,22 @@ const UITLEG_ARTICLE_DATA = {
 
   /* ── Medicijnen en hulpmiddelen ── */
   '3-0': {
+    title: 'Medicijnen',
+    body: 'Na de operatie krijg je medicijnen. Deze helpen je te herstellen en houden pijn en infecties weg.\n\nNeem je medicijnen altijd op de tijden die de dokter heeft aangegeven. Sla geen dosis over.\n\nSommige medicijnen moet je met water innemen. Anderen kun je ook met voedsel nemen.\n\nIn de video leggen we uit welke medicijnen je kunt verwachten na de operatie en hoe je ze goed gebruikt.',
+  },
+  '3-1': {
+    title: 'Maagzuur',
+    body: 'Na de operatie kun je last hebben van maagzuur. Je voelt dan een brandend gevoel in je keel of borst.\n\nJe krijgt vaak medicijnen tegen maagzuur. Deze verminderen de aanmaak van zuur in je maag.\n\nEet kleine porties en ga niet direct na het eten liggen. Dit helpt ook tegen maagzuur.\n\nIn de video leggen we uit hoe maagzuur ontstaat na de operatie en wat je ertegen kunt doen.',
+  },
+  '3-2': {
+    title: 'Pijnstillers',
+    body: 'Na de operatie heb je pijn. Dat is normaal. Je krijgt pijnstillers om de pijn te verminderen.\n\nNeem pijnstillers op de tijden die de dokter aangeeft. Wacht niet tot de pijn heel erg is.\n\nAls de pijn niet minder wordt, neem dan contact op met het ziekenhuis.\n\nIn de video leggen we uit welke pijnstillers je kunt gebruiken en wanneer je om hulp moet vragen.',
+  },
+  '3-3': {
     title: 'Sondevoeding',
     body: 'Soms kun je na de operatie niet goed eten of drinken. Dan krijg je sondevoeding.\n\nSondevoeding is vloeibaar voedsel dat via een slangetje rechtstreeks in je maag of darmen gaat.\n\nDit zorgt ervoor dat je lichaam genoeg voedingsstoffen krijgt terwijl je herstelt.\n\nIn de video leggen we uit hoe sondevoeding werkt en hoe lang je het nodig kunt hebben.',
   },
-  '3-1': {
+  '3-4': {
     title: 'JP drain',
     body: 'Na de operatie heb je soms een JP drain. Dit is een dun slangetje dat vocht uit je lichaam afvoert.\n\nHet vocht dat eruit komt, wordt opgevangen in een klein zakje. Dit zakje moet je regelmatig leegmaken.\n\nDe JP drain blijft zitten totdat er weinig vocht meer uitkomt.\n\nIn de video leggen we uit hoe je voor de JP drain zorgt en wanneer je contact op moet nemen met het ziekenhuis.',
   },
