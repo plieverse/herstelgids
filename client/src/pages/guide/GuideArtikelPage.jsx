@@ -51,12 +51,20 @@ const ARTICLE_DATA = {
     body: 'Na de operatie gaat eten soms te snel door je maag. Daardoor kun je dunne ontlasting krijgen. Dit heet diarree.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '4-0': {
-    title: 'Dumping (laat)',
-    body: 'Late dumping gebeurt één tot drie uur na het eten. Je bloedsuiker gaat dan te snel omhoog en daarna te snel omlaag. Je kunt je dan moe, zweterig of trillerig voelen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+    title: 'Misselijkheid',
+    body: 'Na de operatie kun je misselijk zijn na het eten. Dit kan lang na het eten voorkomen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '4-1': {
+    title: 'Dumping (laat)',
+    body: 'Late dumping gebeurt één tot drie uur na het eten. Je bloedsuiker gaat te snel omhoog en daarna te snel omlaag. Je kunt je moe, zweterig of trillerig voelen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+  },
+  '4-2': {
     title: 'Winderigheid',
     body: 'Na de operatie kun je meer last hebben van winderigheid. Dit komt door de veranderingen in je spijsvertering.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+  },
+  '4-3': {
+    title: 'Diarree',
+    body: 'Na de operatie gaat eten soms te snel door je maag. Daardoor kun je dunne ontlasting krijgen. Dit heet diarree.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '5-0': {
     title: 'Pijn',
