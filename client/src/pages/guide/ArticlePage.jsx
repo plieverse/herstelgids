@@ -66,7 +66,7 @@ const CATEGORY_DATA = {
       { label: 'Gevoel dat het eten terugkomt', icon: 'gastroenterology' },
       { label: 'Dumping (vroeg)',               icon: 'sentiment_stressed' },
       { label: 'Buikkrampen',                   icon: 'bolt' },
-      { label: 'Diarree',                       icon: 'wc' },
+      { label: 'Diarree',                       icon: 'WC' },
     ],
   },
   4: {
@@ -274,10 +274,17 @@ export default function ArticlePage() {
               width: '35px', height: '35px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <span className="material-symbols-outlined" style={{
-                fontSize: '28px', lineHeight: '1', display: 'block',
-                color: cat.iconColor, userSelect: 'none',
-              }}>{problem.icon}</span>
+              {problem.icon === 'WC' ? (
+                <span style={{
+                  fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+                  lineHeight: '24px', color: cat.iconColor, userSelect: 'none',
+                }}>WC</span>
+              ) : (
+                <span className="material-symbols-outlined" style={{
+                  fontSize: '28px', lineHeight: '1', display: 'block',
+                  color: cat.iconColor, userSelect: 'none',
+                }}>{problem.icon}</span>
+              )}
             </div>
             {/* Problem label */}
             <div style={{
