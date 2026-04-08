@@ -85,12 +85,20 @@ const UITLEG_ARTICLE_DATA = {
 
   /* ── Ervaringen andere patiënten ── */
   '5-0': {
-    title: 'Verhalen van patiënten',
-    body: 'Het kan fijn zijn om te horen hoe andere mensen de operatie hebben ervaren.\n\nElke patiënt is anders. Toch zijn er veel overeenkomsten in wat mensen meemaken na de operatie.\n\nDe verhalen van andere patiënten kunnen je helpen om te begrijpen wat je zelf meemaakt.\n\nIn de video vertellen andere patiënten over hun ervaringen na de operatie.',
+    title: 'Lotgenotencontact',
+    body: 'Het kan fijn zijn om te praten met iemand die hetzelfde heeft meegemaakt als jij.\n\nLotgenoten zijn mensen die dezelfde operatie hebben gehad. Zij begrijpen wat jij doormaakt.\n\nJe kunt vragen stellen en ervaringen delen. Dat kan je helpen om je minder alleen te voelen.\n\nIn de video leggen we uit hoe je in contact kunt komen met andere patiënten.',
   },
   '5-1': {
-    title: 'Videos',
-    body: 'In de app staan verschillende videos over herstel na de operatie.\n\nDe videos zijn gemaakt door zorgverleners en patiënten. Ze geven uitleg over veel onderwerpen.\n\nJe kunt de videos bekijken wanneer je wilt. Je kunt ze ook terugkijken als je iets vergeten bent.\n\nIn de video leggen we meer uit over hoe je de videos kunt gebruiken.',
+    title: 'Medicijnen',
+    body: 'Andere patiënten hebben ook ervaringen met medicijnen na de operatie. Die ervaringen kunnen voor jou nuttig zijn.\n\nSommige mensen vinden bepaalde medicijnen moeilijk te slikken. Anderen hebben last van bijwerkingen.\n\nHet helpt om te horen hoe andere patiënten hiermee zijn omgegaan.\n\nIn de video vertellen andere patiënten over hun ervaringen met medicijnen na de operatie.',
+  },
+  '5-2': {
+    title: 'Eten en drinken',
+    body: 'Eten en drinken verandert na de operatie. Andere patiënten hebben daar al ervaring mee opgedaan.\n\nSommigen hebben geleerd welke voeding goed voor hen werkt. Anderen vertellen over fouten die ze maakten en wat ze ervan geleerd hebben.\n\nDeze ervaringen kunnen jou helpen om je eigen weg te vinden.\n\nIn de video vertellen andere patiënten over hun ervaringen met eten en drinken na de operatie.',
+  },
+  '5-3': {
+    title: 'Verhalen',
+    body: 'Andere patiënten hebben hun verhaal opgeschreven of verteld op video. Die verhalen zijn heel persoonlijk.\n\nJe leest en ziet hoe het herstel er voor anderen uitzag. Wat hielp, wat moeilijk was en hoe het nu gaat.\n\nDeze verhalen kunnen je hoop geven en laten zien dat herstel mogelijk is.\n\nIn de video vertellen andere patiënten hun persoonlijke verhaal over de operatie en het herstel.',
   },
 
   /* ── Bewegen ── */
