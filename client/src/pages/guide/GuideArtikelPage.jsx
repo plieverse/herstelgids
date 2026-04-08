@@ -36,7 +36,7 @@ const ARTICLE_DATA = {
   },
   '3-0': {
     title: 'Gevoel dat het eten terugkomt',
-    body: 'Na de operatie kan eten soms terugkomen in je keel. Dit kan een zuur of bittere smaak geven.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+    body: 'Na de operatie kan eten soms omhoog komen. Je voelt dan een zure of bittere smaak in je keel.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '3-1': {
     title: 'Dumping (vroeg)',
@@ -44,11 +44,11 @@ const ARTICLE_DATA = {
   },
   '3-2': {
     title: 'Buikkrampen',
-    body: 'Kort na het eten kun je buikkrampen krijgen. Dit komt door de veranderingen in je spijsvertering.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+    body: 'Kort na het eten kun je pijn in je buik krijgen. Dit noem je buikkrampen. Het komt door de veranderingen in je spijsvertering.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '3-3': {
     title: 'Diarree',
-    body: 'Na de operatie kan eten sneller door je maag gaan. Daardoor kun je diarree krijgen.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
+    body: 'Na de operatie gaat eten soms te snel door je maag. Daardoor kun je dunne ontlasting krijgen. Dit heet diarree.\n\nIn de video leggen we uit hoe dit komt en wat kan helpen.',
   },
   '4-0': {
     title: 'Dumping (laat)',
