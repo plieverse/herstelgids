@@ -200,6 +200,7 @@ export default function GuideArtikelPage() {
           position: 'absolute', left: '26px', top: '59px',
           width: '303px',
           display: 'flex', flexDirection: 'column', gap: '15px',
+          lineHeight: '16px',
         }}>
           <div style={{
             fontFamily: 'Inter', fontWeight: 700, fontSize: '20px',
@@ -210,6 +211,8 @@ export default function GuideArtikelPage() {
             fontFamily: 'Inter', fontWeight: 400, fontSize: '13px',
             lineHeight: '16px', color: '#727272',
             width: '303px',
+            whiteSpace: 'normal',
+            margin: 0, padding: 0,
           }}>{article.body}</div>
         </div>
 
