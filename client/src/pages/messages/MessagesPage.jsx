@@ -176,6 +176,7 @@ export default function MessagesPage() {
         width: '414px', height: '62px',
         background: '#FFFFFF',
         borderTop: '1px solid #E8E8E8',
+        borderBottom: '1px solid #377B8A',
         display: 'flex', flexDirection: 'row',
         alignItems: 'center', padding: '0 16px',
         boxSizing: 'border-box', gap: '10px',
