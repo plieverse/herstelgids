@@ -4,6 +4,8 @@ import Toast, { useToast } from '../../components/ui/Toast';
 import BottomNav from '../../components/layout/BottomNav';
 import { formatDateTime } from '../../utils/dates';
 
+const STORAGE_KEY = 'demo_messages';
+
 /* ── Auto-replies from care providers ── */
 const AUTO_REPLIES = [
   { sender_name: 'Tessa', sender_role: 'Verpleegkundig Specialist', sender_icon: 'medical_information',
@@ -16,16 +18,29 @@ const AUTO_REPLIES = [
     content: 'Begrepen. Ik kijk samen met u naar wat het beste past bij uw herstel. Ik neem snel contact op.' },
 ];
 
-let autoReplyIndex = 0;
-function getNextAutoReply() {
-  const reply = AUTO_REPLIES[autoReplyIndex % AUTO_REPLIES.length];
-  autoReplyIndex++;
-  return reply;
+function getNextReplyIndex(messages) {
+  const careCount = messages.filter((m) => m.sender_type === 'care').length;
+  return careCount % AUTO_REPLIES.length;
 }
 
 function nowTime() {
   return new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' }) +
     ', ' + new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+}
+
+function loadMessages() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveMessages(msgs) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+  } catch {}
 }
 
 /* ── Received bubble ── */
@@ -109,7 +124,7 @@ function EmptyState() {
 
 /* ── Main page ── */
 export default function MessagesPage() {
-  const [localMessages, setLocalMessages] = useState([]);
+  const [localMessages, setLocalMessages] = useState(() => loadMessages());
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
   const { toast, setToast } = useToast();
@@ -120,13 +135,9 @@ export default function MessagesPage() {
   }, []);
 
   useEffect(() => {
+    saveMessages(localMessages);
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [localMessages]);
-
-  function handleReset() {
-    setLocalMessages([]);
-    autoReplyIndex = 0;
-  }
 
   async function handleSend(e) {
     e.preventDefault();
@@ -139,23 +150,33 @@ export default function MessagesPage() {
       content: trimmed,
       display_time: nowTime(),
     };
-    setLocalMessages((prev) => [...prev, sentMsg]);
+
+    setLocalMessages((prev) => {
+      const updated = [...prev, sentMsg];
+      const replyIdx = getNextReplyIndex(updated);
+      const replyData = AUTO_REPLIES[replyIdx];
+
+      setTimeout(() => {
+        const replyMsg = {
+          id: 'reply-' + Date.now(),
+          sender_type: 'care',
+          sender_name: replyData.sender_name,
+          sender_role: replyData.sender_role,
+          sender_icon: replyData.sender_icon,
+          content: replyData.content,
+          display_time: nowTime(),
+        };
+        setLocalMessages((prev2) => {
+          const next = [...prev2, replyMsg];
+          saveMessages(next);
+          return next;
+        });
+      }, 1500);
+
+      return updated;
+    });
+
     setContent('');
-
-    const replyData = getNextAutoReply();
-    setTimeout(() => {
-      const replyMsg = {
-        id: 'reply-' + Date.now(),
-        sender_type: 'care',
-        sender_name: replyData.sender_name,
-        sender_role: replyData.sender_role,
-        sender_icon: replyData.sender_icon,
-        content: replyData.content,
-        display_time: nowTime(),
-      };
-      setLocalMessages((prev) => [...prev, replyMsg]);
-    }, 1500);
-
     api.post('/messages', { content: trimmed }).catch(() => {});
   }
 
@@ -178,27 +199,16 @@ export default function MessagesPage() {
           <div style={{ position: 'absolute', width: '29px', height: '29px', left: '2px', top: '2.5px', borderRadius: '50%', background: '#E6F4F2', zIndex: 1 }} />
           <span style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '24px', lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 3 }}>Berichten</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          {/* Reset button — only visible when there are messages */}
-          {localMessages.length > 0 && (
-            <button onClick={handleReset} title="Reset berichten" style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '35px', height: '35px', borderRadius: '50%',
-            }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '26px', color: '#B3B2B2', userSelect: 'none' }}>restart_alt</span>
-            </button>
-          )}
-          <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '35px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
-          </div>
+        <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '35px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
         </div>
       </div>
 
       {/* ── Messages list / Empty state ── */}
       <div style={{
         position: 'absolute', left: 0, top: '73px', width: '414px', bottom: '120px',
-        overflowY: 'auto', padding: localMessages.length > 0 ? '14px 10px 0' : '0',
+        overflowY: 'auto',
+        padding: localMessages.length > 0 ? '14px 10px 0' : '0',
         boxSizing: 'border-box',
       }}>
         {loading ? (
