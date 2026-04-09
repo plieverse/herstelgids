@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../../api/client';
 import { useAuthStore } from '../../store/authStore';
-import Button from '../../components/ui/Button';
 import Toast, { useToast } from '../../components/ui/Toast';
+import BottomNav from '../../components/layout/BottomNav';
 import { formatDateTime } from '../../utils/dates';
 
 export default function MessagesPage() {
@@ -17,7 +17,6 @@ export default function MessagesPage() {
   useEffect(() => {
     api.get('/messages').then(({ data }) => {
       setMessages(data);
-      // Mark care messages as read
       data.filter((m) => m.sender_type === 'care' && !m.read_at).forEach((m) => {
         api.put(`/messages/${m.id}/read`).catch(() => {});
       });
@@ -43,26 +42,127 @@ export default function MessagesPage() {
     }
   }
 
-  if (loading) return <div style={styles.loading}>Laden…</div>;
-
   return (
-    <main style={styles.page}>
-      <h1 style={styles.title}>Berichten</h1>
+    <div style={{
+      position: 'relative', width: '100%', maxWidth: '414px',
+      height: '100dvh', minHeight: '736px', margin: '0 auto',
+      background: '#F6F6F6', fontFamily: 'Inter, sans-serif',
+      display: 'flex', flexDirection: 'column', overflow: 'hidden',
+    }}>
 
-      <div style={styles.messageList}>
-        {messages.length === 0 ? (
-          <div style={styles.empty}>
-            <p style={styles.emptyTitle}>Nog geen berichten</p>
-            <p style={styles.emptyText}>U kunt hier een bericht sturen naar uw zorgteam. Zij reageren zo snel mogelijk.</p>
+      {/* ── Topbar ── */}
+      <div style={{
+        position: 'absolute', left: 0, top: 0, width: '414px', height: '73px',
+        background: '#FFFFFF', zIndex: 10,
+        display: 'flex', flexDirection: 'column',
+        justifyContent: 'center', padding: '5px 0 0',
+      }}>
+        <div style={{
+          display: 'flex', flexDirection: 'row',
+          justifyContent: 'space-between', alignItems: 'center',
+          padding: '0px 10px', width: '414px', height: '40px',
+          boxSizing: 'border-box',
+        }}>
+          {/* Title with decorative circle */}
+          <div style={{
+            position: 'relative', display: 'flex', alignItems: 'center',
+            padding: '0px 0px 0px 10px', width: '150px', height: '34px',
+          }}>
+            <div style={{
+              position: 'absolute', width: '29px', height: '29px',
+              left: '0px', top: '3px', borderRadius: '50%',
+              background: '#E6F4F2', zIndex: 1,
+            }} />
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
+              lineHeight: '29px', color: '#377B8A',
+              position: 'relative', zIndex: 2,
+            }}>Berichten</span>
           </div>
+
+          {/* Profile icon */}
+          <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Notification / expectation box ── */}
+      <div style={{
+        position: 'absolute', left: '38px', top: '100px',
+        width: '346px', height: '70px',
+        background: '#E6F4F2', borderRadius: '10px',
+        zIndex: 5,
+      }}>
+        {/* Circle behind icon */}
+        <div style={{
+          position: 'absolute', width: '31px', height: '31px',
+          left: '12px', top: '18.5px',
+          borderRadius: '50%', background: '#D0E9E5',
+        }} />
+        {/* Warning icon */}
+        <div style={{
+          position: 'absolute', left: '10px', top: '14px',
+          width: '35px', height: '35px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <span className="material-symbols-outlined" style={{
+            fontSize: '22px', color: '#377B8A', userSelect: 'none',
+          }}>warning</span>
+        </div>
+        {/* Text */}
+        <div style={{
+          position: 'absolute', left: '55px', top: '5px',
+          width: '245px', height: '60px',
+          display: 'flex', alignItems: 'center',
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '12px',
+          lineHeight: '15px', color: '#727272',
+        }}>
+          Zorgverleners kunnen niet altijd meteen je vraag beantwoorden. Binnen 24 uur proberen ze je bericht(en) te beantwoorden.
+        </div>
+      </div>
+
+      {/* ── Messages list ── */}
+      <div style={{
+        position: 'absolute', left: 0, top: '180px',
+        width: '414px', bottom: '120px',
+        overflowY: 'auto', padding: '0 20px',
+        boxSizing: 'border-box', display: 'flex',
+        flexDirection: 'column', gap: '12px',
+      }}>
+        {loading ? (
+          <div style={{ textAlign: 'center', color: '#B3B2B2', marginTop: '40px', fontSize: '14px' }}>Laden…</div>
+        ) : messages.length === 0 ? (
+          /* empty – notification box is already visible above */
+          null
         ) : (
           messages.map((msg) => {
             const isPatient = msg.sender_type === 'patient';
             return (
-              <div key={msg.id} style={{ ...styles.bubble, ...(isPatient ? styles.bubblePatient : styles.bubbleCare) }}>
-                <p style={styles.bubbleSender}>{isPatient ? 'U' : 'Zorgteam'}</p>
-                <p style={styles.bubbleContent}>{msg.content}</p>
-                <p style={styles.bubbleTime}>{formatDateTime(msg.created_at)}</p>
+              <div key={msg.id} style={{
+                alignSelf: isPatient ? 'flex-end' : 'flex-start',
+                maxWidth: '80%',
+                background: isPatient ? '#377B8A' : '#FFFFFF',
+                color: isPatient ? '#FFFFFF' : '#333333',
+                borderRadius: isPatient ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+                padding: '12px 16px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+              }}>
+                {!isPatient && (
+                  <div style={{
+                    fontFamily: 'Inter', fontWeight: 700, fontSize: '12px',
+                    color: '#377B8A', marginBottom: '4px',
+                  }}>Zorgteam</div>
+                )}
+                <div style={{
+                  fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
+                  lineHeight: '20px',
+                }}>{msg.content}</div>
+                <div style={{
+                  fontFamily: 'Inter', fontWeight: 400, fontSize: '11px',
+                  color: isPatient ? 'rgba(255,255,255,0.7)' : '#B3B2B2',
+                  marginTop: '6px', textAlign: 'right',
+                }}>{formatDateTime(msg.created_at)}</div>
               </div>
             );
           })
@@ -70,65 +170,52 @@ export default function MessagesPage() {
         <div ref={bottomRef} />
       </div>
 
-      <form onSubmit={handleSend} style={styles.inputArea}>
-        <textarea
+      {/* ── Input area ── */}
+      <div style={{
+        position: 'absolute', left: 0, bottom: '58px',
+        width: '414px', height: '62px',
+        background: '#FFFFFF',
+        borderTop: '1px solid #E8E8E8',
+        display: 'flex', flexDirection: 'row',
+        alignItems: 'center', padding: '0 16px',
+        boxSizing: 'border-box', gap: '10px',
+      }}>
+        <input
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { handleSend(e); } }}
           placeholder="Schrijf een bericht…"
-          rows={3}
-          style={styles.textarea}
           maxLength={2000}
-          aria-label="Berichtinhoud"
+          style={{
+            flex: 1, height: '38px',
+            background: '#F6F6F6', border: 'none',
+            borderRadius: '19px', padding: '0 16px',
+            fontFamily: 'Inter', fontSize: '14px', color: '#333',
+            outline: 'none',
+          }}
         />
-        <Button type="submit" fullWidth loading={sending} disabled={!content.trim()}>
-          Versturen
-        </Button>
-      </form>
+        <button
+          onClick={handleSend}
+          disabled={!content.trim() || sending}
+          style={{
+            width: '38px', height: '38px', borderRadius: '50%',
+            background: content.trim() ? '#377B8A' : '#E8E8E8',
+            border: 'none', cursor: content.trim() ? 'pointer' : 'default',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0, transition: 'background 0.2s',
+          }}
+        >
+          <span className="material-symbols-outlined" style={{
+            fontSize: '20px', color: content.trim() ? '#FFFFFF' : '#B3B2B2',
+            userSelect: 'none',
+          }}>send</span>
+        </button>
+      </div>
+
+      {/* ── Bottom Nav ── */}
+      <BottomNav />
 
       <Toast toast={toast} onDismiss={() => setToast(null)} />
-    </main>
+    </div>
   );
 }
-
-const styles = {
-  loading: { display: 'flex', justifyContent: 'center', padding: '48px', color: 'var(--color-text-muted)' },
-  page: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 'var(--space-6) var(--space-5)',
-    paddingBottom: 'calc(var(--nav-height) + var(--space-4))',
-    height: '100dvh',
-    overflowY: 'auto',
-  },
-  title: { fontSize: 'var(--text-2xl)', fontWeight: '700', marginBottom: 'var(--space-5)' },
-  messageList: { flex: 1, display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', overflowY: 'auto', marginBottom: 'var(--space-4)' },
-  bubble: {
-    maxWidth: '85%', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)',
-  },
-  bubblePatient: {
-    alignSelf: 'flex-end',
-    background: 'var(--color-primary)',
-    color: '#fff',
-    borderBottomRightRadius: '4px',
-  },
-  bubbleCare: {
-    alignSelf: 'flex-start',
-    background: 'var(--color-surface)',
-    border: '1px solid var(--color-border)',
-    borderBottomLeftRadius: '4px',
-  },
-  bubbleSender: { fontSize: 'var(--text-xs)', fontWeight: '700', opacity: 0.7, marginBottom: '4px' },
-  bubbleContent: { fontSize: 'var(--text-base)', lineHeight: 1.5 },
-  bubbleTime: { fontSize: '11px', opacity: 0.6, marginTop: '6px', textAlign: 'right' },
-  empty: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 'var(--space-8)', textAlign: 'center', gap: 'var(--space-3)' },
-  emptyTitle: { fontSize: 'var(--text-lg)', fontWeight: '700', color: 'var(--color-text)' },
-  emptyText: { fontSize: 'var(--text-base)', color: 'var(--color-text-muted)', lineHeight: 1.6 },
-  inputArea: { display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', paddingTop: 'var(--space-4)', borderTop: '1px solid var(--color-border)' },
-  textarea: {
-    padding: '14px 16px', borderRadius: 'var(--radius-md)',
-    border: '2px solid var(--color-border)', background: 'var(--color-surface)',
-    fontSize: 'var(--text-base)', resize: 'none', color: 'var(--color-text)',
-    fontFamily: 'inherit',
-  },
-};
