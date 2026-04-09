@@ -1,12 +1,121 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../../api/client';
-import { useAuthStore } from '../../store/authStore';
 import Toast, { useToast } from '../../components/ui/Toast';
 import BottomNav from '../../components/layout/BottomNav';
 import { formatDateTime } from '../../utils/dates';
 
+/* ── Demo messages shown in the prototype ── */
+const DEMO_MESSAGES = [
+  {
+    id: 'demo-0',
+    sender_type: 'care',
+    sender_name: 'Tessa',
+    sender_role: 'Verpleegkundig Specialist',
+    sender_icon: 'medical_information',
+    content: 'Goedemorgen meneer Jansen. Ik zie dat u heeft ingevuld dat u bent afgevallen en minder eetlust heeft. Kunt u vertellen hoe het eten de afgelopen dagen ging?',
+    display_time: '14 april, 10:33',
+  },
+  {
+    id: 'demo-1',
+    sender_type: 'patient',
+    content: 'Goedemorgen. Ik krijg mijn eten niet goed op. Na een paar happen zit ik al vol. Ik ben deze week weer een kilo afgevallen.',
+    display_time: '14 april, 10:33',
+  },
+  {
+    id: 'demo-2',
+    sender_type: 'care',
+    sender_name: 'Janny',
+    sender_role: 'Dietiste',
+    sender_icon: 'nutrition',
+    content: 'Dank u voor uw bericht. Dat u snel vol zit, komt vaak voor na deze operatie. Het is belangrijk om vaker kleine porties te eten. Lukt het om 6 keer per dag iets kleins te nemen?',
+    display_time: '14 april, 14:17',
+  },
+];
+
+/* ── Received bubble (care provider) ── */
+function ReceivedBubble({ msg }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginBottom: '16px', paddingRight: '60px' }}>
+      {/* Left tail */}
+      <div style={{
+        width: 0, height: 0, flexShrink: 0,
+        borderTop: '8px solid transparent',
+        borderBottom: '8px solid transparent',
+        borderRight: '12px solid #FFFFFF',
+        marginTop: '28px',
+      }} />
+      {/* White bubble */}
+      <div style={{
+        background: '#FFFFFF', borderRadius: '5px',
+        padding: '8px 15px 8px 12px', flex: 1,
+        minWidth: 0,
+      }}>
+        {/* Sender row */}
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+          <div style={{ position: 'relative', width: '30px', height: '30px', flexShrink: 0 }}>
+            <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#E6F4F2' }} />
+            <span className="material-symbols-outlined" style={{
+              position: 'absolute', left: '3px', top: '3px',
+              fontSize: '24px', lineHeight: '1', color: '#377B8A', userSelect: 'none',
+            }}>{msg.sender_icon || 'medical_information'}</span>
+          </div>
+          <div style={{
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px',
+            lineHeight: '17px', color: '#377B8A',
+          }}>
+            {msg.sender_name || 'Zorgteam'}<br />
+            <span style={{ fontStyle: 'italic' }}>{msg.sender_role || ''}</span>
+          </div>
+        </div>
+        {/* Message text */}
+        <div style={{
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
+          lineHeight: '17px', color: '#727272', marginBottom: '6px',
+        }}>{msg.content}</div>
+        {/* Timestamp */}
+        <div style={{
+          fontFamily: 'Inter', fontStyle: 'italic', fontWeight: 400,
+          fontSize: '13px', lineHeight: '16px', color: '#727272', textAlign: 'right',
+        }}>{msg.display_time || formatDateTime(msg.created_at)}</div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sent bubble (patient) ── */
+function SentBubble({ msg }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', marginBottom: '16px', paddingLeft: '60px' }}>
+      {/* Grey bubble */}
+      <div style={{
+        background: '#E2E2E2', borderRadius: '5px',
+        padding: '8px 12px 8px 15px',
+      }}>
+        {/* Message text */}
+        <div style={{
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
+          lineHeight: '17px', color: '#727272', marginBottom: '6px',
+        }}>{msg.content}</div>
+        {/* Timestamp */}
+        <div style={{
+          fontFamily: 'Inter', fontStyle: 'italic', fontWeight: 400,
+          fontSize: '13px', lineHeight: '16px', color: '#727272', textAlign: 'right',
+        }}>{msg.display_time || formatDateTime(msg.created_at)}</div>
+      </div>
+      {/* Right tail */}
+      <div style={{
+        width: 0, height: 0, flexShrink: 0,
+        borderTop: '8px solid transparent',
+        borderBottom: '8px solid transparent',
+        borderLeft: '12px solid #E2E2E2',
+        marginBottom: '8px',
+      }} />
+    </div>
+  );
+}
+
+/* ── Main page ── */
 export default function MessagesPage() {
-  const user = useAuthStore((s) => s.user);
   const [messages, setMessages] = useState([]);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
@@ -42,6 +151,9 @@ export default function MessagesPage() {
     }
   }
 
+  /* Combine demo messages with real API messages */
+  const allMessages = [...DEMO_MESSAGES, ...messages];
+
   return (
     <div style={{
       position: 'relative', width: '100%', maxWidth: '414px',
@@ -54,118 +166,46 @@ export default function MessagesPage() {
       <div style={{
         position: 'absolute', left: 0, top: 0, width: '414px', height: '73px',
         background: '#FFFFFF', zIndex: 10,
-        display: 'flex', flexDirection: 'column',
-        justifyContent: 'center', padding: '5px 0 0',
+        display: 'flex', alignItems: 'center',
+        padding: '5px 10px 0',
+        boxSizing: 'border-box',
+        justifyContent: 'space-between',
       }}>
         <div style={{
-          display: 'flex', flexDirection: 'row',
-          justifyContent: 'space-between', alignItems: 'center',
-          padding: '0px 10px', width: '414px', height: '40px',
-          boxSizing: 'border-box',
+          position: 'relative', display: 'flex', alignItems: 'center',
+          padding: '0 0 0 10px', height: '34px',
         }}>
-          {/* Title with decorative circle */}
           <div style={{
-            position: 'relative', display: 'flex', alignItems: 'center',
-            padding: '0px 0px 0px 10px', width: '150px', height: '34px',
-          }}>
-            <div style={{
-              position: 'absolute', width: '29px', height: '29px',
-              left: '0px', top: '3px', borderRadius: '50%',
-              background: '#E6F4F2', zIndex: 1,
-            }} />
-            <span style={{
-              fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
-              lineHeight: '29px', color: '#377B8A',
-              position: 'relative', zIndex: 2,
-            }}>Berichten</span>
-          </div>
-
-          {/* Profile icon */}
-          <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
-          </div>
+            position: 'absolute', width: '29px', height: '29px',
+            left: '0px', top: '3px', borderRadius: '50%',
+            background: '#E6F4F2', zIndex: 1,
+          }} />
+          <span style={{
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
+            lineHeight: '29px', color: '#377B8A',
+            position: 'relative', zIndex: 2,
+          }}>Berichten</span>
         </div>
-      </div>
-
-      {/* ── Notification / expectation box ── */}
-      <div style={{
-        position: 'absolute', left: '38px', top: '100px',
-        width: '346px', height: '70px',
-        background: '#E6F4F2', borderRadius: '10px',
-        zIndex: 5,
-      }}>
-        {/* Circle behind icon */}
-        <div style={{
-          position: 'absolute', width: '31px', height: '31px',
-          left: '12px', top: '18.5px',
-          borderRadius: '50%', background: '#D0E9E5',
-        }} />
-        {/* Warning icon */}
-        <div style={{
-          position: 'absolute', left: '10px', top: '14px',
-          width: '35px', height: '35px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <span className="material-symbols-outlined" style={{
-            fontSize: '22px', color: '#377B8A', userSelect: 'none',
-          }}>warning</span>
-        </div>
-        {/* Text */}
-        <div style={{
-          position: 'absolute', left: '55px', top: '5px',
-          width: '245px', height: '60px',
-          display: 'flex', alignItems: 'center',
-          fontFamily: 'Inter', fontWeight: 400, fontSize: '12px',
-          lineHeight: '15px', color: '#727272',
-        }}>
-          Zorgverleners kunnen niet altijd meteen je vraag beantwoorden. Binnen 24 uur proberen ze je bericht(en) te beantwoorden.
+        <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
         </div>
       </div>
 
       {/* ── Messages list ── */}
       <div style={{
-        position: 'absolute', left: 0, top: '180px',
+        position: 'absolute', left: 0, top: '73px',
         width: '414px', bottom: '120px',
-        overflowY: 'auto', padding: '0 20px',
-        boxSizing: 'border-box', display: 'flex',
-        flexDirection: 'column', gap: '12px',
+        overflowY: 'auto', padding: '16px 16px 0',
+        boxSizing: 'border-box',
       }}>
         {loading ? (
           <div style={{ textAlign: 'center', color: '#B3B2B2', marginTop: '40px', fontSize: '14px' }}>Laden…</div>
-        ) : messages.length === 0 ? (
-          /* empty – notification box is already visible above */
-          null
         ) : (
-          messages.map((msg) => {
-            const isPatient = msg.sender_type === 'patient';
-            return (
-              <div key={msg.id} style={{
-                alignSelf: isPatient ? 'flex-end' : 'flex-start',
-                maxWidth: '80%',
-                background: isPatient ? '#377B8A' : '#FFFFFF',
-                color: isPatient ? '#FFFFFF' : '#333333',
-                borderRadius: isPatient ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                padding: '12px 16px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-              }}>
-                {!isPatient && (
-                  <div style={{
-                    fontFamily: 'Inter', fontWeight: 700, fontSize: '12px',
-                    color: '#377B8A', marginBottom: '4px',
-                  }}>Zorgteam</div>
-                )}
-                <div style={{
-                  fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
-                  lineHeight: '20px',
-                }}>{msg.content}</div>
-                <div style={{
-                  fontFamily: 'Inter', fontWeight: 400, fontSize: '11px',
-                  color: isPatient ? 'rgba(255,255,255,0.7)' : '#B3B2B2',
-                  marginTop: '6px', textAlign: 'right',
-                }}>{formatDateTime(msg.created_at)}</div>
-              </div>
-            );
-          })
+          allMessages.map((msg) =>
+            msg.sender_type === 'care'
+              ? <ReceivedBubble key={msg.id} msg={msg} />
+              : <SentBubble key={msg.id} msg={msg} />
+          )
         )}
         <div ref={bottomRef} />
       </div>
@@ -184,7 +224,7 @@ export default function MessagesPage() {
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { handleSend(e); } }}
+          onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) handleSend(e); }}
           placeholder="Schrijf een bericht…"
           maxLength={2000}
           style={{
@@ -207,7 +247,8 @@ export default function MessagesPage() {
           }}
         >
           <span className="material-symbols-outlined" style={{
-            fontSize: '20px', color: content.trim() ? '#FFFFFF' : '#B3B2B2',
+            fontSize: '20px',
+            color: content.trim() ? '#FFFFFF' : '#B3B2B2',
             userSelect: 'none',
           }}>send</span>
         </button>
