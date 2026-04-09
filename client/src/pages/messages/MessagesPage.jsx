@@ -101,23 +101,57 @@ function SentBubble({ msg }) {
 /* ── Empty state ── */
 function EmptyState() {
   return (
-    <div style={{
-      display: 'flex', flexDirection: 'column', alignItems: 'center',
-      justifyContent: 'center', height: '100%', gap: '16px',
-      padding: '0 40px', boxSizing: 'border-box',
-    }}>
+    <div style={{ position: 'relative', height: '100%' }}>
+
+      {/* Notification card from diary */}
       <div style={{
-        width: '72px', height: '72px', borderRadius: '50%',
-        background: '#E6F4F2', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        position: 'absolute', width: '346px', height: '70px',
+        left: '38px', top: '100px',
+        background: '#E6F4F2', borderRadius: '10px',
       }}>
-        <span className="material-symbols-outlined" style={{ fontSize: '40px', color: '#377B8A', userSelect: 'none' }}>chat</span>
+        {/* Decorative circle */}
+        <div style={{
+          position: 'absolute', width: '31px', height: '31px',
+          left: '12px', top: '18.5px',
+          borderRadius: '50%', background: '#D0E9E5',
+        }} />
+        {/* Warning icon */}
+        <span className="material-symbols-outlined" style={{
+          position: 'absolute', left: '10px', top: '14px',
+          fontSize: '35px', color: '#377B8A', userSelect: 'none',
+        }}>warning</span>
+        {/* Text */}
+        <div style={{
+          position: 'absolute', left: '55px', top: '5px',
+          width: '245px', height: '60px',
+          display: 'flex', alignItems: 'center',
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '12px',
+          lineHeight: '15px', color: '#727272',
+        }}>
+          Lastig. Ik kan mijn eten moeilijk doorslikken.
+        </div>
       </div>
-      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '18px', color: '#377B8A', textAlign: 'center' }}>
-        Nog geen berichten
+
+      {/* Empty state message */}
+      <div style={{
+        position: 'absolute', left: 0, right: 0, bottom: '40px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        gap: '16px', padding: '0 40px', boxSizing: 'border-box',
+      }}>
+        <div style={{
+          width: '72px', height: '72px', borderRadius: '50%',
+          background: '#E6F4F2', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '40px', color: '#377B8A', userSelect: 'none' }}>chat</span>
+        </div>
+        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '18px', color: '#377B8A', textAlign: 'center' }}>
+          Nog geen berichten
+        </div>
+        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '14px', lineHeight: '20px', color: '#727272', textAlign: 'center' }}>
+          Stuur een bericht naar uw zorgteam. Zij reageren zo snel mogelijk.
+        </div>
       </div>
-      <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '14px', lineHeight: '20px', color: '#727272', textAlign: 'center' }}>
-        Stuur een bericht naar uw zorgteam. Zij reageren zo snel mogelijk.
-      </div>
+
     </div>
   );
 }
