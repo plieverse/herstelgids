@@ -35,47 +35,62 @@ const DEMO_MESSAGES = [
 /* ── Received bubble (care provider) ── */
 function ReceivedBubble({ msg }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginBottom: '16px', paddingRight: '60px' }}>
-      {/* Left tail */}
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginBottom: '16px', paddingRight: '50px' }}>
+      {/* Left triangle tail */}
       <div style={{
         width: 0, height: 0, flexShrink: 0,
-        borderTop: '8px solid transparent',
-        borderBottom: '8px solid transparent',
-        borderRight: '12px solid #FFFFFF',
-        marginTop: '28px',
+        borderTop: '7px solid transparent',
+        borderBottom: '7px solid transparent',
+        borderRight: '13px solid #FFFFFF',
+        marginTop: '32px',
       }} />
       {/* White bubble */}
       <div style={{
-        background: '#FFFFFF', borderRadius: '5px',
-        padding: '8px 15px 8px 12px', flex: 1,
+        background: '#FFFFFF',
+        borderRadius: '5px',
+        padding: '5px 25px 5px 15px',
+        flex: 1,
         minWidth: 0,
       }}>
         {/* Sender row */}
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+        <div style={{
+          display: 'flex', flexDirection: 'row',
+          alignItems: 'center', gap: '5px',
+          marginBottom: '10px',
+        }}>
           <div style={{ position: 'relative', width: '30px', height: '30px', flexShrink: 0 }}>
-            <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#E6F4F2' }} />
+            <div style={{
+              position: 'absolute', width: '30px', height: '30px',
+              borderRadius: '50%', background: '#E6F4F2',
+            }} />
             <span className="material-symbols-outlined" style={{
               position: 'absolute', left: '3px', top: '3px',
-              fontSize: '24px', lineHeight: '1', color: '#377B8A', userSelect: 'none',
+              fontSize: '24px', lineHeight: '1',
+              color: '#377B8A', userSelect: 'none',
             }}>{msg.sender_icon || 'medical_information'}</span>
           </div>
           <div style={{
-            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px',
-            lineHeight: '17px', color: '#377B8A',
+            fontFamily: 'Inter', fontWeight: 700,
+            fontSize: '16px', lineHeight: '19px',
+            color: '#377B8A',
           }}>
             {msg.sender_name || 'Zorgteam'}<br />
-            <span style={{ fontStyle: 'italic' }}>{msg.sender_role || ''}</span>
+            <span style={{ fontStyle: 'normal', fontWeight: 400, fontSize: '14px' }}>
+              {msg.sender_role || ''}
+            </span>
           </div>
         </div>
         {/* Message text */}
         <div style={{
-          fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
-          lineHeight: '17px', color: '#727272', marginBottom: '6px',
+          fontFamily: 'Inter', fontWeight: 400,
+          fontSize: '14px', lineHeight: '17px',
+          color: '#727272', marginBottom: '10px',
         }}>{msg.content}</div>
         {/* Timestamp */}
         <div style={{
           fontFamily: 'Inter', fontStyle: 'italic', fontWeight: 400,
-          fontSize: '13px', lineHeight: '16px', color: '#727272', textAlign: 'right',
+          fontSize: '13px', lineHeight: '16px',
+          color: '#727272', textAlign: 'right',
         }}>{msg.display_time || formatDateTime(msg.created_at)}</div>
       </div>
     </div>
@@ -85,30 +100,37 @@ function ReceivedBubble({ msg }) {
 /* ── Sent bubble (patient) ── */
 function SentBubble({ msg }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', marginBottom: '16px', paddingLeft: '60px' }}>
+    <div style={{
+      display: 'flex', flexDirection: 'row',
+      alignItems: 'flex-end', justifyContent: 'flex-end',
+      marginBottom: '16px', paddingLeft: '50px',
+    }}>
       {/* Grey bubble */}
       <div style={{
-        background: '#E2E2E2', borderRadius: '5px',
-        padding: '8px 12px 8px 15px',
+        background: '#E2E2E2',
+        borderRadius: '5px',
+        padding: '5px 15px 5px 25px',
       }}>
         {/* Message text */}
         <div style={{
-          fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
-          lineHeight: '17px', color: '#727272', marginBottom: '6px',
+          fontFamily: 'Inter', fontWeight: 400,
+          fontSize: '14px', lineHeight: '17px',
+          color: '#727272', marginBottom: '10px',
         }}>{msg.content}</div>
         {/* Timestamp */}
         <div style={{
           fontFamily: 'Inter', fontStyle: 'italic', fontWeight: 400,
-          fontSize: '13px', lineHeight: '16px', color: '#727272', textAlign: 'right',
+          fontSize: '13px', lineHeight: '16px',
+          color: '#727272', textAlign: 'right',
         }}>{msg.display_time || formatDateTime(msg.created_at)}</div>
       </div>
-      {/* Right tail */}
+      {/* Right triangle tail */}
       <div style={{
         width: 0, height: 0, flexShrink: 0,
-        borderTop: '8px solid transparent',
-        borderBottom: '8px solid transparent',
-        borderLeft: '12px solid #E2E2E2',
-        marginBottom: '8px',
+        borderTop: '7px solid transparent',
+        borderBottom: '7px solid transparent',
+        borderLeft: '13px solid #E2E2E2',
+        marginBottom: '10px',
       }} />
     </div>
   );
@@ -129,7 +151,7 @@ export default function MessagesPage() {
       data.filter((m) => m.sender_type === 'care' && !m.read_at).forEach((m) => {
         api.put(`/messages/${m.id}/read`).catch(() => {});
       });
-    }).finally(() => setLoading(false));
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -138,20 +160,27 @@ export default function MessagesPage() {
 
   async function handleSend(e) {
     e.preventDefault();
-    if (!content.trim()) return;
+    const trimmed = content.trim();
+    if (!trimmed) return;
+    const newMsg = {
+      id: 'sent-' + Date.now(),
+      sender_type: 'patient',
+      content: trimmed,
+      display_time: new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' }) + ', ' +
+        new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
+    };
+    setMessages((prev) => [...prev, newMsg]);
+    setContent('');
     setSending(true);
     try {
-      const { data } = await api.post('/messages', { content: content.trim() });
-      setMessages((prev) => [...prev, data]);
-      setContent('');
+      await api.post('/messages', { content: trimmed });
     } catch {
-      showToast('Bericht sturen mislukt.', 'error');
+      // silently ignore API errors in prototype
     } finally {
       setSending(false);
     }
   }
 
-  /* Combine demo messages with real API messages */
   const allMessages = [...DEMO_MESSAGES, ...messages];
 
   return (
@@ -164,30 +193,47 @@ export default function MessagesPage() {
 
       {/* ── Topbar ── */}
       <div style={{
-        position: 'absolute', left: 0, top: 0, width: '414px', height: '73px',
+        position: 'absolute', left: 0, top: 0,
+        width: '414px', height: '73px',
         background: '#FFFFFF', zIndex: 10,
-        display: 'flex', alignItems: 'center',
-        padding: '5px 10px 0',
-        boxSizing: 'border-box',
-        justifyContent: 'space-between',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', padding: '5px 0 0',
+        gap: '20px', boxSizing: 'border-box',
       }}>
         <div style={{
-          position: 'relative', display: 'flex', alignItems: 'center',
-          padding: '0 0 0 10px', height: '34px',
+          width: '414px', height: '40px',
+          background: '#FFFFFF',
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 10px', boxSizing: 'border-box',
+          position: 'relative',
         }}>
+          {/* Title with decorative circle */}
           <div style={{
-            position: 'absolute', width: '29px', height: '29px',
-            left: '0px', top: '3px', borderRadius: '50%',
-            background: '#E6F4F2', zIndex: 1,
-          }} />
-          <span style={{
-            fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
-            lineHeight: '29px', color: '#377B8A',
-            position: 'relative', zIndex: 2,
-          }}>Berichten</span>
-        </div>
-        <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
+            display: 'flex', flexDirection: 'row',
+            alignItems: 'center', padding: '0 0 0 10px',
+            gap: '16px', isolation: 'isolate',
+            height: '34px', position: 'relative',
+          }}>
+            <div style={{
+              position: 'absolute',
+              width: '29px', height: '29px',
+              left: '2px', top: '2.5px',
+              borderRadius: '50%', background: '#E6F4F2',
+              zIndex: 1,
+            }} />
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 700,
+              fontSize: '24px', lineHeight: '29px',
+              color: '#377B8A', position: 'relative', zIndex: 3,
+            }}>Berichten</span>
+          </div>
+          {/* Profile icon */}
+          <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '35px', color: '#377B8A', userSelect: 'none',
+            }}>account_circle</span>
+          </div>
         </div>
       </div>
 
@@ -195,7 +241,7 @@ export default function MessagesPage() {
       <div style={{
         position: 'absolute', left: 0, top: '73px',
         width: '414px', bottom: '120px',
-        overflowY: 'auto', padding: '16px 16px 0',
+        overflowY: 'auto', padding: '14px 10px 0',
         boxSizing: 'border-box',
       }}>
         {loading ? (
