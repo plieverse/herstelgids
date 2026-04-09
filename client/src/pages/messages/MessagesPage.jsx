@@ -103,52 +103,54 @@ function EmptyState() {
   return (
     <div style={{ position: 'relative', height: '100%' }}>
 
-      {/* Notification card from diary */}
+      {/* Info card */}
       <div style={{
-        position: 'absolute', width: '346px', height: '70px',
-        left: '38px', top: '100px',
+        position: 'absolute', left: '24px', right: '24px', top: '24px',
         background: '#E6F4F2', borderRadius: '10px',
+        padding: '14px 16px 14px 54px', boxSizing: 'border-box',
+        minHeight: '70px',
       }}>
-        {/* Decorative circle */}
+        {/* Decorative circle behind icon */}
         <div style={{
           position: 'absolute', width: '31px', height: '31px',
-          left: '12px', top: '18.5px',
+          left: '12px', top: '50%', transform: 'translateY(-50%)',
           borderRadius: '50%', background: '#D0E9E5',
         }} />
         {/* Warning icon */}
         <span className="material-symbols-outlined" style={{
-          position: 'absolute', left: '10px', top: '14px',
-          fontSize: '35px', color: '#377B8A', userSelect: 'none',
+          position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
+          fontSize: '32px', color: '#377B8A', userSelect: 'none',
         }}>warning</span>
         {/* Text */}
         <div style={{
-          position: 'absolute', left: '55px', top: '5px',
-          width: '245px', height: '60px',
-          display: 'flex', alignItems: 'center',
           fontFamily: 'Inter', fontWeight: 400, fontSize: '12px',
-          lineHeight: '15px', color: '#727272',
+          lineHeight: '17px', color: '#727272',
         }}>
-          Lastig. Ik kan mijn eten moeilijk doorslikken.
+          Zorgverleners kunnen niet altijd meteen je vraag beantwoorden. Binnen 24 uur proberen ze je bericht(en) te beantwoorden.
         </div>
       </div>
 
-      {/* Empty state message */}
+      {/* Centered empty state */}
       <div style={{
-        position: 'absolute', left: 0, right: 0, bottom: '40px',
+        position: 'absolute', left: 0, right: 0, top: '160px', bottom: 0,
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        gap: '16px', padding: '0 40px', boxSizing: 'border-box',
+        justifyContent: 'center', gap: '16px',
+        padding: '0 40px', boxSizing: 'border-box',
       }}>
         <div style={{
-          width: '72px', height: '72px', borderRadius: '50%',
+          width: '80px', height: '80px', borderRadius: '50%',
           background: '#E6F4F2', display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '40px', color: '#377B8A', userSelect: 'none' }}>chat</span>
+          <span className="material-symbols-outlined" style={{ fontSize: '44px', color: '#377B8A', userSelect: 'none' }}>chat</span>
         </div>
         <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '18px', color: '#377B8A', textAlign: 'center' }}>
           Nog geen berichten
         </div>
-        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '14px', lineHeight: '20px', color: '#727272', textAlign: 'center' }}>
-          Stuur een bericht naar uw zorgteam. Zij reageren zo snel mogelijk.
+        <div style={{
+          fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
+          lineHeight: '20px', color: '#B3B2B2', textAlign: 'center',
+        }}>
+          Stel een vraag aan uw zorgteam via het tekstveld hieronder.
         </div>
       </div>
 
