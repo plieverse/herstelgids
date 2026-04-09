@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
+import { SearchOverlay } from './GuideSearch';
 
 const TILES = [
   {
@@ -108,6 +110,10 @@ const TILES = [
 
 export default function GuideUitlegPage() {
   const navigate = useNavigate();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState('');
+
+  function closeSearch() { setSearchOpen(false); setQuery(''); }
 
   return (
     <div style={{
@@ -147,7 +153,10 @@ export default function GuideUitlegPage() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div
+              onClick={() => setSearchOpen(true)}
+              style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            >
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
             </div>
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -250,6 +259,11 @@ export default function GuideUitlegPage() {
           </div>
         ))}
       </div>
+
+      {/* ── Search overlay ── */}
+      {searchOpen && (
+        <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} />
+      )}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />
