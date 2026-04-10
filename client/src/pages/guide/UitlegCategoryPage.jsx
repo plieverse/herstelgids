@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
+import { SearchOverlay } from './GuideSearch';
 
 const UITLEG_CATEGORY_DATA = {
   1: {
@@ -146,6 +148,9 @@ export default function UitlegCategoryPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const cat = UITLEG_CATEGORY_DATA[id] || UITLEG_CATEGORY_DATA[1];
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  function closeSearch() { setSearchOpen(false); setQuery(''); }
 
   return (
     <div style={{
@@ -182,7 +187,7 @@ export default function UitlegCategoryPage() {
             }}>Gids</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setSearchOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
             </div>
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -328,6 +333,9 @@ export default function UitlegCategoryPage() {
           </div>
         ))}
       </div>
+
+      {/* ── Search overlay ── */}
+      {searchOpen && <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} />}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />

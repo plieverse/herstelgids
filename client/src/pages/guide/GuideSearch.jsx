@@ -118,13 +118,17 @@ export function SearchOverlay({ query, setQuery, onClose }) {
         {/* Search bar */}
         <div style={{ position: 'relative', width: '100%', height: '44px' }}>
           <div style={{ position: 'absolute', inset: 0, background: '#FFFFFF', borderRadius: '20px' }} />
+          {/* Grey search icon on the left */}
+          <div style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#B3B2B2', userSelect: 'none' }}>search</span>
+          </div>
           <input
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Zoek uitleg over een probleem of onderwerp"
             style={{
-              position: 'absolute', left: '16px', top: 0, right: '44px', height: '44px',
+              position: 'absolute', left: '40px', top: 0, right: '44px', height: '44px',
               background: 'transparent', border: 'none', outline: 'none',
               fontFamily: 'Inter', fontSize: '13px', color: '#377B8A',
             }}
@@ -134,7 +138,7 @@ export function SearchOverlay({ query, setQuery, onClose }) {
             onClick={onClose}
             style={{ position: 'absolute', right: '6px', top: '5px', width: '33px', height: '33px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#B3B2B2', userSelect: 'none' }}>close</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#377B8A', userSelect: 'none' }}>close</span>
           </div>
         </div>
 
