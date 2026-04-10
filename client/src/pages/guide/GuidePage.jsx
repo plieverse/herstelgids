@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
 import { SearchOverlay } from './GuideSearch';
+import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 
 const TILES = [
   {
@@ -45,6 +46,8 @@ export default function GuidePage() {
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const [debugOpen, setDebugOpen] = useState(false);
+  const handleTripleClick = useTripleClick(() => setDebugOpen(true));
 
   function closeSearch() { setSearchOpen(false); setQuery(''); }
 
@@ -82,7 +85,7 @@ export default function GuidePage() {
             <span style={{
               fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
               lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 2,
-            }}>Gids</span>
+            }} onClick={handleTripleClick}>Gids</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
@@ -143,6 +146,8 @@ export default function GuidePage() {
       {searchOpen && (
         <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} />
       )}
+
+      {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />

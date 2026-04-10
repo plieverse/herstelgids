@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -7,6 +9,8 @@ const DUTCH_MONTHS = [
 
 export default function DiaryPage() {
   const navigate = useNavigate();
+  const [debugOpen, setDebugOpen] = useState(false);
+  const handleTripleClick = useTripleClick(() => setDebugOpen(true));
 
   const now = new Date();
   const dateString = `${now.getDate()} ${DUTCH_MONTHS[now.getMonth()]}`;
@@ -78,7 +82,7 @@ export default function DiaryPage() {
               color: '#377B8A',
               position: 'relative',
               zIndex: 2,
-            }}>Dagboek</span>
+            }} onClick={handleTripleClick}>Dagboek</span>
           </div>
 
           {/* Right: profile icon 35×35 */}
@@ -283,6 +287,8 @@ export default function DiaryPage() {
           </div>
         </div>
       </div>
+
+      {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
     </div>
   );
 }
