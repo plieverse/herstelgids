@@ -224,6 +224,7 @@ export default function UitlegArtikelPage() {
       <div style={{
         position: 'absolute', top: '110px', bottom: '58px', left: 0, right: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
+        pointerEvents: 'none',
       }}>
       {/* ── Content card ── */}
       <div style={{
@@ -231,6 +232,7 @@ export default function UitlegArtikelPage() {
         background: '#FFFFFF', borderRadius: '20px',
         display: 'flex', flexDirection: 'column',
         paddingBottom: '24px',
+        pointerEvents: 'auto',
       }}>
 
         {/* Top row: Lees voor button right-aligned */}
