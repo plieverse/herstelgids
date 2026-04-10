@@ -62,38 +62,70 @@ export default function DebugMenu({ onClose }) {
         </div>
 
         {/* Onboarding button */}
-        <button
+        <div
           onClick={resetOnboarding}
           style={{
-            width: '100%', height: '46px',
-            background: '#377B8A', border: 'none', borderRadius: '12px',
-            color: '#FFFFFF', fontFamily: 'Inter', fontWeight: 600, fontSize: '14px',
-            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+            width: '100%', height: '58px', background: '#FFFFFF',
+            border: '1px solid #E6F4F2', borderRadius: '20px',
+            cursor: 'pointer', display: 'flex', alignItems: 'center',
+            gap: '0', position: 'relative',
           }}
         >
-          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>restart_alt</span>
-          Onboarding opnieuw doorlopen
-        </button>
+          <div style={{
+            position: 'absolute', width: '29px', height: '29px',
+            left: '15px', borderRadius: '50%', background: '#E6F4F2',
+          }} />
+          <div style={{
+            position: 'absolute', left: '13px', width: '35px', height: '35px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#377B8A', userSelect: 'none' }}>restart_alt</span>
+          </div>
+          <span style={{
+            position: 'absolute', left: '61px',
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', color: '#377B8A',
+          }}>Onboarding opnieuw doorlopen</span>
+          <span className="material-symbols-outlined" style={{
+            position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
+          }}>chevron_right</span>
+        </div>
 
         {/* Messages reset button */}
-        <button
-          onClick={resetMessages}
+        <div
+          onClick={msgDone ? undefined : resetMessages}
           style={{
-            width: '100%', height: '46px',
-            background: msgDone ? '#CFEBD4' : '#F6F6F6',
-            border: `1px solid ${msgDone ? '#378A6C' : '#E0E0E0'}`,
-            borderRadius: '12px',
-            color: msgDone ? '#378A6C' : '#2a2a2a',
-            fontFamily: 'Inter', fontWeight: 600, fontSize: '14px',
+            width: '100%', height: '58px', background: '#FFFFFF',
+            border: `1px solid ${msgDone ? '#CFEBD4' : '#FFF0E8'}`,
+            borderRadius: '20px',
             cursor: msgDone ? 'default' : 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+            display: 'flex', alignItems: 'center',
+            position: 'relative',
           }}
         >
-          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-            {msgDone ? 'check_circle' : 'delete_sweep'}
-          </span>
-          {msgDone ? 'Berichten gereset!' : 'Berichten resetten'}
-        </button>
+          <div style={{
+            position: 'absolute', width: '29px', height: '29px',
+            left: '15px', borderRadius: '50%',
+            background: msgDone ? '#CFEBD4' : '#FFF0E8',
+          }} />
+          <div style={{
+            position: 'absolute', left: '13px', width: '35px', height: '35px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '22px', color: msgDone ? '#378A6C' : '#CB6E02', userSelect: 'none',
+            }}>{msgDone ? 'check_circle' : 'delete_sweep'}</span>
+          </div>
+          <span style={{
+            position: 'absolute', left: '61px',
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px',
+            color: msgDone ? '#378A6C' : '#CB6E02',
+          }}>{msgDone ? 'Berichten gereset!' : 'Berichten resetten'}</span>
+          {!msgDone && (
+            <span className="material-symbols-outlined" style={{
+              position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
+            }}>chevron_right</span>
+          )}
+        </div>
 
         <div style={{ fontSize: '11px', color: '#B3B2B2', textAlign: 'center', marginTop: '2px' }}>
           3× klikken op de paginatitel om te openen
