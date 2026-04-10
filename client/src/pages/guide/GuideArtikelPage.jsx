@@ -190,7 +190,7 @@ export default function GuideArtikelPage() {
 
       {/* ── Content card: auto height ── */}
       <div style={{
-        position: 'absolute', left: '34px', top: '149px',
+        position: 'absolute', left: '20px', top: '149px',
         width: '374px',
         background: '#FFFFFF', borderRadius: '20px',
         display: 'flex', flexDirection: 'column',
@@ -255,7 +255,7 @@ export default function GuideArtikelPage() {
         {/* Video thumbnail with play button */}
         <div style={{
           position: 'relative',
-          marginLeft: '21px', marginTop: '20px',
+          margin: '20px auto 0',
           width: '317px', height: '178px',
           borderRadius: '8px', overflow: 'hidden',
           background: '#D0E9E5', flexShrink: 0,
