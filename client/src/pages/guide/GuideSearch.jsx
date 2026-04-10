@@ -12,11 +12,11 @@ const UITLEG_CAT = {
 
 /* ── Problemen category colours ── */
 const PROBLEEM_CAT = {
-  1: { color: '#377B8A', circleColor: '#E6F4F2' },
-  2: { color: '#CB6E02', circleColor: '#F4D2BC' },
-  3: { color: '#4A378A', circleColor: '#DFCFEB' },
-  4: { color: '#378A6C', circleColor: '#CFEBD4' },
-  5: { color: '#8A3773', circleColor: '#EBCFDE' },
+  1: { color: '#377B8A', circleColor: '#E6F4F2', label: 'Voor het eten' },
+  2: { color: '#CB6E02', circleColor: '#F4D2BC', label: 'Tijdens het eten' },
+  3: { color: '#4A378A', circleColor: '#DFCFEB', label: 'Kort na het eten' },
+  4: { color: '#378A6C', circleColor: '#CFEBD4', label: 'Lang na het eten' },
+  5: { color: '#8A3773', circleColor: '#EBCFDE', label: 'Langdurig' },
 };
 
 /* ── All searchable items ── */
@@ -31,11 +31,11 @@ const ALL_ITEMS = [
   { type: 'probleem', catId: 3, idx: 0, title: 'Gevoel dat het eten terugkomt',      icon: 'gastroenterology' },
   { type: 'probleem', catId: 3, idx: 1, title: 'Dumping (vroeg)',                    icon: 'sentiment_stressed' },
   { type: 'probleem', catId: 3, idx: 2, title: 'Buikkrampen',                        icon: 'bolt' },
-  { type: 'probleem', catId: 3, idx: 3, title: 'Diarree',                            icon: 'wc' },
+  { type: 'probleem', catId: 3, idx: 3, title: 'Diarree',                            icon: 'gastroenterology' },
   { type: 'probleem', catId: 4, idx: 0, title: 'Misselijkheid',                      icon: 'gastroenterology' },
   { type: 'probleem', catId: 4, idx: 1, title: 'Dumping (laat)',                     icon: 'sentiment_stressed' },
   { type: 'probleem', catId: 4, idx: 2, title: 'Winderigheid',                       icon: 'air' },
-  { type: 'probleem', catId: 4, idx: 3, title: 'Diarree',                            icon: 'wc' },
+  { type: 'probleem', catId: 4, idx: 3, title: 'Diarree',                            icon: 'gastroenterology' },
   { type: 'probleem', catId: 5, idx: 0, title: 'Moeheid',                            icon: 'hotel' },
   { type: 'probleem', catId: 5, idx: 1, title: 'Hoesten',                            icon: 'voice_selection' },
   { type: 'probleem', catId: 5, idx: 2, title: 'Gewichtsverlies',                    icon: 'balance' },
@@ -160,7 +160,9 @@ export function SearchOverlay({ query, setQuery, onClose }) {
                   <div style={{ position: 'absolute', left: '58px', top: '50%', transform: 'translateY(-50%)', right: '40px' }}>
                     <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '15px', lineHeight: '19px', color }}>{item.title}</div>
                     <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '11px', color: '#B3B2B2', marginTop: '2px' }}>
-                      {item.type === 'probleem' ? 'Problemen' : `Uitleg · ${UITLEG_CAT[item.catId].label}`}
+                      {item.type === 'probleem'
+                        ? `Problemen · ${PROBLEEM_CAT[item.catId].label}`
+                        : `Uitleg · ${UITLEG_CAT[item.catId].label}`}
                     </div>
                   </div>
                   <span className="material-symbols-outlined" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '24px', color: '#B3B2B2', userSelect: 'none' }}>keyboard_arrow_right</span>
