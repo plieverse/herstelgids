@@ -33,7 +33,7 @@ const TILES = [
     dots: [{ w: 7, h: 7, l: 113, t: 22 }, { w: 7, h: 7, l: 120, t: 32 }, { w: 7, h: 7, l: 123, t: 23 }],
   },
   {
-    id: 5, title: 'Langdurig', subtitle: 'Pijn, gewichtsverlies, hoesten en meer...',
+    id: 5, title: 'Langdurig', subtitle: 'Moeheid, hoesten, gewichtsverlies en meer...',
     icon: 'all_inclusive', circleColor: '#EBCFDE', iconColor: '#8A3773',
     tileLeft: 0, tileTop: 348, iconTop: 16,
     circle: { w: 54, h: 54, l: 58, t: 26 },
