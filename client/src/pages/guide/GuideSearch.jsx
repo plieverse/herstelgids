@@ -129,8 +129,12 @@ export function SearchOverlay({ query, setQuery, onClose }) {
               fontFamily: 'Inter', fontSize: '13px', color: '#377B8A',
             }}
           />
-          <div style={{ position: 'absolute', right: '6px', top: '5px', width: '33px', height: '33px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '26px', color: '#377B8A', userSelect: 'none' }}>search</span>
+          {/* Clear/close button */}
+          <div
+            onClick={onClose}
+            style={{ position: 'absolute', right: '6px', top: '5px', width: '33px', height: '33px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#B3B2B2', userSelect: 'none' }}>close</span>
           </div>
         </div>
 
