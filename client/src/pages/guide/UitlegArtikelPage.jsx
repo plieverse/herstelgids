@@ -220,9 +220,13 @@ export default function UitlegArtikelPage() {
         </div>
       </div>
 
-      {/* ── Content card: auto height ── */}
+      {/* ── Centred content area ── */}
       <div style={{
-        position: 'absolute', left: '20px', top: '149px',
+        position: 'absolute', top: '110px', bottom: '58px', left: 0, right: 0,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+      {/* ── Content card ── */}
+      <div style={{
         width: '374px',
         background: '#FFFFFF', borderRadius: '20px',
         display: 'flex', flexDirection: 'column',
@@ -312,6 +316,7 @@ export default function UitlegArtikelPage() {
           </div>
         </div>
       </div>
+      </div>{/* end centred area */}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />
