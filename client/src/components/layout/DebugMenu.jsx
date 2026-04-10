@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DIARY_DONE_KEY } from '../../pages/diary/DiaryPage';
 
@@ -19,7 +19,6 @@ export function useTripleClick(onTriple) {
 
 export default function DebugMenu({ onClose }) {
   const navigate = useNavigate();
-  const [msgDone, setMsgDone] = useState(false);
 
   function resetOnboarding() {
     localStorage.removeItem('onboardingComplete');
@@ -29,7 +28,8 @@ export default function DebugMenu({ onClose }) {
 
   function resetMessages() {
     localStorage.removeItem('demo_messages');
-    setMsgDone(true);
+    onClose();
+    navigate('/berichten');
   }
 
   function resetDiary() {
@@ -99,39 +99,33 @@ export default function DebugMenu({ onClose }) {
 
         {/* Messages reset button */}
         <div
-          onClick={msgDone ? undefined : resetMessages}
+          onClick={resetMessages}
           style={{
             width: '100%', height: '58px', background: '#FFFFFF',
-            border: `1px solid ${msgDone ? '#CFEBD4' : '#FFF0E8'}`,
-            borderRadius: '20px',
-            cursor: msgDone ? 'default' : 'pointer',
-            display: 'flex', alignItems: 'center',
+            border: '1px solid #FFF0E8', borderRadius: '20px',
+            cursor: 'pointer', display: 'flex', alignItems: 'center',
             position: 'relative',
           }}
         >
           <div style={{
             position: 'absolute', width: '29px', height: '29px',
-            left: '15px', borderRadius: '50%',
-            background: msgDone ? '#CFEBD4' : '#FFF0E8',
+            left: '15px', borderRadius: '50%', background: '#FFF0E8',
           }} />
           <div style={{
             position: 'absolute', left: '13px', width: '35px', height: '35px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <span className="material-symbols-outlined" style={{
-              fontSize: '22px', color: msgDone ? '#378A6C' : '#CB6E02', userSelect: 'none',
-            }}>{msgDone ? 'check_circle' : 'delete_sweep'}</span>
+              fontSize: '22px', color: '#CB6E02', userSelect: 'none',
+            }}>delete_sweep</span>
           </div>
           <span style={{
             position: 'absolute', left: '61px',
-            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px',
-            color: msgDone ? '#378A6C' : '#CB6E02',
-          }}>{msgDone ? 'Berichten gereset!' : 'Berichten resetten'}</span>
-          {!msgDone && (
-            <span className="material-symbols-outlined" style={{
-              position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
-            }}>chevron_right</span>
-          )}
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', color: '#CB6E02',
+          }}>Berichten resetten</span>
+          <span className="material-symbols-outlined" style={{
+            position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
+          }}>chevron_right</span>
         </div>
 
         {/* Diary reset button */}
