@@ -69,7 +69,7 @@ export default function DiaryIngevuldPage() {
       position: 'relative',
       width: '100%',
       maxWidth: '414px',
-      height: '100dvh',
+      height: '736px',
       minHeight: '736px',
       margin: '0 auto',
       background: '#F6F6F6',

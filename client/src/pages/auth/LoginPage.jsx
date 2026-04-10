@@ -87,7 +87,7 @@ const styles = {
   page: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100dvh',
+    minheight: '736px',
     padding: 'var(--space-8) var(--space-5)',
     background: 'var(--color-bg)',
   },

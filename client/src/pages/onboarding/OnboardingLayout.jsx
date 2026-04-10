@@ -49,7 +49,7 @@ const styles = {
   page: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100dvh',
+    minheight: '736px',
     background: '#f6f6f6',
     maxWidth: '480px',
     margin: '0 auto',

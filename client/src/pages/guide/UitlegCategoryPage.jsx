@@ -155,7 +155,7 @@ export default function UitlegCategoryPage() {
   return (
     <div style={{
       position: 'relative', width: '100%', maxWidth: '414px',
-      height: '100dvh', minHeight: '736px', margin: '0 auto',
+      height: '736px', margin: '0 auto',
       background: cat.bgColor, fontFamily: 'Inter, sans-serif', overflow: 'hidden',
     }}>
 

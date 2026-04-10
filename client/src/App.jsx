@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ScaleWrapper from './components/layout/ScaleWrapper';
 import { useAuthStore } from './store/authStore';
 import { configureApiAuth } from './api/client';
 import ProtectedRoute from './components/layout/ProtectedRoute';
@@ -62,6 +63,7 @@ export default function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
+    <ScaleWrapper>
     <BrowserRouter>
       <Routes>
         {/* Onboarding */}
@@ -102,5 +104,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
+    </ScaleWrapper>
   );
 }

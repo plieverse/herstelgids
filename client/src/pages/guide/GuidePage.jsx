@@ -51,7 +51,7 @@ export default function GuidePage() {
   return (
     <div style={{
       position: 'relative', width: '100%', maxWidth: '414px',
-      height: '100dvh', minHeight: '736px', margin: '0 auto',
+      height: '736px', margin: '0 auto',
       background: '#F6F6F6', fontFamily: 'Inter, sans-serif', overflow: 'hidden',
     }}>
 
