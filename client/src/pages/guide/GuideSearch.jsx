@@ -31,11 +31,11 @@ const ALL_ITEMS = [
   { type: 'probleem', catId: 3, idx: 0, title: 'Gevoel dat het eten terugkomt',      icon: 'gastroenterology' },
   { type: 'probleem', catId: 3, idx: 1, title: 'Dumping (vroeg)',                    icon: 'sentiment_stressed' },
   { type: 'probleem', catId: 3, idx: 2, title: 'Buikkrampen',                        icon: 'bolt' },
-  { type: 'probleem', catId: 3, idx: 3, title: 'Diarree',                            icon: 'WC' },
+  { type: 'probleem', catId: 3, idx: 3, title: 'Diarree',                            icon: 'wc' },
   { type: 'probleem', catId: 4, idx: 0, title: 'Misselijkheid',                      icon: 'gastroenterology' },
   { type: 'probleem', catId: 4, idx: 1, title: 'Dumping (laat)',                     icon: 'sentiment_stressed' },
   { type: 'probleem', catId: 4, idx: 2, title: 'Winderigheid',                       icon: 'air' },
-  { type: 'probleem', catId: 4, idx: 3, title: 'Diarree',                            icon: 'WC' },
+  { type: 'probleem', catId: 4, idx: 3, title: 'Diarree',                            icon: 'wc' },
   { type: 'probleem', catId: 5, idx: 0, title: 'Moeheid',                            icon: 'hotel' },
   { type: 'probleem', catId: 5, idx: 1, title: 'Hoesten',                            icon: 'voice_selection' },
   { type: 'probleem', catId: 5, idx: 2, title: 'Gewichtsverlies',                    icon: 'balance' },
@@ -147,11 +147,17 @@ export function SearchOverlay({ query, setQuery, onClose }) {
                   onClick={() => handleClick(item)}
                   style={{ position: 'relative', width: '100%', height: '70px', background: '#FFFFFF', borderRadius: '20px', cursor: 'pointer', flexShrink: 0 }}
                 >
-                  <div style={{ position: 'absolute', width: '26px', height: '26px', left: '12px', top: '22px', borderRadius: '50%', background: circleColor }} />
-                  <span className="material-symbols-outlined" style={{ position: 'absolute', left: '15px', top: '18px', fontSize: '28px', color, userSelect: 'none' }}>
-                    {catIcon}
-                  </span>
-                  <div style={{ position: 'absolute', left: '56px', top: '50%', transform: 'translateY(-50%)', right: '40px' }}>
+                  {/* Icon centered in circle */}
+                  <div style={{
+                    position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+                    width: '36px', height: '36px', borderRadius: '50%', background: circleColor,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '24px', color, userSelect: 'none', lineHeight: 1 }}>
+                      {catIcon}
+                    </span>
+                  </div>
+                  <div style={{ position: 'absolute', left: '58px', top: '50%', transform: 'translateY(-50%)', right: '40px' }}>
                     <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '15px', lineHeight: '19px', color }}>{item.title}</div>
                     <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '11px', color: '#B3B2B2', marginTop: '2px' }}>
                       {item.type === 'probleem' ? 'Problemen' : `Uitleg · ${UITLEG_CAT[item.catId].label}`}
