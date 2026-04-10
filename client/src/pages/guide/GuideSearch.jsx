@@ -98,7 +98,7 @@ export function SearchOverlay({ query, setQuery, onClose }) {
   }
 
   function getCatIcon(item) {
-    return item.type === 'uitleg' ? UITLEG_CAT[item.catId].icon : item.icon;
+    return item.icon;
   }
 
   return (
