@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+export const DIARY_DONE_KEY = 'diary_last_completed';
+export function todayKey() { return new Date().toISOString().slice(0, 10); }
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 
 const DUTCH_MONTHS = [
@@ -11,6 +14,12 @@ export default function DiaryPage() {
   const navigate = useNavigate();
   const [debugOpen, setDebugOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
+
+  useEffect(() => {
+    if (localStorage.getItem(DIARY_DONE_KEY) === todayKey()) {
+      navigate('/dagboek/samenvatting', { replace: true });
+    }
+  }, []);
 
   const now = new Date();
   const dateString = `${now.getDate()} ${DUTCH_MONTHS[now.getMonth()]}`;

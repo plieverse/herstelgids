@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { DIARY_DONE_KEY } from '../../pages/diary/DiaryPage';
 
 /** Wrap any element with this to detect triple-click */
 export function useTripleClick(onTriple) {
@@ -19,6 +20,7 @@ export function useTripleClick(onTriple) {
 export default function DebugMenu({ onClose }) {
   const navigate = useNavigate();
   const [msgDone, setMsgDone] = useState(false);
+  const [diaryDone, setDiaryDone] = useState(false);
 
   function resetOnboarding() {
     localStorage.removeItem('onboardingComplete');
@@ -29,6 +31,11 @@ export default function DebugMenu({ onClose }) {
   function resetMessages() {
     localStorage.removeItem('demo_messages');
     setMsgDone(true);
+  }
+
+  function resetDiary() {
+    localStorage.removeItem(DIARY_DONE_KEY);
+    setDiaryDone(true);
   }
 
   return (
@@ -121,6 +128,43 @@ export default function DebugMenu({ onClose }) {
             color: msgDone ? '#378A6C' : '#CB6E02',
           }}>{msgDone ? 'Berichten gereset!' : 'Berichten resetten'}</span>
           {!msgDone && (
+            <span className="material-symbols-outlined" style={{
+              position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
+            }}>chevron_right</span>
+          )}
+        </div>
+
+        {/* Diary reset button */}
+        <div
+          onClick={diaryDone ? undefined : resetDiary}
+          style={{
+            width: '100%', height: '58px', background: '#FFFFFF',
+            border: `1px solid ${diaryDone ? '#CFEBD4' : '#EBE9CF'}`,
+            borderRadius: '20px',
+            cursor: diaryDone ? 'default' : 'pointer',
+            display: 'flex', alignItems: 'center',
+            position: 'relative',
+          }}
+        >
+          <div style={{
+            position: 'absolute', width: '29px', height: '29px',
+            left: '15px', borderRadius: '50%',
+            background: diaryDone ? '#CFEBD4' : '#EBE9CF',
+          }} />
+          <div style={{
+            position: 'absolute', left: '13px', width: '35px', height: '35px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '22px', color: diaryDone ? '#378A6C' : '#C5A500', userSelect: 'none',
+            }}>{diaryDone ? 'check_circle' : 'contract_edit'}</span>
+          </div>
+          <span style={{
+            position: 'absolute', left: '61px',
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px',
+            color: diaryDone ? '#378A6C' : '#C5A500',
+          }}>{diaryDone ? 'Dagboek gereset!' : 'Dagboek opnieuw invullen'}</span>
+          {!diaryDone && (
             <span className="material-symbols-outlined" style={{
               position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
             }}>chevron_right</span>

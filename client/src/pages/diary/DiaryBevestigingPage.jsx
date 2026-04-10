@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { DIARY_DONE_KEY, todayKey } from './DiaryPage';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -272,7 +273,7 @@ export default function DiaryBevestigingPage() {
           {/* "Begrepen" button: 170×50px centered */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button
-              onClick={() => navigate('/dagboek/samenvatting')}
+              onClick={() => { localStorage.setItem(DIARY_DONE_KEY, todayKey()); navigate('/dagboek/samenvatting'); }}
               style={{
                 width: '170px',
                 height: '50px',
