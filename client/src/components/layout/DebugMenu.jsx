@@ -20,7 +20,6 @@ export function useTripleClick(onTriple) {
 export default function DebugMenu({ onClose }) {
   const navigate = useNavigate();
   const [msgDone, setMsgDone] = useState(false);
-  const [diaryDone, setDiaryDone] = useState(false);
 
   function resetOnboarding() {
     localStorage.removeItem('onboardingComplete');
@@ -35,7 +34,8 @@ export default function DebugMenu({ onClose }) {
 
   function resetDiary() {
     localStorage.removeItem(DIARY_DONE_KEY);
-    setDiaryDone(true);
+    onClose();
+    navigate('/dagboek');
   }
 
   return (
@@ -136,39 +136,33 @@ export default function DebugMenu({ onClose }) {
 
         {/* Diary reset button */}
         <div
-          onClick={diaryDone ? undefined : resetDiary}
+          onClick={resetDiary}
           style={{
             width: '100%', height: '58px', background: '#FFFFFF',
-            border: `1px solid ${diaryDone ? '#CFEBD4' : '#EBE9CF'}`,
-            borderRadius: '20px',
-            cursor: diaryDone ? 'default' : 'pointer',
-            display: 'flex', alignItems: 'center',
+            border: '1px solid #EBE9CF', borderRadius: '20px',
+            cursor: 'pointer', display: 'flex', alignItems: 'center',
             position: 'relative',
           }}
         >
           <div style={{
             position: 'absolute', width: '29px', height: '29px',
-            left: '15px', borderRadius: '50%',
-            background: diaryDone ? '#CFEBD4' : '#EBE9CF',
+            left: '15px', borderRadius: '50%', background: '#EBE9CF',
           }} />
           <div style={{
             position: 'absolute', left: '13px', width: '35px', height: '35px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <span className="material-symbols-outlined" style={{
-              fontSize: '22px', color: diaryDone ? '#378A6C' : '#C5A500', userSelect: 'none',
-            }}>{diaryDone ? 'check_circle' : 'contract_edit'}</span>
+              fontSize: '22px', color: '#C5A500', userSelect: 'none',
+            }}>contract_edit</span>
           </div>
           <span style={{
             position: 'absolute', left: '61px',
-            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px',
-            color: diaryDone ? '#378A6C' : '#C5A500',
-          }}>{diaryDone ? 'Dagboek gereset!' : 'Dagboek opnieuw invullen'}</span>
-          {!diaryDone && (
-            <span className="material-symbols-outlined" style={{
-              position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
-            }}>chevron_right</span>
-          )}
+            fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', color: '#C5A500',
+          }}>Dagboek opnieuw invullen</span>
+          <span className="material-symbols-outlined" style={{
+            position: 'absolute', right: '14px', fontSize: '22px', color: '#B3B2B2', userSelect: 'none',
+          }}>chevron_right</span>
         </div>
 
         <div style={{ fontSize: '11px', color: '#B3B2B2', textAlign: 'center', marginTop: '2px' }}>
