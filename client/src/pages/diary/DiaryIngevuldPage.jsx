@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -60,6 +62,8 @@ const SUMMARY_ROWS = [
 
 export default function DiaryIngevuldPage() {
   const navigate = useNavigate();
+  const [debugOpen, setDebugOpen] = useState(false);
+  const handleTripleClick = useTripleClick(() => setDebugOpen(true));
 
   const now = new Date();
   const dateString = `${now.getDate()} ${DUTCH_MONTHS[now.getMonth()]}`;
@@ -129,7 +133,7 @@ export default function DiaryIngevuldPage() {
               color: '#377B8A',
               position: 'relative',
               zIndex: 2,
-            }}>Dagboek</span>
+            }} onClick={handleTripleClick}>Dagboek</span>
           </div>
 
           {/* Right: edit + account_circle */}
@@ -325,7 +329,7 @@ export default function DiaryIngevuldPage() {
         ))}
       </div>
 
-      {/* ── BottomNav spacer (filled by BottomNav component) ── */}
+      {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
     </div>
   );
 }
