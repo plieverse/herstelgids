@@ -11,12 +11,10 @@ export default function BottomNav() {
 
   return (
     <nav style={{
-      position: 'fixed',
+      position: 'absolute',
       bottom: 0,
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '100%',
-      maxWidth: '414px',
+      left: 0,
+      width: '414px',
       height: '58px',
       background: '#FFFFFF',
       display: 'flex',
