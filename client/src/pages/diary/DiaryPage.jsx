@@ -64,7 +64,6 @@ export default function DiaryPage() {
         width: '414px',
         height: '105px',
         background: '#FFFFFF',
-        borderBottom: '2px solid #377B8A',
         display: 'flex',
         flexDirection: 'column',
         gap: '15px',
