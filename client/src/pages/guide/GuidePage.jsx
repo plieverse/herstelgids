@@ -63,7 +63,7 @@ export default function GuidePage() {
         position: 'absolute', left: 0, top: 0, width: '414px', height: '110px',
         background: '#FFFFFF',
         display: 'flex', flexDirection: 'column',
-        justifyContent: 'center', alignItems: 'center', gap: '20px',
+        justifyContent: 'flex-start', alignItems: 'center', gap: '20px',
         zIndex: 20,
       }}>
         {/* Title row */}

@@ -228,15 +228,24 @@ export default function MessagesPage() {
       <div style={{
         position: 'absolute', left: 0, top: 0, width: '414px', height: '73px',
         background: '#FFFFFF', zIndex: 10,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '5px 10px 0', boxSizing: 'border-box',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', padding: '0 0 0 10px', height: '34px', position: 'relative' }}>
-          <div style={{ position: 'absolute', width: '29px', height: '29px', left: '2px', top: '2.5px', borderRadius: '50%', background: '#E6F4F2', zIndex: 1 }} />
-          <span style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '24px', lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 3 }} onClick={handleTripleClick}>Berichten</span>
-        </div>
-        <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '35px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
+        {/* 40px title row — same height/structure as Dagboek and Gids so titles align */}
+        <div style={{
+          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+          alignItems: 'center', padding: '0px 10px', width: '414px', height: '40px',
+          boxSizing: 'border-box',
+        }}>
+          <div style={{
+            position: 'relative', display: 'flex', flexDirection: 'row',
+            alignItems: 'center', padding: '0px 0px 0px 10px',
+            isolation: 'isolate', height: '34px',
+          }}>
+            <div style={{ position: 'absolute', width: '29px', height: '29px', left: '0px', top: '3px', borderRadius: '50%', background: '#E6F4F2', zIndex: 1 }} />
+            <span style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '24px', lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 2 }} onClick={handleTripleClick}>Berichten</span>
+          </div>
+          <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '35px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
+          </div>
         </div>
       </div>
 
