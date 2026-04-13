@@ -116,7 +116,7 @@ function NormalBanner() {
         Samenvatting bekeken
       </div>
       <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
-        Je dagboek is verwerkt. Alle waarden zien er goed uit. Blijf zo doorgaan!
+        De app heeft uw antwoorden bekeken. Op dit moment zien we geen signalen die direct extra aandacht nodig hebben.
       </div>
     </div>
   );
@@ -146,7 +146,7 @@ function AlarmBanner() {
         Zorgverlener wordt ingelicht
       </div>
       <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
-        Enkele waarden liggen buiten de normale grens. Iemand van het zorgteam gaat je dagboek bekijken.
+        De app heeft uw antwoorden bekeken. Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
       </div>
     </div>
   );
