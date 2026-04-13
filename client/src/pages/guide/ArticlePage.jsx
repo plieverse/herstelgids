@@ -179,11 +179,13 @@ export default function ArticlePage() {
           display: 'flex', flexDirection: 'row', alignItems: 'center',
           padding: '3px 5px', boxSizing: 'border-box',
         }}>
-          <div style={{
-            width: '189px', height: '33px',
-            background: '#377B8A', borderRadius: '20px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
+          <div
+            onClick={() => navigate('/gids')}
+            style={{
+              width: '189px', height: '33px',
+              background: '#377B8A', borderRadius: '20px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+            }}>
             <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '24px', color: '#FFFFFF', textAlign: 'center' }}>Problemen</span>
           </div>
           <div

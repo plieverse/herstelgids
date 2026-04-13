@@ -209,11 +209,13 @@ export default function UitlegCategoryPage() {
           >
             <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '24px', color: '#B3B2B2', textAlign: 'center' }}>Problemen</span>
           </div>
-          <div style={{
-            width: '189px', height: '33px',
-            background: '#377B8A', borderRadius: '20px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
+          <div
+            onClick={() => navigate('/gids/uitleg')}
+            style={{
+              width: '189px', height: '33px',
+              background: '#377B8A', borderRadius: '20px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+            }}>
             <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '24px', color: '#FFFFFF', textAlign: 'center' }}>Uitleg</span>
           </div>
         </div>
