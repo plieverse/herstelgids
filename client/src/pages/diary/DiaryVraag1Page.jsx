@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { saveDiaryAnswer } from './DiaryPage';
 
 const PAIN_OPTIONS = [
   {
@@ -311,7 +312,7 @@ export default function DiaryVraag1Page() {
 
         {/* Volgende: 182×30, teal */}
         <button
-          onClick={() => navigate('/dagboek/invullen/vraag2')}
+          onClick={() => { saveDiaryAnswer(1, selected ?? 3); navigate('/dagboek/invullen/vraag2'); }}
           style={{
             width: '182px',
             height: '30px',

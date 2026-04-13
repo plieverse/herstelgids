@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { saveDiaryAnswer } from './DiaryPage';
 
 const POOP_OPTIONS = [
   {
@@ -314,7 +315,7 @@ export default function DiaryVraag5Page() {
 
         {/* Klaar: 182×30, teal */}
         <button
-          onClick={() => navigate('/dagboek/bevestiging')}
+          onClick={() => { saveDiaryAnswer(5, selected ?? 3); navigate('/dagboek/bevestiging'); }}
           style={{
             width: '182px',
             height: '30px',

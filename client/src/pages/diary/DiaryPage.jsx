@@ -3,6 +3,25 @@ import { useNavigate } from 'react-router-dom';
 
 export const DIARY_DONE_KEY = 'diary_last_completed';
 export function todayKey() { return new Date().toISOString().slice(0, 10); }
+
+export const DIARY_ANSWERS_KEY = 'diary_answers';
+
+export function saveDiaryAnswer(questionNum, score) {
+  try {
+    const stored = localStorage.getItem(DIARY_ANSWERS_KEY);
+    const data = stored ? JSON.parse(stored) : {};
+    data[`q${questionNum}`] = score;
+    localStorage.setItem(DIARY_ANSWERS_KEY, JSON.stringify(data));
+  } catch {}
+}
+
+export function loadDiaryAnswers() {
+  try {
+    const stored = localStorage.getItem(DIARY_ANSWERS_KEY);
+    return stored ? JSON.parse(stored) : {};
+  } catch { return {}; }
+}
+
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 
 const DUTCH_MONTHS = [

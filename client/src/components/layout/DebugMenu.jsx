@@ -33,6 +33,7 @@ export default function DebugMenu({ onClose }) {
 
   function resetDiary() {
     localStorage.removeItem(DIARY_DONE_KEY);
+    localStorage.removeItem('diary_answers');
     window.location.href = '/dagboek';
   }
 

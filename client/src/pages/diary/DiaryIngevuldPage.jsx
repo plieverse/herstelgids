@@ -1,64 +1,156 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
+import { loadDiaryAnswers } from './DiaryPage';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
   'juli', 'augustus', 'september', 'oktober', 'november', 'december',
 ];
 
-const SUMMARY_ROWS = [
-  {
-    id: 1,
-    category: 'Vergelijking gisteren',
-    answerBold: 'Hetzelfde.',
-    answerNormal: ' Ik voel me hetzelfde als gisteren.',
-    circleColor: '#EBE9CF',
-    iconColor: '#C5A500',
-    icon: 'health_metrics',
-    isText: false,
-  },
-  {
-    id: 2,
-    category: 'Eten',
-    answerBold: 'Goed.',
-    answerNormal: ' Ik heb af en toe last, maar het gaat.',
-    circleColor: '#CFEBD4',
-    iconColor: '#378A6C',
-    icon: 'nutrition',
-    isText: false,
-  },
-  {
-    id: 3,
-    category: 'Ademen',
-    answerBold: 'Moeilijk.',
-    answerNormal: ' Ik kan niet goed ademen.',
-    circleColor: '#F4D2BC',
-    iconColor: '#CB6E02',
-    icon: 'pulmonology',
-    isText: false,
-  },
-  {
-    id: 4,
-    category: 'Pijn',
-    answerBold: 'Heel veel pijn.',
-    answerNormal: ' Ik heb heel veel last van pijn.',
-    circleColor: '#EBCFCF',
-    iconColor: '#AF1E1E',
-    icon: 'bolt',
-    isText: false,
-  },
-  {
-    id: 5,
-    category: 'Poep',
-    answerBold: 'Normaal.',
-    answerNormal: ' Mijn poep was normaal.',
-    circleColor: '#CFEBD4',
-    iconColor: '#378A6C',
-    icon: 'WC',
-    isText: true,
-  },
-];
+// Color mapping per score (1=best green → 5=worst red)
+const SCORE_COLORS = {
+  1: { circleColor: '#B2DEB6', iconColor: '#378A6C' },
+  2: { circleColor: '#CFEBD4', iconColor: '#378A6C' },
+  3: { circleColor: '#EBE9CF', iconColor: '#C5A500' },
+  4: { circleColor: '#F0C8AD', iconColor: '#CB6E02' },
+  5: { circleColor: '#EEC7C7', iconColor: '#AF1E1E' },
+};
+
+// Q5 (stool) has its own color scale: 3=best, 1 and 5 are both bad
+const Q5_COLORS = {
+  1: { circleColor: '#F4D2BC', iconColor: '#CB6E02' },
+  2: { circleColor: '#F2EFC2', iconColor: '#C5A500' },
+  3: { circleColor: '#CFEBD4', iconColor: '#378A6C' },
+  4: { circleColor: '#F2EFC2', iconColor: '#C5A500' },
+  5: { circleColor: '#F4D2BC', iconColor: '#CB6E02' },
+};
+
+// Text per score for each question
+const Q1 = {
+  1: { bold: 'Veel beter', normal: ' Ik voel me veel beter. Ik heb bijna geen last.' },
+  2: { bold: 'Iets beter', normal: ' Ik voel me iets beter. Ik heb nog een beetje last.' },
+  3: { bold: 'Hetzelfde.', normal: ' Ik voel me hetzelfde als gisteren.' },
+  4: { bold: 'Iets slechter', normal: ' Ik voel me iets slechter. Ik heb meer last.' },
+  5: { bold: 'Veel slechter', normal: ' Ik voel me veel slechter. Ik heb heel veel last.' },
+};
+const Q2 = {
+  1: { bold: 'Heel goed', normal: ' Ik heb geen problemen met eten.' },
+  2: { bold: 'Goed.', normal: ' Ik heb af en toe last, maar het gaat.' },
+  3: { bold: 'Middelmatig', normal: ' Ik heb duidelijk moeite met eten.' },
+  4: { bold: 'Moeilijk', normal: ' Ik kan moeilijk mijn eten doorslikken.' },
+  5: { bold: 'Heel moeilijk', normal: ' Ik kan mijn eten bijna niet doorslikken.' },
+};
+const Q3 = {
+  1: { bold: 'Heel goed', normal: ' Ik kan goed doorademen.' },
+  2: { bold: 'Goed', normal: ' Ik heb af en toe moeite met ademen.' },
+  3: { bold: 'Middelmatig', normal: ' Ik heb duidelijk moeite met ademen.' },
+  4: { bold: 'Moeilijk.', normal: ' Ik kan niet goed ademen.' },
+  5: { bold: 'Heel moeilijk', normal: ' Ik kan bijna niet ademen.' },
+};
+const Q4 = {
+  1: { bold: 'Geen pijn', normal: ' Ik voel helemaal geen pijn.' },
+  2: { bold: 'Weinig pijn', normal: ' Ik voel het, maar het gaat.' },
+  3: { bold: 'Pijn', normal: ' Ik voel duidelijk pijn. Maar het is nog vol te houden.' },
+  4: { bold: 'Veel pijn', normal: ' Ik heb veel pijn.' },
+  5: { bold: 'Heel veel pijn', normal: ' Ik heb heel veel pijn.' },
+};
+const Q5 = {
+  1: { bold: 'Diarree', normal: ' Mijn ontlasting is heel dun of waterig.' },
+  2: { bold: 'Wat dunner', normal: ' Mijn ontlasting was wat dunner dan normaal.' },
+  3: { bold: 'Normaal.', normal: ' Mijn ontlasting was normaal.' },
+  4: { bold: 'Wat harder', normal: ' Mijn ontlasting is wat harder of vaster.' },
+  5: { bold: 'Verstopping', normal: ' Ik heb moeite met naar het toilet gaan.' },
+};
+
+/**
+ * Returns true when any answer exceeds the alarm threshold:
+ * - Q1 (feeling vs yesterday): score 5 = "Veel slechter"
+ * - Q2 (eating):               score >= 4 = "Moeilijk" or "Heel moeilijk"
+ * - Q3 (breathing):            score >= 4 = "Moeilijk" or "Heel moeilijk"
+ * - Q4 (pain):                 score >= 4 = "Veel pijn" or "Heel veel pijn"
+ * - Q5 (stool):                score 1 = "Diarree" or score 5 = "Verstopping"
+ */
+function checkAlarm(answers) {
+  const { q1 = 3, q2 = 2, q3 = 2, q4 = 2, q5 = 3 } = answers;
+  return q1 >= 5 || q2 >= 4 || q3 >= 4 || q4 >= 4 || q5 === 1 || q5 === 5;
+}
+
+function buildRows(answers) {
+  const a = {
+    q1: answers.q1 ?? 3,
+    q2: answers.q2 ?? 2,
+    q3: answers.q3 ?? 4,
+    q4: answers.q4 ?? 5,
+    q5: answers.q5 ?? 3,
+  };
+  return [
+    { id: 1, category: 'Vergelijking gisteren', ...Q1[a.q1], ...SCORE_COLORS[a.q1], icon: 'health_metrics', isText: false },
+    { id: 2, category: 'Eten',                  ...Q2[a.q2], ...SCORE_COLORS[a.q2], icon: 'nutrition',      isText: false },
+    { id: 3, category: 'Ademen',                ...Q3[a.q3], ...SCORE_COLORS[a.q3], icon: 'pulmonology',    isText: false },
+    { id: 4, category: 'Pijn',                  ...Q4[a.q4], ...SCORE_COLORS[a.q4], icon: 'bolt',           isText: false },
+    { id: 5, category: 'Ontlasting',            ...Q5[a.q5], ...Q5_COLORS[a.q5],    icon: 'WC',             isText: true  },
+  ];
+}
+
+function NormalBanner() {
+  return (
+    <div style={{
+      width: '346px',
+      background: '#E6F4F2',
+      borderRadius: '10px',
+      padding: '12px 16px 12px 54px',
+      boxSizing: 'border-box',
+      position: 'relative',
+      minHeight: '68px',
+    }}>
+      <div style={{
+        position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+        width: '31px', height: '31px', borderRadius: '50%', background: '#CFEBE8',
+      }} />
+      <span className="material-symbols-outlined" style={{
+        position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
+        fontSize: '32px', color: '#377B8A', userSelect: 'none',
+      }}>check_circle</span>
+      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#377B8A' }}>
+        Samenvatting bekeken
+      </div>
+      <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
+        Je dagboek is verwerkt. Alle waarden zien er goed uit. Blijf zo doorgaan!
+      </div>
+    </div>
+  );
+}
+
+function AlarmBanner() {
+  return (
+    <div style={{
+      width: '346px',
+      background: '#FEF0E9',
+      borderRadius: '10px',
+      border: '1px solid #F4D2BC',
+      padding: '12px 16px 12px 54px',
+      boxSizing: 'border-box',
+      position: 'relative',
+      minHeight: '68px',
+    }}>
+      <div style={{
+        position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+        width: '31px', height: '31px', borderRadius: '50%', background: '#F4D2BC',
+      }} />
+      <span className="material-symbols-outlined" style={{
+        position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
+        fontSize: '32px', color: '#CB6E02', userSelect: 'none',
+      }}>warning</span>
+      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#CB6E02' }}>
+        Zorgverlener wordt ingelicht
+      </div>
+      <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
+        Enkele waarden liggen buiten de normale grens. Iemand van het zorgteam gaat je dagboek bekijken.
+      </div>
+    </div>
+  );
+}
 
 export default function DiaryIngevuldPage() {
   const navigate = useNavigate();
@@ -67,6 +159,10 @@ export default function DiaryIngevuldPage() {
 
   const now = new Date();
   const dateString = `${now.getDate()} ${DUTCH_MONTHS[now.getMonth()]}`;
+
+  const answers = loadDiaryAnswers();
+  const alarm = checkAlarm(answers);
+  const summaryRows = buildRows(answers);
 
   return (
     <div style={{
@@ -81,7 +177,7 @@ export default function DiaryIngevuldPage() {
       overflow: 'hidden',
     }}>
 
-      {/* ── NS Dagboektopbar: white bar 414×105px ── */}
+      {/* ── Topbar ── */}
       <div style={{
         position: 'absolute',
         left: 0,
@@ -94,8 +190,7 @@ export default function DiaryIngevuldPage() {
         flexDirection: 'column',
         gap: '15px',
       }}>
-
-        {/* Frame 42: title row */}
+        {/* Title row */}
         <div style={{
           display: 'flex',
           flexDirection: 'row',
@@ -104,7 +199,6 @@ export default function DiaryIngevuldPage() {
           padding: '0px 10px',
           height: '40px',
         }}>
-          {/* Left: circle + "Dagboek" */}
           <div style={{
             position: 'relative',
             display: 'flex',
@@ -116,33 +210,16 @@ export default function DiaryIngevuldPage() {
             height: '34px',
           }}>
             <div style={{
-              position: 'absolute',
-              width: '29px',
-              height: '29px',
-              left: '0px',
-              top: '3px',
-              borderRadius: '50%',
-              background: '#E6F4F2',
-              zIndex: 1,
+              position: 'absolute', width: '29px', height: '29px',
+              left: '0px', top: '3px', borderRadius: '50%',
+              background: '#E6F4F2', zIndex: 1,
             }} />
             <span style={{
-              fontFamily: 'Inter',
-              fontWeight: 700,
-              fontSize: '24px',
-              lineHeight: '29px',
-              color: '#377B8A',
-              position: 'relative',
-              zIndex: 2,
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
+              lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 2,
             }} onClick={handleTripleClick}>Dagboek</span>
           </div>
-
-          {/* Right: edit + account_circle */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '11px',
-          }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>edit</span>
             </div>
@@ -152,31 +229,26 @@ export default function DiaryIngevuldPage() {
           </div>
         </div>
 
-        {/* Frame 7: date navigation */}
+        {/* Date navigation */}
         <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '0px 0px 10px',
-          height: '46px',
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          padding: '0px 0px 10px', height: '46px',
         }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', height: '36px' }}>
             <button
               onClick={() => navigate('/dagboek/historie/1')}
               style={{
-              width: '30px', height: '30px', background: '#E6F4F2',
-              border: '0.5px solid #CFEBE8', borderRadius: '4px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', padding: 0,
-            }}>
+                width: '30px', height: '30px', background: '#E6F4F2',
+                border: '0.5px solid #CFEBE8', borderRadius: '4px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', padding: 0,
+              }}>
               <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>chevron_left</span>
             </button>
-
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: '#377B8A', fontFamily: 'Inter', fontWeight: 400 }}>
               <span style={{ fontSize: '20px', lineHeight: '24px' }}>Vandaag</span>
               <span style={{ fontSize: '12px', lineHeight: '15px' }}>{dateString}</span>
             </div>
-
             <button style={{
               width: '30px', height: '30px', background: '#E6F4F2',
               border: '0.5px solid #CFEBE8', borderRadius: '4px',
@@ -189,144 +261,73 @@ export default function DiaryIngevuldPage() {
         </div>
       </div>
 
-      {/* ── Ellipse 25: teal circle behind title, 54×54, left:25, top:136 ── */}
+      {/* ── Scrollable content ── */}
       <div style={{
         position: 'absolute',
-        width: '54px',
-        height: '54px',
-        left: '25px',
-        top: '136px',
-        borderRadius: '50%',
-        background: '#CFEBE8',
-      }} />
-
-      {/* ── Ellipse 26: small teal circle, 14×14, left:72, top:183 ── */}
-      <div style={{
-        position: 'absolute',
-        width: '14px',
-        height: '14px',
-        left: '72px',
-        top: '183px',
-        borderRadius: '50%',
-        background: '#CFEBE8',
-      }} />
-
-      {/* ── "Samenvatting" title: left:37, top:144 ── */}
-      <div style={{
-        position: 'absolute',
-        left: '37px',
-        top: '144px',
-        width: '218px',
-        height: '39px',
-        fontFamily: 'Inter',
-        fontWeight: 700,
-        fontSize: '32px',
-        lineHeight: '39px',
-        color: '#377B8A',
-        display: 'flex',
-        alignItems: 'center',
+        top: '105px',
+        bottom: '58px',
+        left: 0,
+        right: 0,
+        overflowY: 'auto',
+        overscrollBehavior: 'none',
       }}>
-        Samenvatting
-      </div>
+        <div style={{ padding: '10px 25px 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
-      {/* ── Frame 46: 5 summary rows, width:346, left:25, top:221 ── */}
-      <div style={{
-        position: 'absolute',
-        width: '346px',
-        left: '25px',
-        top: '221px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-      }}>
-        {SUMMARY_ROWS.map((row) => (
-          <div
-            key={row.id}
-            style={{
-              position: 'relative',
-              width: '346px',
-              height: '77px',
-              background: '#FFFFFF',
-              borderRadius: '10px',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              padding: '5px 0px 5px 10px',
-              gap: '10px',
-              boxSizing: 'border-box',
-            }}
-          >
-            {/* Colored circle: 51×51, absolute, left:9, top:13 */}
+          {/* "Samenvatting" title with decorative circles */}
+          <div style={{ position: 'relative', height: '55px' }}>
+            <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8' }} />
+            <div style={{ position: 'absolute', width: '14px', height: '14px', left: '47px', top: '47px', borderRadius: '50%', background: '#CFEBE8' }} />
             <div style={{
-              position: 'relative',
-              width: '51px',
-              height: '51px',
-              flexShrink: 0,
-            }}>
-              <div style={{
-                position: 'absolute',
-                width: '51px',
-                height: '51px',
-                borderRadius: '50%',
-                background: row.circleColor,
-              }} />
-              {/* Icon centered on circle */}
-              <div style={{
-                position: 'absolute',
-                width: '51px',
-                height: '51px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                {row.isText ? (
-                  <span style={{
-                    fontFamily: 'Inter',
-                    fontWeight: 400,
-                    fontSize: '20px',
-                    lineHeight: '24px',
-                    color: row.iconColor,
-                    userSelect: 'none',
-                  }}>{row.icon}</span>
-                ) : (
-                  <span className="material-symbols-outlined" style={{
-                    fontSize: '32px',
-                    color: row.iconColor,
-                    userSelect: 'none',
-                  }}>{row.icon}</span>
-                )}
-              </div>
-            </div>
-
-            {/* Text: category + answer */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '7px',
-              width: '245px',
-            }}>
-              <div style={{
-                fontFamily: 'Inter',
-                fontWeight: 700,
-                fontSize: '20px',
-                lineHeight: '24px',
-                color: '#377B8A',
-              }}>
-                {row.category}
-              </div>
-              <div style={{
-                fontFamily: 'Inter',
-                fontSize: '15px',
-                lineHeight: '18px',
-                color: '#727272',
-              }}>
-                <span style={{ fontWeight: 700 }}>{row.answerBold}</span>
-                <span style={{ fontWeight: 400 }}>{row.answerNormal}</span>
-              </div>
-            </div>
+              position: 'absolute', left: '12px', top: '8px',
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
+              lineHeight: '39px', color: '#377B8A',
+            }}>Samenvatting</div>
           </div>
-        ))}
+
+          {/* Notification banner */}
+          {alarm ? <AlarmBanner /> : <NormalBanner />}
+
+          {/* Summary rows */}
+          {summaryRows.map((row) => (
+            <div
+              key={row.id}
+              style={{
+                position: 'relative',
+                width: '346px',
+                height: '77px',
+                background: '#FFFFFF',
+                borderRadius: '10px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: '5px 0px 5px 10px',
+                gap: '10px',
+                boxSizing: 'border-box',
+                flexShrink: 0,
+              }}
+            >
+              <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
+                <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: row.circleColor }} />
+                <div style={{ position: 'absolute', width: '51px', height: '51px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {row.isText ? (
+                    <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '20px', lineHeight: '24px', color: row.iconColor, userSelect: 'none' }}>{row.icon}</span>
+                  ) : (
+                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: row.iconColor, userSelect: 'none' }}>{row.icon}</span>
+                  )}
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '7px', width: '245px' }}>
+                <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#377B8A' }}>
+                  {row.category}
+                </div>
+                <div style={{ fontFamily: 'Inter', fontSize: '15px', lineHeight: '18px', color: '#727272' }}>
+                  <span style={{ fontWeight: 700 }}>{row.bold}</span>
+                  <span style={{ fontWeight: 400 }}>{row.normal}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
