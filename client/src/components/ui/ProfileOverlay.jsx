@@ -14,7 +14,7 @@ function formatDutchDate(dateStr) {
     const [, year, month, day] = match;
     return `${parseInt(day)} ${DUTCH_MONTHS[parseInt(month) - 1]} ${year}`;
   }
-  return dateStr; // fallback for unrecognised format
+  return dateStr;
 }
 
 function loadProfile() {
@@ -34,18 +34,20 @@ function saveProfile(data) {
 const labelStyle = {
   display: 'block',
   fontFamily: 'Inter', fontSize: 13, lineHeight: '16px',
-  color: '#B3B2B2', marginBottom: 5,
+  color: '#377B8A', marginBottom: 5,
 };
 
+// Readonly display — values in dark teal, grey background
 const readonlyFieldStyle = {
   width: '100%', height: 40,
   border: '1px solid #E8E8E8', borderRadius: 8,
   padding: '0 12px', boxSizing: 'border-box',
   fontFamily: 'Inter', fontSize: 16,
-  color: '#B3B2B2', background: '#F6F6F6',
+  color: '#377B8A', background: '#F6F6F6',
   display: 'flex', alignItems: 'center',
 };
 
+// Editable input
 const editFieldStyle = {
   width: '100%', height: 40,
   border: '1.5px solid #CFEBE8', borderRadius: 8,
@@ -53,6 +55,16 @@ const editFieldStyle = {
   fontFamily: 'Inter', fontSize: 16,
   color: '#333', background: '#FFFFFF',
   outline: 'none',
+};
+
+// Native date/time input styled for non-edit state
+const readonlyNativeStyle = {
+  width: '100%', height: 40,
+  border: '1px solid #E8E8E8', borderRadius: 8,
+  padding: '0 12px', boxSizing: 'border-box',
+  fontFamily: 'Inter', fontSize: 16,
+  color: '#377B8A', background: '#F6F6F6',
+  outline: 'none', cursor: 'pointer',
 };
 
 export default function ProfileOverlay({ onClose }) {
@@ -81,6 +93,15 @@ export default function ProfileOverlay({ onClose }) {
     setProfile(prev => ({ ...prev, [field]: value }));
   }
 
+  // Called when date/time field changes while not yet in edit mode
+  function handlePickerChange(field, value) {
+    if (!editing) {
+      setDraft({ ...profile });
+      setEditing(true);
+    }
+    setProfile(prev => ({ ...prev, [field]: value }));
+  }
+
   return (
     <div
       onClick={onClose}
@@ -98,18 +119,16 @@ export default function ProfileOverlay({ onClose }) {
         }}
       >
 
-        {/* ── Header: decorative circle + title ── */}
+        {/* ── Header ── */}
         <div style={{
           position: 'relative', height: 85,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          {/* Decorative circle behind title */}
           <div style={{
             position: 'absolute',
             width: 76, height: 76, left: 143, top: 5,
             borderRadius: '50%', background: '#CFEBE8',
           }} />
-          {/* Title */}
           <span style={{
             position: 'relative', zIndex: 1,
             fontFamily: 'Inter', fontWeight: 700, fontSize: 24,
@@ -119,7 +138,7 @@ export default function ProfileOverlay({ onClose }) {
           </span>
         </div>
 
-        {/* ── Pencil (edit) button — same style as topbar ── */}
+        {/* ── Pencil button (not in edit mode) ── */}
         {!editing && (
           <button
             onClick={startEditing}
@@ -137,7 +156,7 @@ export default function ProfileOverlay({ onClose }) {
           </button>
         )}
 
-        {/* ── Close (X) button ── */}
+        {/* ── Close button ── */}
         <button
           onClick={onClose}
           aria-label="Sluiten"
@@ -183,36 +202,26 @@ export default function ProfileOverlay({ onClose }) {
             )}
           </div>
 
-          {/* Datum van operatie */}
+          {/* Datum van operatie — always native date input so picker opens on click */}
           <div>
             <label style={labelStyle}>Datum van operatie</label>
-            {editing ? (
-              <input
-                type="date"
-                value={profile.operatieDatum}
-                onChange={e => handleChange('operatieDatum', e.target.value)}
-                style={editFieldStyle}
-              />
-            ) : (
-              <div style={readonlyFieldStyle}>
-                {formatDutchDate(profile.operatieDatum)}
-              </div>
-            )}
+            <input
+              type="date"
+              value={profile.operatieDatum}
+              onChange={e => handlePickerChange('operatieDatum', e.target.value)}
+              style={editing ? editFieldStyle : readonlyNativeStyle}
+            />
           </div>
 
-          {/* Herinnering dagboek */}
+          {/* Tijd herinnering dagboek — always native time input */}
           <div>
-            <label style={labelStyle}>Herinnering dagboek</label>
-            {editing ? (
-              <input
-                type="time"
-                value={profile.herinnering}
-                onChange={e => handleChange('herinnering', e.target.value)}
-                style={editFieldStyle}
-              />
-            ) : (
-              <div style={readonlyFieldStyle}>{profile.herinnering}</div>
-            )}
+            <label style={labelStyle}>Tijd herinnering dagboek</label>
+            <input
+              type="time"
+              value={profile.herinnering}
+              onChange={e => handlePickerChange('herinnering', e.target.value)}
+              style={editing ? editFieldStyle : readonlyNativeStyle}
+            />
           </div>
 
           {/* Annuleren / Opslaan — edit mode only */}
@@ -226,8 +235,12 @@ export default function ProfileOverlay({ onClose }) {
                   borderRadius: 20, cursor: 'pointer',
                   fontFamily: 'Inter', fontWeight: 400, fontSize: 16,
                   color: '#377B8A',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                 }}
               >
+                <span className="material-symbols-outlined" style={{
+                  fontSize: '20px', color: '#377B8A', userSelect: 'none',
+                }}>close</span>
                 Annuleren
               </button>
               <button
@@ -238,8 +251,12 @@ export default function ProfileOverlay({ onClose }) {
                   borderRadius: 20, cursor: 'pointer',
                   fontFamily: 'Inter', fontWeight: 400, fontSize: 16,
                   color: '#FFFFFF',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                 }}
               >
+                <span className="material-symbols-outlined" style={{
+                  fontSize: '20px', color: '#FFFFFF', userSelect: 'none',
+                }}>save</span>
                 Opslaan
               </button>
             </div>
