@@ -3,30 +3,42 @@ import { useEffect, useState } from 'react';
 const BASE_W = 414;
 const BASE_H = 736;
 
-// Snapshot the viewport on first load, before any keyboard or browser-chrome
-// changes can interfere. We only recalculate on orientation change.
-function calcScale() {
-  return Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
+// Capture the viewport size ONCE on first load (before any interaction).
+// We deliberately avoid reading innerHeight after load to prevent
+// keyboard / iOS Safari chrome changes from triggering rescales.
+const INIT_W = window.innerWidth;
+const INIT_H = window.innerHeight;
+
+function calcScale(w = INIT_W, h = INIT_H) {
+  return Math.min(w / BASE_W, h / BASE_H);
 }
 
 export default function ScaleWrapper({ children }) {
-  const [scale, setScale] = useState(calcScale);
+  const [scale, setScale] = useState(() => calcScale());
 
   useEffect(() => {
-    // Do NOT listen to 'resize' — that fires whenever the keyboard opens /
-    // closes or the browser chrome collapses, causing the layout to jump.
     // Only recalculate when the device is physically rotated.
+    // 'resize' is intentionally NOT used — it fires on keyboard open/close
+    // and iOS Safari chrome collapse, both of which must NOT change the scale.
     function onOrientationChange() {
-      setTimeout(() => setScale(calcScale()), 200);
+      setTimeout(() => {
+        setScale(calcScale(window.innerWidth, window.innerHeight));
+      }, 300);
     }
     window.addEventListener('orientationchange', onOrientationChange);
     return () => window.removeEventListener('orientationchange', onOrientationChange);
   }, []);
 
   return (
+    // Use explicit top/left/width/height instead of inset:0 so the container
+    // is anchored to the top-left corner with a fixed size. On iOS Safari,
+    // 'inset: 0' can cause the bottom to move when the browser chrome animates.
     <div style={{
       position: 'fixed',
-      inset: 0,
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'flex-start',
