@@ -223,8 +223,7 @@ export default function MessagesPage() {
     <div style={{
       position: 'relative', width: '100%', maxWidth: '414px',
       height: '736px', margin: '0 auto',
-      background: '#F6F6F6', fontFamily: 'Inter, sans-serif',
-      display: 'flex', flexDirection: 'column', overflow: 'hidden',
+      background: '#F6F6F6', fontFamily: 'Inter, sans-serif', overflow: 'hidden',
     }}>
 
       {/* ── Topbar ── */}
@@ -279,7 +278,9 @@ export default function MessagesPage() {
           style={{
             flex: 1, height: '38px', background: '#F6F6F6', border: 'none',
             borderRadius: '19px', padding: '0 16px',
-            fontFamily: 'Inter', fontSize: '14px', color: '#333', outline: 'none',
+            // iOS Safari auto-zooms (and resizes the viewport) when focused
+            // input font-size < 16px — this causes the layout jump on navigation.
+            fontFamily: 'Inter', fontSize: '16px', color: '#333', outline: 'none',
           }}
         />
         <button
