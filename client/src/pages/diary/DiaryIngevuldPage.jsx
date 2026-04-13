@@ -111,12 +111,12 @@ function NormalBanner() {
       <span className="material-symbols-outlined" style={{
         position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
         fontSize: '32px', color: '#377B8A', userSelect: 'none',
-      }}>check_circle</span>
+      }}>visibility</span>
       <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#377B8A' }}>
         Samenvatting bekeken
       </div>
       <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
-        De app heeft uw antwoorden bekeken. Op dit moment zien we geen signalen die direct extra aandacht nodig hebben.
+        Op dit moment zien we geen signalen die direct extra aandacht nodig hebben.
       </div>
     </div>
   );
@@ -128,7 +128,6 @@ function AlarmBanner() {
       width: '346px',
       background: '#FEF0E9',
       borderRadius: '10px',
-      border: '1px solid #F4D2BC',
       padding: '12px 16px 12px 54px',
       boxSizing: 'border-box',
       position: 'relative',
@@ -146,7 +145,7 @@ function AlarmBanner() {
         Zorgverlener wordt ingelicht
       </div>
       <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
-        De app heeft uw antwoorden bekeken. Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
+        Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
       </div>
     </div>
   );
