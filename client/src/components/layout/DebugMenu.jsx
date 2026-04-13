@@ -28,14 +28,12 @@ export default function DebugMenu({ onClose }) {
 
   function resetMessages() {
     localStorage.removeItem('demo_messages');
-    onClose();
-    navigate('/berichten');
+    window.location.href = '/berichten';
   }
 
   function resetDiary() {
     localStorage.removeItem(DIARY_DONE_KEY);
-    onClose();
-    navigate('/dagboek');
+    window.location.href = '/dagboek';
   }
 
   return (
