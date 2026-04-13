@@ -127,7 +127,7 @@ export default function GuideUitlegPage() {
         position: 'absolute', left: 0, top: 0, width: '414px', height: '110px',
         background: '#FFFFFF',
         display: 'flex', flexDirection: 'column',
-        justifyContent: 'center', alignItems: 'center', gap: '20px',
+        justifyContent: 'flex-start', alignItems: 'center', gap: '20px',
       }}>
         {/* Title row */}
         <div style={{
@@ -197,7 +197,7 @@ export default function GuideUitlegPage() {
       {/* ── Tiles grid (Frame 58) ── */}
       <div style={{
         position: 'absolute', width: '358px', height: '499px',
-        left: '28px', top: '144px',
+        left: '28px', top: '150px',
       }}>
         {TILES.map((tile) => (
           <div key={tile.id} onClick={() => navigate(`/gids/uitleg/${tile.id}`)} style={{
