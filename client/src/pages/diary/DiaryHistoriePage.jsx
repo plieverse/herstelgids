@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DIARY_DONE_KEY, todayKey } from './DiaryPage';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -76,6 +77,7 @@ const CATEGORIES = [
 
 export default function DiaryHistoriePage() {
   const navigate = useNavigate();
+  const [profileOpen, setProfileOpen] = useState(false);
   const { daysAgo: daysAgoStr } = useParams();
   const daysAgo = parseInt(daysAgoStr, 10) || 1;
 
@@ -136,7 +138,7 @@ export default function DiaryHistoriePage() {
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>edit</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -222,6 +224,7 @@ export default function DiaryHistoriePage() {
           </div>
         ))}
       </div>
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
     </div>
   );
 }

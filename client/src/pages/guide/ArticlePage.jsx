@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
 import { SearchOverlay } from './GuideSearch';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const CATEGORY_DATA = {
   1: {
@@ -126,6 +127,7 @@ export default function ArticlePage() {
   const cat = CATEGORY_DATA[id] || CATEGORY_DATA[1];
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const [profileOpen, setProfileOpen] = useState(false);
   function closeSearch() { setSearchOpen(false); setQuery(''); }
 
   return (
@@ -166,7 +168,7 @@ export default function ArticlePage() {
             <div onClick={() => setSearchOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -321,6 +323,8 @@ export default function ArticlePage() {
 
       {/* ── Search overlay ── */}
       {searchOpen && <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} />}
+
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />

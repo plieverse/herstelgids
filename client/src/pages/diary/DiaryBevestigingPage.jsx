@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DIARY_DONE_KEY, todayKey } from './DiaryPage';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -8,6 +10,7 @@ const DUTCH_MONTHS = [
 
 export default function DiaryBevestigingPage() {
   const navigate = useNavigate();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const now = new Date();
   const dateString = `${now.getDate()} ${DUTCH_MONTHS[now.getMonth()]}`;
@@ -100,12 +103,13 @@ export default function DiaryBevestigingPage() {
                 userSelect: 'none',
               }}>edit</span>
             </div>
-            <div style={{
+            <div onClick={() => setProfileOpen(true)} style={{
               width: '35px',
               height: '35px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              cursor: 'pointer',
             }}>
               <span className="material-symbols-outlined" style={{
                 fontSize: '32px',
@@ -300,7 +304,7 @@ export default function DiaryBevestigingPage() {
             </button>
           </div>
         </div>
-      </div>
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
     </div>
   );
 }

@@ -23,6 +23,7 @@ export function loadDiaryAnswers() {
 }
 
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -32,6 +33,7 @@ const DUTCH_MONTHS = [
 export default function DiaryPage() {
   const navigate = useNavigate();
   const [debugOpen, setDebugOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
 
   useEffect(() => {
@@ -113,12 +115,13 @@ export default function DiaryPage() {
           </div>
 
           {/* Right: profile icon 35×35 */}
-          <div style={{
+          <div onClick={() => setProfileOpen(true)} style={{
             width: '35px',
             height: '35px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
           }}>
             <span className="material-symbols-outlined" style={{
               fontSize: '32px',
@@ -315,6 +318,7 @@ export default function DiaryPage() {
         </div>
       </div>
 
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
       {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
     </div>
   );

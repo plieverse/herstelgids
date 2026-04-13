@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
 import { SearchOverlay } from './GuideSearch';
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const TILES = [
   {
@@ -47,6 +48,7 @@ export default function GuidePage() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [debugOpen, setDebugOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
 
   function closeSearch() { setSearchOpen(false); setQuery(''); }
@@ -95,7 +97,7 @@ export default function GuidePage() {
             >
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -147,6 +149,7 @@ export default function GuidePage() {
         <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} />
       )}
 
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
       {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
 
       {/* ── Bottom Nav ── */}

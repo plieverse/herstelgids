@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
 import { SearchOverlay } from './GuideSearch';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const TILES = [
   {
@@ -112,6 +113,7 @@ export default function GuideUitlegPage() {
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const [profileOpen, setProfileOpen] = useState(false);
 
   function closeSearch() { setSearchOpen(false); setQuery(''); }
 
@@ -159,7 +161,7 @@ export default function GuideUitlegPage() {
             >
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -264,6 +266,8 @@ export default function GuideUitlegPage() {
       {searchOpen && (
         <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} />
       )}
+
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />

@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BottomNav from '../../components/layout/BottomNav';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const CATEGORY_COLORS = {
   '1': { color: '#377B8A', circleColor: '#E6F4F2' },
@@ -95,6 +97,7 @@ const DEFAULT_ARTICLE = {
 
 export default function GuideArtikelPage() {
   const navigate = useNavigate();
+  const [profileOpen, setProfileOpen] = useState(false);
   const { categoryId, problemIndex } = useParams();
   const key = `${categoryId}-${problemIndex}`;
   const article = ARTICLE_DATA[key] || DEFAULT_ARTICLE;
@@ -138,7 +141,7 @@ export default function GuideArtikelPage() {
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>search</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -289,6 +292,8 @@ export default function GuideArtikelPage() {
         </div>
       </div>
       </div>{/* end centred area */}
+
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
 
       {/* ── Bottom Nav ── */}
       <BottomNav />

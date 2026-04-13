@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Toast, { useToast } from '../../components/ui/Toast';
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 import { formatDateTime } from '../../utils/dates';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const STORAGE_KEY = 'demo_messages';
 
@@ -162,6 +163,7 @@ export default function MessagesPage() {
   const [localMessages, setLocalMessages] = useState(() => loadMessages());
   const [content, setContent] = useState('');
   const [debugOpen, setDebugOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
   const { toast, setToast } = useToast();
   const listRef = useRef(null);
@@ -243,7 +245,7 @@ export default function MessagesPage() {
             <div style={{ position: 'absolute', width: '29px', height: '29px', left: '0px', top: '3px', borderRadius: '50%', background: '#E6F4F2', zIndex: 1 }} />
             <span style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '24px', lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 2 }} onClick={handleTripleClick}>Berichten</span>
           </div>
-          <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
             <span className="material-symbols-outlined" style={{ fontSize: '35px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
           </div>
         </div>
@@ -308,6 +310,7 @@ export default function MessagesPage() {
         </button>
       </div>
 
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
       {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
 
       <Toast toast={toast} onDismiss={() => setToast(null)} />

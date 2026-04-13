@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 import { loadDiaryAnswers } from './DiaryPage';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -154,6 +155,7 @@ function AlarmBanner() {
 export default function DiaryIngevuldPage() {
   const navigate = useNavigate();
   const [debugOpen, setDebugOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
 
   const now = new Date();
@@ -221,7 +223,7 @@ export default function DiaryIngevuldPage() {
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>edit</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -328,6 +330,7 @@ export default function DiaryIngevuldPage() {
         </div>
       </div>
 
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
       {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
     </div>
   );

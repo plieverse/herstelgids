@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -89,6 +90,7 @@ const CATEGORIES = [
 
 export default function DiaryGisterenPage() {
   const navigate = useNavigate();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const yesterday = new Date(Date.now() - 86400000);
   const dateString = `${yesterday.getDate()} ${DUTCH_MONTHS[yesterday.getMonth()]}`;
@@ -154,7 +156,7 @@ export default function DiaryGisterenPage() {
             <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>edit</span>
             </div>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
@@ -281,6 +283,7 @@ export default function DiaryGisterenPage() {
           </div>
         ))}
       </div>
+      {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
     </div>
   );
 }
