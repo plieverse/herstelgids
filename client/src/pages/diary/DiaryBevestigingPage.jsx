@@ -304,6 +304,8 @@ export default function DiaryBevestigingPage() {
             </button>
           </div>
         </div>
+      </div>
+
       {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
     </div>
   );
