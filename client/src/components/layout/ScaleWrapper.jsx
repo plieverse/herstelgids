@@ -3,42 +3,53 @@ import { useEffect, useState } from 'react';
 const BASE_W = 414;
 const BASE_H = 736;
 
-// Capture the viewport size ONCE on first load (before any interaction).
-// We deliberately avoid reading innerHeight after load to prevent
-// keyboard / iOS Safari chrome changes from triggering rescales.
-const INIT_W = window.innerWidth;
-const INIT_H = window.innerHeight;
+/**
+ * Measure the "small viewport height" (svh) in pixels — the visible height
+ * when the browser chrome (address bar + bottom bar) is fully visible.
+ * This is the most conservative (smallest) height we'll ever have to fit into.
+ * We use this so the app is never clipped by the browser chrome.
+ */
+function measureSvh() {
+  // Modern browsers support 100svh directly in CSS
+  const el = document.createElement('div');
+  el.style.cssText = 'position:fixed;top:-9999px;height:100svh;visibility:hidden;pointer-events:none;';
+  document.documentElement.appendChild(el);
+  const h = el.offsetHeight;
+  el.remove();
+  // Fallback: if svh is not supported or returns 0, use innerHeight
+  return h > 100 ? h : window.innerHeight;
+}
 
-function calcScale(w = INIT_W, h = INIT_H) {
-  return Math.min(w / BASE_W, h / BASE_H);
+const svh = measureSvh();
+
+function calcScale(w) {
+  return Math.min((w ?? window.innerWidth) / BASE_W, svh / BASE_H);
 }
 
 export default function ScaleWrapper({ children }) {
   const [scale, setScale] = useState(() => calcScale());
 
   useEffect(() => {
-    // Only recalculate when the device is physically rotated.
-    // 'resize' is intentionally NOT used — it fires on keyboard open/close
-    // and iOS Safari chrome collapse, both of which must NOT change the scale.
+    // Only recalculate on orientation change (physical device rotation).
+    // Width changes on rotation; we re-measure svh after rotation too.
     function onOrientationChange() {
-      setTimeout(() => {
-        setScale(calcScale(window.innerWidth, window.innerHeight));
-      }, 300);
+      setTimeout(() => setScale(calcScale(window.innerWidth)), 300);
     }
     window.addEventListener('orientationchange', onOrientationChange);
     return () => window.removeEventListener('orientationchange', onOrientationChange);
   }, []);
 
   return (
-    // Use explicit top/left/width/height instead of inset:0 so the container
-    // is anchored to the top-left corner with a fixed size. On iOS Safari,
-    // 'inset: 0' can cause the bottom to move when the browser chrome animates.
     <div style={{
       position: 'fixed',
       top: 0,
       left: 0,
-      width: '100%',
-      height: '100%',
+      right: 0,
+      // Use bottom:0 instead of a fixed pixel height so the outer container
+      // always covers the full screen — even when iOS Safari hides its chrome
+      // and the viewport grows beyond svh. Without this, the body background
+      // (grey) shows in the gap below the scaled content.
+      bottom: 0,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'flex-start',
