@@ -164,14 +164,17 @@ export default function MessagesPage() {
   const [debugOpen, setDebugOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
   const { toast, setToast } = useToast();
-  const bottomRef = useRef(null);
+  const listRef = useRef(null);
 
-  // Save messages and scroll to bottom whenever messages change.
-  // No loading state — prototype reads directly from localStorage on mount
-  // so there is no re-render that could trigger iOS Safari's chrome collapse.
+  // Save messages and scroll list to bottom.
+  // Use direct scrollTop instead of scrollIntoView() — scrollIntoView() inside
+  // a CSS transform context on iOS Safari can disturb the visual viewport and
+  // cause the ScaleWrapper scale to update to a wrong persistent value.
   useEffect(() => {
     saveMessages(localMessages);
-    bottomRef.current?.scrollIntoView();
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
   }, [localMessages]);
 
   async function handleSend(e) {
@@ -238,15 +241,16 @@ export default function MessagesPage() {
       </div>
 
       {/* ── Messages list / Empty state ── */}
-      <div style={{
-        position: 'absolute', left: 0, top: '73px', width: '414px', bottom: '120px',
-        overflowY: 'auto',
-        // Prevent iOS Safari from treating this inner scroll area as a
-        // reason to collapse the browser chrome on page load.
-        overscrollBehavior: 'none',
-        padding: localMessages.length > 0 ? '14px 10px 0' : '0',
-        boxSizing: 'border-box',
-      }}>
+      <div
+        ref={listRef}
+        style={{
+          position: 'absolute', left: 0, top: '73px', width: '414px', bottom: '120px',
+          overflowY: 'auto',
+          overscrollBehavior: 'none',
+          padding: localMessages.length > 0 ? '14px 10px 0' : '0',
+          boxSizing: 'border-box',
+        }}
+      >
         {localMessages.length === 0 ? (
           <EmptyState />
         ) : (
@@ -256,7 +260,6 @@ export default function MessagesPage() {
               : <SentBubble key={msg.id} msg={msg} />
           )
         )}
-        <div ref={bottomRef} />
       </div>
 
       {/* ── Input area ── */}
