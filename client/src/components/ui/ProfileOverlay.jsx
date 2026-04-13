@@ -37,13 +37,13 @@ const labelStyle = {
   color: '#377B8A', marginBottom: 5,
 };
 
-// Readonly display — values in dark teal, grey background
+// Readonly display — values in dark grey, grey background
 const readonlyFieldStyle = {
   width: '100%', height: 40,
   border: '1px solid #E8E8E8', borderRadius: 8,
   padding: '0 12px', boxSizing: 'border-box',
   fontFamily: 'Inter', fontSize: 16,
-  color: '#377B8A', background: '#F6F6F6',
+  color: '#333', background: '#F6F6F6',
   display: 'flex', alignItems: 'center',
 };
 
@@ -63,7 +63,7 @@ const readonlyNativeStyle = {
   border: '1px solid #E8E8E8', borderRadius: 8,
   padding: '0 12px', boxSizing: 'border-box',
   fontFamily: 'Inter', fontSize: 16,
-  color: '#377B8A', background: '#F6F6F6',
+  color: '#333', background: '#F6F6F6',
   outline: 'none', cursor: 'pointer',
 };
 
@@ -209,6 +209,7 @@ export default function ProfileOverlay({ onClose }) {
               type="date"
               value={profile.operatieDatum}
               onChange={e => handlePickerChange('operatieDatum', e.target.value)}
+              onClick={e => { try { e.target.showPicker(); } catch {} }}
               style={editing ? editFieldStyle : readonlyNativeStyle}
             />
           </div>
@@ -220,6 +221,7 @@ export default function ProfileOverlay({ onClose }) {
               type="time"
               value={profile.herinnering}
               onChange={e => handlePickerChange('herinnering', e.target.value)}
+              onClick={e => { try { e.target.showPicker(); } catch {} }}
               style={editing ? editFieldStyle : readonlyNativeStyle}
             />
           </div>
