@@ -97,7 +97,7 @@ function NormalBanner() {
   return (
     <div style={{
       width: '346px',
-      background: '#E6F4F2',
+      background: '#CFEBD4',
       borderRadius: '10px',
       padding: '12px 16px 12px 54px',
       boxSizing: 'border-box',
@@ -106,13 +106,13 @@ function NormalBanner() {
     }}>
       <div style={{
         position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
-        width: '31px', height: '31px', borderRadius: '50%', background: '#CFEBE8',
+        width: '31px', height: '31px', borderRadius: '50%', background: '#B2DEB6',
       }} />
       <span className="material-symbols-outlined" style={{
         position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
-        fontSize: '32px', color: '#377B8A', userSelect: 'none',
+        fontSize: '32px', color: '#378A6C', userSelect: 'none',
       }}>visibility</span>
-      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#377B8A' }}>
+      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#378A6C' }}>
         Samenvatting bekeken
       </div>
       <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
@@ -142,7 +142,7 @@ function AlarmBanner() {
         fontSize: '32px', color: '#CB6E02', userSelect: 'none',
       }}>warning</span>
       <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#CB6E02' }}>
-        Zorgverlener wordt ingelicht
+        Samenvatting bekeken
       </div>
       <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
         Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
