@@ -2,13 +2,28 @@ import { useState } from 'react';
 
 const PROFILE_KEY = 'profile_settings';
 
+const DUTCH_MONTHS = [
+  'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+  'juli', 'augustus', 'september', 'oktober', 'november', 'december',
+];
+
+function formatDutchDate(dateStr) {
+  if (!dateStr) return '';
+  const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (match) {
+    const [, year, month, day] = match;
+    return `${parseInt(day)} ${DUTCH_MONTHS[parseInt(month) - 1]} ${year}`;
+  }
+  return dateStr; // fallback for unrecognised format
+}
+
 function loadProfile() {
   try {
     const saved = localStorage.getItem(PROFILE_KEY);
-    const defaults = { naam: '', operatieDatum: '13 januari 2025', herinnering: '09:00' };
+    const defaults = { naam: '', operatieDatum: '2025-01-13', herinnering: '09:00' };
     return saved ? { ...defaults, ...JSON.parse(saved) } : defaults;
   } catch {
-    return { naam: '', operatieDatum: '13 januari 2025', herinnering: '09:00' };
+    return { naam: '', operatieDatum: '2025-01-13', herinnering: '09:00' };
   }
 }
 
@@ -18,11 +33,8 @@ function saveProfile(data) {
 
 const labelStyle = {
   display: 'block',
-  fontFamily: 'Inter',
-  fontSize: 13,
-  lineHeight: '16px',
-  color: '#B3B2B2',
-  marginBottom: 5,
+  fontFamily: 'Inter', fontSize: 13, lineHeight: '16px',
+  color: '#B3B2B2', marginBottom: 5,
 };
 
 const readonlyFieldStyle = {
@@ -73,78 +85,64 @@ export default function ProfileOverlay({ onClose }) {
     <div
       onClick={onClose}
       style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.4)',
-        zIndex: 200,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        position: 'fixed', inset: 0,
+        background: 'rgba(0,0,0,0.4)', zIndex: 200,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
     >
       <div
         onClick={e => e.stopPropagation()}
         style={{
-          position: 'relative',
-          width: 361,
-          background: '#FFFFFF',
-          borderRadius: 20,
-          overflow: 'hidden',
+          position: 'relative', width: 361,
+          background: '#FFFFFF', borderRadius: 20, overflow: 'hidden',
         }}
       >
-        {/* Decorative circle behind title */}
-        <div style={{
-          position: 'absolute',
-          width: 76, height: 76,
-          left: 143, top: 25,
-          borderRadius: '50%',
-          background: '#CFEBE8',
-        }} />
 
-        {/* Title "Profiel" */}
+        {/* ── Header: decorative circle + title ── */}
         <div style={{
-          position: 'relative',
-          left: 65, top: 35,
-          width: 231, height: 57,
-          fontFamily: 'Inter', fontWeight: 700, fontSize: 24, lineHeight: '29px',
+          position: 'relative', height: 85,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          textAlign: 'center', color: '#377B8A',
         }}>
-          Profiel
+          {/* Decorative circle behind title */}
+          <div style={{
+            position: 'absolute',
+            width: 76, height: 76, left: 143, top: 5,
+            borderRadius: '50%', background: '#CFEBE8',
+          }} />
+          {/* Title */}
+          <span style={{
+            position: 'relative', zIndex: 1,
+            fontFamily: 'Inter', fontWeight: 700, fontSize: 24,
+            lineHeight: '29px', color: '#377B8A',
+          }}>
+            Profiel
+          </span>
         </div>
 
-        {/* Pencil (edit) button — only when not editing */}
+        {/* ── Pencil (edit) button — same style as topbar ── */}
         {!editing && (
           <button
             onClick={startEditing}
             aria-label="Bewerken"
             style={{
-              position: 'absolute', left: 260, top: 7,
-              width: 46, height: 46,
+              position: 'absolute', right: 50, top: 10,
+              width: 35, height: 35,
               background: 'none', border: 'none', cursor: 'pointer', padding: 0,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
           >
-            <div style={{
-              width: 26, height: 26, borderRadius: '50%',
-              background: '#E6F4F2',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M9.5 2.5l2 2L4 12H2v-2L9.5 2.5z"
-                  stroke="#377B8A" strokeWidth="1.5"
-                  strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '28px', color: '#377B8A', userSelect: 'none',
+            }}>edit</span>
           </button>
         )}
 
-        {/* Close (X) button — always visible */}
+        {/* ── Close (X) button ── */}
         <button
           onClick={onClose}
           aria-label="Sluiten"
           style={{
-            position: 'absolute', left: 307, top: 7,
+            position: 'absolute', right: 7, top: 7,
             width: 46, height: 46,
             background: 'none', border: 'none', cursor: 'pointer', padding: 0,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -162,9 +160,9 @@ export default function ProfileOverlay({ onClose }) {
           </div>
         </button>
 
-        {/* Form fields */}
+        {/* ── Form fields ── */}
         <div style={{
-          padding: '16px 24px 28px',
+          padding: '0 24px 28px',
           display: 'flex', flexDirection: 'column', gap: '14px',
         }}>
 
@@ -190,13 +188,15 @@ export default function ProfileOverlay({ onClose }) {
             <label style={labelStyle}>Datum van operatie</label>
             {editing ? (
               <input
+                type="date"
                 value={profile.operatieDatum}
                 onChange={e => handleChange('operatieDatum', e.target.value)}
-                placeholder="bijv. 13 januari 2025"
                 style={editFieldStyle}
               />
             ) : (
-              <div style={readonlyFieldStyle}>{profile.operatieDatum}</div>
+              <div style={readonlyFieldStyle}>
+                {formatDutchDate(profile.operatieDatum)}
+              </div>
             )}
           </div>
 
@@ -215,15 +215,14 @@ export default function ProfileOverlay({ onClose }) {
             )}
           </div>
 
-          {/* Annuleren / Opslaan — only in edit mode */}
+          {/* Annuleren / Opslaan — edit mode only */}
           {editing && (
             <div style={{ display: 'flex', gap: '10px', marginTop: '4px' }}>
               <button
                 onClick={handleCancel}
                 style={{
                   flex: 1, height: 44,
-                  background: '#FFFFFF',
-                  border: '1.5px solid #377B8A',
+                  background: '#FFFFFF', border: '1.5px solid #377B8A',
                   borderRadius: 20, cursor: 'pointer',
                   fontFamily: 'Inter', fontWeight: 400, fontSize: 16,
                   color: '#377B8A',
@@ -235,8 +234,7 @@ export default function ProfileOverlay({ onClose }) {
                 onClick={handleSave}
                 style={{
                   flex: 1, height: 44,
-                  background: '#377B8A',
-                  border: 'none',
+                  background: '#377B8A', border: 'none',
                   borderRadius: 20, cursor: 'pointer',
                   fontFamily: 'Inter', fontWeight: 400, fontSize: 16,
                   color: '#FFFFFF',
