@@ -3,27 +3,24 @@ import { useEffect, useState } from 'react';
 const BASE_W = 414;
 const BASE_H = 736;
 
-// Use screen dimensions (not innerWidth/Height) so the keyboard opening
-// on mobile never triggers a rescale.
+// Snapshot the viewport on first load, before any keyboard or browser-chrome
+// changes can interfere. We only recalculate on orientation change.
 function calcScale() {
-  const w = window.innerWidth;
-  // screen.height stays constant regardless of keyboard / browser chrome
-  const h = window.screen.height;
-  return Math.min(w / BASE_W, h / BASE_H);
+  return Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
 }
 
 export default function ScaleWrapper({ children }) {
   const [scale, setScale] = useState(calcScale);
 
   useEffect(() => {
-    function update() { setScale(calcScale()); }
-    // Only width changes matter (orientation flip changes innerWidth)
-    window.addEventListener('resize', update);
-    window.addEventListener('orientationchange', () => setTimeout(update, 100));
-    return () => {
-      window.removeEventListener('resize', update);
-      window.removeEventListener('orientationchange', update);
-    };
+    // Do NOT listen to 'resize' — that fires whenever the keyboard opens /
+    // closes or the browser chrome collapses, causing the layout to jump.
+    // Only recalculate when the device is physically rotated.
+    function onOrientationChange() {
+      setTimeout(() => setScale(calcScale()), 200);
+    }
+    window.addEventListener('orientationchange', onOrientationChange);
+    return () => window.removeEventListener('orientationchange', onOrientationChange);
   }, []);
 
   return (
@@ -33,7 +30,7 @@ export default function ScaleWrapper({ children }) {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'flex-start',
-      background: '#F6F6F6',
+      background: '#FFFFFF',
       overflow: 'hidden',
     }}>
       <div style={{
