@@ -146,7 +146,7 @@ export default function DiaryPage() {
           }}>
 
             {/* Left arrow (active) */}
-            <button style={{
+            <button onClick={() => navigate('/dagboek/historie/1')} style={{
               width: '30px',
               height: '30px',
               background: '#E6F4F2',

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { DIARY_DONE_KEY, todayKey } from './DiaryPage';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
@@ -90,8 +91,14 @@ export default function DiaryHistoriePage() {
   [daysAgo]);
 
   const goBack  = () => navigate(`/dagboek/historie/${daysAgo + 1}`);
-  const goForward = () =>
-    daysAgo === 1 ? navigate('/dagboek/samenvatting') : navigate(`/dagboek/historie/${daysAgo - 1}`);
+  const goForward = () => {
+    if (daysAgo === 1) {
+      const todayDone = localStorage.getItem(DIARY_DONE_KEY) === todayKey();
+      navigate(todayDone ? '/dagboek/samenvatting' : '/dagboek');
+    } else {
+      navigate(`/dagboek/historie/${daysAgo - 1}`);
+    }
+  };
 
   return (
     <div style={{
