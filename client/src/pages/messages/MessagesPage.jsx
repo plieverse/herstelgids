@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import api from '../../api/client';
 import Toast, { useToast } from '../../components/ui/Toast';
-import BottomNav from '../../components/layout/BottomNav';
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 import { formatDateTime } from '../../utils/dates';
 
@@ -163,19 +161,17 @@ function EmptyState() {
 export default function MessagesPage() {
   const [localMessages, setLocalMessages] = useState(() => loadMessages());
   const [content, setContent] = useState('');
-  const [loading, setLoading] = useState(true);
   const [debugOpen, setDebugOpen] = useState(false);
   const handleTripleClick = useTripleClick(() => setDebugOpen(true));
   const { toast, setToast } = useToast();
   const bottomRef = useRef(null);
 
-  useEffect(() => {
-    api.get('/messages').catch(() => {}).finally(() => setLoading(false));
-  }, []);
-
+  // Save messages and scroll to bottom whenever messages change.
+  // No loading state — prototype reads directly from localStorage on mount
+  // so there is no re-render that could trigger iOS Safari's chrome collapse.
   useEffect(() => {
     saveMessages(localMessages);
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView();
   }, [localMessages]);
 
   async function handleSend(e) {
@@ -216,7 +212,6 @@ export default function MessagesPage() {
     });
 
     setContent('');
-    api.post('/messages', { content: trimmed }).catch(() => {});
   }
 
   return (
@@ -246,12 +241,13 @@ export default function MessagesPage() {
       <div style={{
         position: 'absolute', left: 0, top: '73px', width: '414px', bottom: '120px',
         overflowY: 'auto',
+        // Prevent iOS Safari from treating this inner scroll area as a
+        // reason to collapse the browser chrome on page load.
+        overscrollBehavior: 'none',
         padding: localMessages.length > 0 ? '14px 10px 0' : '0',
         boxSizing: 'border-box',
       }}>
-        {loading ? (
-          <div style={{ textAlign: 'center', color: '#B3B2B2', marginTop: '40px', fontSize: '14px' }}>Laden…</div>
-        ) : localMessages.length === 0 ? (
+        {localMessages.length === 0 ? (
           <EmptyState />
         ) : (
           localMessages.map((msg) =>
@@ -302,7 +298,6 @@ export default function MessagesPage() {
 
       {debugOpen && <DebugMenu onClose={() => setDebugOpen(false)} />}
 
-      <BottomNav />
       <Toast toast={toast} onDismiss={() => setToast(null)} />
     </div>
   );
