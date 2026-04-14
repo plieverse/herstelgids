@@ -37,7 +37,6 @@ const labelStyle = {
   color: '#377B8A', marginBottom: 5,
 };
 
-// Readonly display — values in dark grey, grey background
 const readonlyFieldStyle = {
   width: '100%', height: 40,
   border: '1px solid #E8E8E8', borderRadius: 8,
@@ -47,7 +46,6 @@ const readonlyFieldStyle = {
   display: 'flex', alignItems: 'center',
 };
 
-// Editable input
 const editFieldStyle = {
   width: '100%', height: 40,
   border: '1.5px solid #CFEBE8', borderRadius: 8,
@@ -55,17 +53,18 @@ const editFieldStyle = {
   fontFamily: 'Inter', fontSize: 16,
   color: '#333', background: '#FFFFFF',
   outline: 'none',
+  // teal calendar/clock icon via filter
+  colorScheme: 'light',
 };
 
-// Native date/time input styled for non-edit state
-const readonlyNativeStyle = {
-  width: '100%', height: 40,
-  border: '1px solid #E8E8E8', borderRadius: 8,
-  padding: '0 12px', boxSizing: 'border-box',
-  fontFamily: 'Inter', fontSize: 16,
-  color: '#333', background: '#F6F6F6',
-  outline: 'none', cursor: 'pointer',
-};
+// CSS to tint the native picker icon to teal (#377B8A)
+const PICKER_ICON_CSS = `
+  .profile-date-input::-webkit-calendar-picker-indicator,
+  .profile-time-input::-webkit-calendar-picker-indicator {
+    filter: invert(38%) sepia(44%) saturate(493%) hue-rotate(147deg) brightness(87%) contrast(89%);
+    cursor: pointer;
+  }
+`;
 
 export default function ProfileOverlay({ onClose }) {
   const [profile, setProfile] = useState(loadProfile);
@@ -93,15 +92,6 @@ export default function ProfileOverlay({ onClose }) {
     setProfile(prev => ({ ...prev, [field]: value }));
   }
 
-  // Called when date/time field changes while not yet in edit mode
-  function handlePickerChange(field, value) {
-    if (!editing) {
-      setDraft({ ...profile });
-      setEditing(true);
-    }
-    setProfile(prev => ({ ...prev, [field]: value }));
-  }
-
   return (
     <div
       onClick={onClose}
@@ -111,6 +101,9 @@ export default function ProfileOverlay({ onClose }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
     >
+      {/* Inject CSS for teal picker icons */}
+      <style>{PICKER_ICON_CSS}</style>
+
       <div
         onClick={e => e.stopPropagation()}
         style={{
@@ -138,7 +131,7 @@ export default function ProfileOverlay({ onClose }) {
           </span>
         </div>
 
-        {/* ── Pencil button (not in edit mode) ── */}
+        {/* ── Pencil button (view mode only) ── */}
         {!editing && (
           <button
             onClick={startEditing}
@@ -202,28 +195,40 @@ export default function ProfileOverlay({ onClose }) {
             )}
           </div>
 
-          {/* Datum van operatie — always native date input so picker opens on click */}
+          {/* Datum van operatie */}
           <div>
             <label style={labelStyle}>Datum van operatie</label>
-            <input
-              type="date"
-              value={profile.operatieDatum}
-              onChange={e => handlePickerChange('operatieDatum', e.target.value)}
-              onClick={e => { try { e.target.showPicker(); } catch {} }}
-              style={editing ? editFieldStyle : readonlyNativeStyle}
-            />
+            {editing ? (
+              <input
+                type="date"
+                className="profile-date-input"
+                value={profile.operatieDatum}
+                onChange={e => handleChange('operatieDatum', e.target.value)}
+                onClick={e => { try { e.target.showPicker(); } catch {} }}
+                style={editFieldStyle}
+              />
+            ) : (
+              <div style={readonlyFieldStyle}>
+                {formatDutchDate(profile.operatieDatum)}
+              </div>
+            )}
           </div>
 
-          {/* Tijd herinnering dagboek — always native time input */}
+          {/* Tijd herinnering dagboek */}
           <div>
             <label style={labelStyle}>Tijd herinnering dagboek</label>
-            <input
-              type="time"
-              value={profile.herinnering}
-              onChange={e => handlePickerChange('herinnering', e.target.value)}
-              onClick={e => { try { e.target.showPicker(); } catch {} }}
-              style={editing ? editFieldStyle : readonlyNativeStyle}
-            />
+            {editing ? (
+              <input
+                type="time"
+                className="profile-time-input"
+                value={profile.herinnering}
+                onChange={e => handleChange('herinnering', e.target.value)}
+                onClick={e => { try { e.target.showPicker(); } catch {} }}
+                style={editFieldStyle}
+              />
+            ) : (
+              <div style={readonlyFieldStyle}>{profile.herinnering}</div>
+            )}
           </div>
 
           {/* Annuleren / Opslaan — edit mode only */}
