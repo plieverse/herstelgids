@@ -2,6 +2,16 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { saveDiaryAnswer, loadDiaryAnswers } from './DiaryPage';
 
+const DUTCH_MONTHS = [
+  'januari', 'februari', 'maart', 'april', 'mei', 'juni',
+  'juli', 'augustus', 'september', 'oktober', 'november', 'december',
+];
+
+function todayLabel() {
+  const d = new Date();
+  return `Vandaag: ${d.getDate()} ${DUTCH_MONTHS[d.getMonth()]}`;
+}
+
 const QUESTIONS = [
   {
     num: 1,
@@ -53,8 +63,9 @@ const QUESTIONS = [
   },
   {
     num: 5,
-    icon: 'wc',
-    title: 'Hoe was je ontlasting vandaag?',
+    icon: 'WC',
+    isText: true,
+    title: 'Hoe was je poep vandaag?',
     options: [
       { id: 1, label: 'Diarree',     desc: 'Mijn poep is heel dun of waterig.',                color: '#F4D2BC', height: 71 },
       { id: 2, label: 'Wat dunner',  desc: 'Mijn poep was wat dunner dan normaal.',            color: '#F2EFC2', height: 77 },
@@ -71,12 +82,12 @@ export default function DiaryBewerkenPage() {
   const qNum = Math.min(5, Math.max(1, parseInt(vraag, 10) || 1));
   const q = QUESTIONS[qNum - 1];
 
-  // Pre-load saved answer for this question
   const saved = loadDiaryAnswers();
   const defaultAnswer = saved[`q${qNum}`] ?? null;
   const [selected, setSelected] = useState(defaultAnswer);
 
   const isLast = qNum === 5;
+  const dateLabel = todayLabel();
 
   function handleNext() {
     saveDiaryAnswer(qNum, selected ?? defaultAnswer ?? 3);
@@ -104,20 +115,49 @@ export default function DiaryBewerkenPage() {
 
       {/* ── Progress header ── */}
       <div style={{
-        position: 'absolute', width: '414px', height: '78px', left: 0, top: '5px',
+        position: 'absolute', width: '414px', left: 0, top: '5px',
         background: '#FFFFFF',
       }}>
+        {/* Title row with close button */}
         <div style={{
-          position: 'absolute', left: '16px', top: '12px',
-          fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
-          lineHeight: '29px', color: '#377B8A',
+          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+          alignItems: 'flex-start', padding: '7px 10px 0 16px',
         }}>
-          Bewerken: vraag {qNum} van de 5
+          <div>
+            <div style={{
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
+              lineHeight: '29px', color: '#377B8A',
+            }}>
+              Bewerken: vraag {qNum} van de 5
+            </div>
+            <div style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
+              lineHeight: '17px', color: '#727272', marginTop: '2px',
+            }}>
+              {dateLabel}
+            </div>
+          </div>
+          {/* Close / annuleren */}
+          <button
+            onClick={() => navigate('/dagboek/samenvatting')}
+            aria-label="Annuleren"
+            style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: '#E6F4F2', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, marginTop: '2px',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{
+              fontSize: '22px', color: '#377B8A', userSelect: 'none',
+            }}>close</span>
+          </button>
         </div>
+
+        {/* Progress bar */}
         <div style={{
-          position: 'absolute', left: '16px', top: '52px',
-          width: '374px', height: '6px',
-          display: 'flex', flexDirection: 'row', gap: '5px',
+          margin: '8px 16px 0',
+          height: '6px', display: 'flex', flexDirection: 'row', gap: '5px',
         }}>
           {[1,2,3,4,5].map(i => (
             <div key={i} style={{
@@ -130,13 +170,13 @@ export default function DiaryBewerkenPage() {
 
       {/* ── Grey background ── */}
       <div style={{
-        position: 'absolute', left: 0, top: '98px', width: '414px', bottom: '58px',
+        position: 'absolute', left: 0, top: '108px', width: '414px', bottom: '58px',
         background: '#F6F6F6', borderRadius: '20px 20px 0px 0px',
       }} />
 
       {/* ── Question + options ── */}
       <div style={{
-        position: 'absolute', width: '370px', left: '20px', top: '105px',
+        position: 'absolute', width: '370px', left: '20px', top: '115px',
       }}>
         {/* Decorative circle */}
         <div style={{
@@ -151,9 +191,11 @@ export default function DiaryBewerkenPage() {
           display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1,
         }}>
           <div style={{ width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span className="material-symbols-outlined" style={{
-              fontSize: '48px', color: '#377B8A', userSelect: 'none',
-            }}>{q.icon}</span>
+            {q.isText ? (
+              <span style={{ fontSize: '36px', fontWeight: 400, color: '#377B8A', userSelect: 'none', fontFamily: 'Inter' }}>{q.icon}</span>
+            ) : (
+              <span className="material-symbols-outlined" style={{ fontSize: '48px', color: '#377B8A', userSelect: 'none' }}>{q.icon}</span>
+            )}
           </div>
           <div style={{
             width: '311px', fontFamily: 'Inter', fontWeight: 700, fontSize: '24px',
@@ -243,14 +285,14 @@ export default function DiaryBewerkenPage() {
             background: '#377B8A', border: 'none',
             borderRadius: '20px', cursor: 'pointer',
             display: 'flex', flexDirection: 'row', alignItems: 'center',
-            justifyContent: 'center', gap: '10px',
+            justifyContent: 'center', gap: '8px',
           }}
         >
-          <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', color: '#FFFFFF' }}>
-            {isLast ? 'Opslaan' : 'Volgende'}
-          </span>
           <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#FFFFFF', userSelect: 'none' }}>
             {isLast ? 'save' : 'chevron_right'}
+          </span>
+          <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', color: '#FFFFFF' }}>
+            {isLast ? 'Opslaan' : 'Volgende'}
           </span>
         </button>
       </div>
