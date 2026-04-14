@@ -105,7 +105,7 @@ function NormalBanner() {
       <div style={{ position: 'relative', width: '38px', height: '38px', flexShrink: 0 }}>
         <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#CFEBD4' }} />
         <div style={{ position: 'absolute', width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#378A6C', userSelect: 'none' }}>visibility</span>
+          <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#378A6C', userSelect: 'none' }}>visibility</span>
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
@@ -131,7 +131,7 @@ function AlarmBanner() {
       <div style={{ position: 'relative', width: '38px', height: '38px', flexShrink: 0 }}>
         <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#F4D2BC' }} />
         <div style={{ position: 'absolute', width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#CB6E02', userSelect: 'none' }}>warning</span>
+          <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#CB6E02', userSelect: 'none' }}>warning</span>
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
@@ -248,7 +248,7 @@ export default function DiaryIngevuldPage() {
             </div>
             <button style={{
               width: '30px', height: '30px', background: '#E6F4F2',
-              border: '0.5px solid #CFEBE8', borderRadius: '4px',
+              border: '0.5px solid #CFEBE8', borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'default', padding: 0,
             }}>
