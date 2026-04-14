@@ -272,6 +272,49 @@ export default function ProfileOverlay({ onClose }) {
             )}
           </div>
 
+          {/* Test melding knop — view mode only */}
+          {!editing && (
+            <button
+              onClick={async () => {
+                const perm = await requestNotificationPermission();
+                if (perm === 'denied') {
+                  alert('Notificaties zijn geblokkeerd. Pas dit aan in de browserinstellingen.');
+                  return;
+                }
+                if (perm === 'unsupported') {
+                  alert('Deze browser ondersteunt geen notificaties.');
+                  return;
+                }
+                try {
+                  if ('serviceWorker' in navigator) {
+                    const reg = await navigator.serviceWorker.ready;
+                    await reg.showNotification('De Lichaamsgids', {
+                      body: 'Vergeet niet je dagboek in te vullen vandaag!',
+                      icon: '/icons/icon-192.png',
+                      tag: 'dagboek-reminder-test',
+                    });
+                  } else {
+                    new Notification('De Lichaamsgids', {
+                      body: 'Vergeet niet je dagboek in te vullen vandaag!',
+                      icon: '/icons/icon-192.png',
+                    });
+                  }
+                } catch { alert('Kon geen melding tonen. Controleer je browserinstellingen.'); }
+              }}
+              style={{
+                width: '100%', height: 44,
+                background: '#FFFFFF', border: '1.5px solid #377B8A',
+                borderRadius: 20, cursor: 'pointer',
+                fontFamily: 'Inter', fontWeight: 400, fontSize: 16,
+                color: '#377B8A',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>notifications</span>
+              Test melding
+            </button>
+          )}
+
           {/* Annuleren / Opslaan — edit mode only */}
           {editing && (
             <div style={{ display: 'flex', gap: '10px', marginTop: '4px' }}>
