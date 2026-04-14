@@ -68,7 +68,7 @@ export default function DiaryOverzichtPage() {
               onClick={() => navigate(-1)}
               style={{
                 width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', background: '#377B8A', borderRadius: '8px',
+                cursor: 'pointer', background: '#377B8A', borderRadius: '50%',
               }}
             >
               <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#FFFFFF', userSelect: 'none' }}>bar_chart</span>

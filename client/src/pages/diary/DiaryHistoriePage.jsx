@@ -160,7 +160,7 @@ export default function DiaryHistoriePage() {
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', height: '36px' }}>
             <button onClick={goBack} style={{
               width: '30px', height: '30px', background: '#377B8A',
-              border: 'none', borderRadius: '4px',
+              border: 'none', borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', padding: 0,
             }}>
@@ -184,7 +184,7 @@ export default function DiaryHistoriePage() {
 
             <button onClick={goForward} style={{
               width: '30px', height: '30px', background: '#377B8A',
-              border: 'none', borderRadius: '4px',
+              border: 'none', borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', padding: 0,
             }}>

@@ -173,7 +173,7 @@ export default function DiaryPage() {
               height: '30px',
               background: '#377B8A',
               border: 'none',
-              borderRadius: '4px',
+              borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
