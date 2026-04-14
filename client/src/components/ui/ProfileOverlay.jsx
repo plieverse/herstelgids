@@ -47,14 +47,14 @@ const readonlyFieldStyle = {
 };
 
 const editFieldStyle = {
-  width: '100%', height: 40,
+  width: '100%', maxWidth: '100%', minWidth: 0, height: 40,
   border: '1.5px solid #CFEBE8', borderRadius: 8,
   padding: '0 12px', boxSizing: 'border-box',
   fontFamily: 'Inter', fontSize: 16,
   color: '#333', background: '#FFFFFF',
   outline: 'none',
-  // teal calendar/clock icon via filter
   colorScheme: 'light',
+  display: 'block',
 };
 
 // CSS to tint the native picker icon to teal (#377B8A)
@@ -184,6 +184,7 @@ export default function ProfileOverlay({ onClose }) {
         <div style={{
           padding: '0 24px 28px',
           display: 'flex', flexDirection: 'column', gap: '14px',
+          overflow: 'hidden',
         }}>
 
           {/* Naam */}

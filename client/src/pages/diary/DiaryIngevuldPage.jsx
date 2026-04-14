@@ -271,10 +271,10 @@ export default function DiaryIngevuldPage() {
         overflowY: 'auto',
         overscrollBehavior: 'none',
       }}>
-        <div style={{ padding: '10px 25px 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div style={{ padding: '10px 25px 20px', display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
 
           {/* "Samenvatting" title with decorative circles */}
-          <div style={{ position: 'relative', height: '55px' }}>
+          <div style={{ position: 'relative', height: '55px', width: '346px' }}>
             <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8' }} />
             <div style={{ position: 'absolute', width: '14px', height: '14px', left: '47px', top: '47px', borderRadius: '50%', background: '#CFEBE8' }} />
             <div style={{
