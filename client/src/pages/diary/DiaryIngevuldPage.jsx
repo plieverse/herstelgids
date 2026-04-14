@@ -57,10 +57,10 @@ const Q4 = {
   5: { bold: 'Heel veel pijn', normal: ' Ik heb heel veel pijn.' },
 };
 const Q5 = {
-  1: { bold: 'Diarree', normal: ' Mijn ontlasting is heel dun of waterig.' },
-  2: { bold: 'Wat dunner', normal: ' Mijn ontlasting was wat dunner dan normaal.' },
-  3: { bold: 'Normaal.', normal: ' Mijn ontlasting was normaal.' },
-  4: { bold: 'Wat harder', normal: ' Mijn ontlasting is wat harder of vaster.' },
+  1: { bold: 'Diarree', normal: ' Mijn poep is heel dun of waterig.' },
+  2: { bold: 'Wat dunner', normal: ' Mijn poep was wat dunner dan normaal.' },
+  3: { bold: 'Normaal.', normal: ' Mijn poep was normaal.' },
+  4: { bold: 'Wat harder', normal: ' Mijn poep is wat harder of vaster.' },
   5: { bold: 'Verstopping', normal: ' Ik heb moeite met naar het toilet gaan.' },
 };
 
@@ -90,7 +90,7 @@ function buildRows(answers) {
     { id: 2, category: 'Eten',                  ...Q2[a.q2], ...SCORE_COLORS[a.q2], icon: 'nutrition',      isText: false },
     { id: 3, category: 'Ademen',                ...Q3[a.q3], ...SCORE_COLORS[a.q3], icon: 'pulmonology',    isText: false },
     { id: 4, category: 'Pijn',                  ...Q4[a.q4], ...SCORE_COLORS[a.q4], icon: 'bolt',           isText: false },
-    { id: 5, category: 'Ontlasting',            ...Q5[a.q5], ...Q5_COLORS[a.q5],    icon: 'WC',             isText: true  },
+    { id: 5, category: 'Poep',                   ...Q5[a.q5], ...Q5_COLORS[a.q5],    icon: 'WC',             isText: true  },
   ];
 }
 
