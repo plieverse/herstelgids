@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
 import { loadDiaryAnswersForDay } from '../../pages/diary/DiaryPage';
 
-const BAR_W      = 52;
-const SMILEY     = 34;
-const SMILEY_GAP = 6;
-const TOP_PAD    = SMILEY + SMILEY_GAP; // 40px
-const Y_W        = 62;
+const BAR_W   = 52;
+const TOP_PAD = 12; // small breathing room above the top dotted line
+const Y_W     = 62;
 
 // Diary traffic-light colours (same as summary rows)
 const THEME = {
@@ -24,25 +22,14 @@ function seeded(daysAgo, qIdx) {
   return (Math.abs((daysAgo * 31 + qIdx * 17) % 5)) + 1;
 }
 
-function SmileyFace({ theme }) {
-  const s = SMILEY;
-  const cx = s / 2, cy = s / 2;
-  const { bar, icon } = THEME[theme];
-
-  const mouth =
-    theme === 'green' ? `M ${cx - 7},${cy + 3} Q ${cx},${cy + 9} ${cx + 7},${cy + 3}` :
-    theme === 'amber' ? `M ${cx - 7},${cy + 5} L ${cx + 7},${cy + 5}` :
-                        `M ${cx - 7},${cy + 8} Q ${cx},${cy + 2} ${cx + 7},${cy + 8}`;
-
-  return (
-    <svg width={s} height={s} viewBox={`0 0 ${s} ${s}`} style={{ display: 'block', flexShrink: 0 }} aria-hidden="true">
-      <circle cx={cx} cy={cy} r={cx - 1} fill={bar} stroke={icon} strokeWidth="1.5" />
-      <circle cx={cx - 5} cy={cy - 3} r="2.5" fill={icon} />
-      <circle cx={cx + 5} cy={cy - 3} r="2.5" fill={icon} />
-      <path d={mouth} stroke={icon} strokeWidth="1.5" fill="none" strokeLinecap="round" />
-    </svg>
-  );
-}
+// Category icon definitions — matching the diary summary rows
+const CAT_DEFS = [
+  { label: 'Gevoel',    icon: 'health_metrics', isText: false },
+  { label: 'Eten',      icon: 'nutrition',       isText: false },
+  { label: 'Ademen',    icon: 'pulmonology',     isText: false },
+  { label: 'Pijn',      icon: 'bolt',            isText: false },
+  { label: 'Stoelgang', icon: 'WC',              isText: true  },
+];
 
 const Y_LINES = [
   { pos: 0,   label: 'Heel goed'   },
@@ -52,6 +39,7 @@ const Y_LINES = [
 
 export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
   const CHART_H = TOP_PAD + maxBarHeight;
+
   const dagData = useMemo(() => {
     const result = [];
     for (let i = 1; i <= days; i++) {
@@ -76,11 +64,11 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
     const stoolAvg = dagData.reduce((a, d) => a + (1 - Math.abs(d.q5 - 3) / 2), 0) / n;
 
     return [
-      { label: 'Gevoel',    pct: avg.q1/5,  theme: themeKey(avg.q1)           },
-      { label: 'Eten',      pct: avg.q2/5,  theme: themeKey(avg.q2)           },
-      { label: 'Ademen',    pct: avg.q3/5,  theme: themeKey(avg.q3)           },
-      { label: 'Pijn',      pct: avg.q4/5,  theme: themeKey(avg.q4)           },
-      { label: 'Stoelgang', pct: stoolAvg,  theme: themeKey(stoolAvg, true)   },
+      { ...CAT_DEFS[0], pct: avg.q1/5,  theme: themeKey(avg.q1)         },
+      { ...CAT_DEFS[1], pct: avg.q2/5,  theme: themeKey(avg.q2)         },
+      { ...CAT_DEFS[2], pct: avg.q3/5,  theme: themeKey(avg.q3)         },
+      { ...CAT_DEFS[3], pct: avg.q4/5,  theme: themeKey(avg.q4)         },
+      { ...CAT_DEFS[4], pct: stoolAvg,  theme: themeKey(stoolAvg, true) },
     ];
   }, [dagData, n]);
 
@@ -122,17 +110,38 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
           }}>
             {cats.map((cat) => {
               const barH = Math.max(cat.pct * maxBarHeight, 3);
+              const iconColor = THEME[cat.theme].icon;
+              const showIcon = barH >= 34;
+
               return (
-                <div key={cat.label}
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SMILEY_GAP }}
-                  role="img" aria-label={cat.label}
-                >
-                  <SmileyFace theme={cat.theme} />
-                  <div style={{
-                    width: BAR_W, height: barH,
+                <div
+                  key={cat.label}
+                  role="img"
+                  aria-label={cat.label}
+                  style={{
+                    position: 'relative',
+                    width: BAR_W,
+                    height: barH,
                     background: THEME[cat.theme].bar,
                     borderRadius: '10px 10px 0 0',
-                  }} />
+                  }}
+                >
+                  {showIcon && (
+                    <div style={{
+                      position: 'absolute', top: 7, left: 0, right: 0,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      {cat.isText ? (
+                        <span style={{ fontSize: 16, fontWeight: 400, color: iconColor, fontFamily: 'Inter', userSelect: 'none', lineHeight: '18px' }}>
+                          {cat.icon}
+                        </span>
+                      ) : (
+                        <span className="material-symbols-outlined" style={{ fontSize: 22, color: iconColor, userSelect: 'none' }}>
+                          {cat.icon}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -143,7 +152,7 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
       {/* X-axis labels */}
       <div style={{ display: 'flex', justifyContent: 'space-around', marginLeft: Y_W, marginTop: 8 }}>
         {cats.map((cat) => (
-          <div key={cat.label} style={{ width: BAR_W, textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#727272' }}>
+          <div key={cat.label} style={{ width: BAR_W, textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#377B8A' }}>
             {cat.label}
           </div>
         ))}
