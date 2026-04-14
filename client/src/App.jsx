@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { scheduleReminder } from './utils/reminders';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ScaleWrapper from './components/layout/ScaleWrapper';
 import { useAuthStore } from './store/authStore';
@@ -50,6 +51,19 @@ function RootRedirect() {
 
 export default function App() {
   const { refreshToken, setTokens, clear } = useAuthStore();
+
+  // Re-schedule diary reminder on every page load (keeps it alive across refreshes)
+  useEffect(() => {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      try {
+        const saved = localStorage.getItem('profile_settings');
+        if (saved) {
+          const { herinnering } = JSON.parse(saved);
+          if (herinnering) scheduleReminder(herinnering);
+        }
+      } catch { /* ignore */ }
+    }
+  }, []);
 
   useEffect(() => {
     if (!refreshToken) return;

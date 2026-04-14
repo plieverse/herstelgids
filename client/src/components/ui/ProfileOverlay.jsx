@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { requestNotificationPermission, scheduleReminder } from '../../utils/reminders';
 
 const PROFILE_KEY = 'profile_settings';
 
@@ -102,10 +103,14 @@ export default function ProfileOverlay({ onClose }) {
     setDraft(null);
   }
 
-  function handleSave() {
+  async function handleSave() {
     saveProfile(profile);
     setEditing(false);
     setDraft(null);
+    if (profile.herinnering) {
+      const perm = await requestNotificationPermission();
+      if (perm === 'granted') scheduleReminder(profile.herinnering);
+    }
   }
 
   function handleChange(field, value) {
@@ -250,7 +255,7 @@ export default function ProfileOverlay({ onClose }) {
 
           {/* Tijd herinnering dagboek */}
           <div>
-            <label style={labelStyle}>Tijd herinnering dagboek</label>
+            <label style={labelStyle}>Tijd herinnering dagboek (app moet open zijn)</label>
             {editing ? (
               <div className="profile-input-wrapper">
                 <input
