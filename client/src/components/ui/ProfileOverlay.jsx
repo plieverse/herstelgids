@@ -57,6 +57,8 @@ const editFieldStyle = {
   display: 'block',
   WebkitAppearance: 'none',
   appearance: 'none',
+  textAlign: 'left',
+  lineHeight: '40px',
 };
 
 // CSS to tint the native picker icon to teal (#377B8A) and force width constraints
@@ -79,6 +81,8 @@ const PICKER_ICON_CSS = `
     max-width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
+    text-align: left !important;
+    text-align-last: left !important;
   }
 `;
 
