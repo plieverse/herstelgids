@@ -49,12 +49,15 @@ export default function DiaryOverzichtPage() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
-            {/* Bar chart icon — click to leave overzicht */}
+            {/* Bar chart icon — active state: white icon on dark teal square */}
             <div
               onClick={() => navigate(-1)}
-              style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+              style={{
+                width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', background: '#377B8A', borderRadius: '8px',
+              }}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>bar_chart</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#FFFFFF', userSelect: 'none' }}>bar_chart</span>
             </div>
             {/* Profile icon */}
             <div
@@ -123,17 +126,6 @@ export default function DiaryOverzichtPage() {
       }}>
         <div style={{ padding: '16px 17px 28px' }}>
 
-          {/* Decorative "Overzicht" title */}
-          <div style={{ position: 'relative', height: '50px', marginBottom: '14px' }}>
-            <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8' }} />
-            <div style={{ position: 'absolute', width: '14px', height: '14px', left: '47px', top: '47px', borderRadius: '50%', background: '#CFEBE8' }} />
-            <div style={{
-              position: 'absolute', left: '12px', top: '8px',
-              fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
-              lineHeight: '39px', color: '#377B8A',
-            }}>Overzicht</div>
-          </div>
-
           {/* Info banner */}
           <div style={{
             width: '100%', minHeight: '54px',
@@ -150,10 +142,10 @@ export default function DiaryOverzichtPage() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
               <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '15px', lineHeight: '18px', color: '#377B8A' }}>
-                Gemiddelde {periodeLabel}
+                Overzicht van hoe het met je gaat
               </div>
               <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '15px', color: '#727272' }}>
-                Hoe hoger de balk, hoe beter je score voor die categorie.
+                De grafiek hierdonder laat zien hoe het met je gaat de {periodeLabel}. Hoe hoger de balk, hoe beter het gaat voor die categorie. Draai je telefoon om de grafiek beter te bekijken.
               </div>
             </div>
           </div>
