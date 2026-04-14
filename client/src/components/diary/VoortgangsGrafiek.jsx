@@ -26,7 +26,7 @@ function seeded(daysAgo, qIdx) {
 
 // Category icon definitions — matching the diary summary rows
 const CAT_DEFS = [
-  { label: 'Gevoel',    icon: 'health_metrics', isText: false },
+  { label: 'Vergelijking', icon: 'health_metrics', isText: false },
   { label: 'Eten',      icon: 'nutrition',       isText: false },
   { label: 'Ademen',    icon: 'pulmonology',     isText: false },
   { label: 'Pijn',      icon: 'bolt',            isText: false },
