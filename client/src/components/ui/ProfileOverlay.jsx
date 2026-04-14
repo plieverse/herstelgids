@@ -113,24 +113,23 @@ export default function ProfileOverlay({ onClose }) {
       >
 
         {/* ── Header ── */}
-        <div style={{ position: 'relative', height: 120 }}>
+        <div style={{ position: 'relative', height: 105 }}>
           {/* Decorative circle */}
           <div style={{
             position: 'absolute',
             width: 76, height: 76, left: 143, top: 25,
             borderRadius: '50%', background: '#CFEBE8',
           }} />
-          {/* Profile icon — positioned above/overlapping top of circle */}
+          {/* Profile icon — overlapping top of circle */}
           <span className="material-symbols-outlined" style={{
             position: 'absolute',
-            width: 54, height: 54,
             left: 154, top: 15,
             fontSize: '54px', lineHeight: '54px',
             color: '#377B8A', userSelect: 'none',
           }}>account_circle</span>
-          {/* Title below circle */}
+          {/* Title — overlapping bottom of circle */}
           <span style={{
-            position: 'absolute', left: 0, right: 0, top: 105,
+            position: 'absolute', left: 0, right: 0, top: 76,
             fontFamily: 'Inter', fontWeight: 700, fontSize: 24,
             lineHeight: '29px', color: '#377B8A',
             textAlign: 'center',
