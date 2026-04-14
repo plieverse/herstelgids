@@ -129,6 +129,23 @@ export default function DiaryOverzichtPage() {
       }}>
         <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px', minHeight: '100%', boxSizing: 'border-box' }}>
 
+          {/* Back button */}
+          <div style={{ flexShrink: 0 }}>
+            <button
+              onClick={() => navigate(-1)}
+              aria-label="Terug"
+              style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: '#377B8A', border: 'none', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3L5 8L10 13" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
           {/* "Overzicht" title with decorative circles — same style as "Samenvatting" */}
           <div style={{ position: 'relative', height: '55px', width: '100%', flexShrink: 0 }}>
             <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8' }} />
