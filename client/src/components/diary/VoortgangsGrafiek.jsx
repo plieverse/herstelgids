@@ -1,6 +1,11 @@
 import { useMemo } from 'react';
 import { loadDiaryAnswersForDay } from '../../pages/diary/DiaryPage';
 
+// Deterministic seeded score (1-5) matching DiaryHistoriePage logic
+function seeded(daysAgo, qIdx) {
+  return (Math.abs((daysAgo * 31 + qIdx * 17) % 5)) + 1;
+}
+
 const MAX_BAR    = 224;
 const BAR_W      = 52;
 const SMILEY     = 34;
@@ -59,30 +64,24 @@ export default function VoortgangsGrafiek({
   titel    = 'Hoe gaat het met mij?',
   subtitel = 'Gemiddelde van de afgelopen week',
 }) {
-  // Load real diary data for the last 7 days (including today = 0)
+  // Load last 7 days — use real data where available, seeded data as fallback
   const dagData = useMemo(() => {
     const days = [];
-    for (let i = 0; i <= 6; i++) {
+    for (let i = 1; i <= 7; i++) {
       const ans = loadDiaryAnswersForDay(i);
       if (ans && (ans.q1 || ans.q2 || ans.q3 || ans.q4 || ans.q5)) {
-        days.push({
-          q1: ans.q1 ?? 3,
-          q2: ans.q2 ?? 3,
-          q3: ans.q3 ?? 3,
-          q4: ans.q4 ?? 3,
-          q5: ans.q5 ?? 3,
-        });
+        days.push({ q1: ans.q1 ?? seeded(i,0), q2: ans.q2 ?? seeded(i,1), q3: ans.q3 ?? seeded(i,2), q4: ans.q4 ?? seeded(i,3), q5: ans.q5 ?? seeded(i,4) });
+      } else {
+        days.push({ q1: seeded(i,0), q2: seeded(i,1), q3: seeded(i,2), q4: seeded(i,3), q5: seeded(i,4) });
       }
     }
     return days;
   }, []);
 
-  const n     = dagData.length;
-  const nodig = Math.max(0, 3 - n);
+  const n = dagData.length;
 
   // Compute per-category averages and bar heights
   const cats = useMemo(() => {
-    if (n === 0) return [];
 
     const sum = dagData.reduce(
       (acc, d) => ({ q1: acc.q1 + d.q1, q2: acc.q2 + d.q2, q3: acc.q3 + d.q3, q4: acc.q4 + d.q4, q5: acc.q5 + d.q5 }),
@@ -101,23 +100,6 @@ export default function VoortgangsGrafiek({
       { label: 'Stoelgang', pct: stoolAvg,     avg: stoolAvg, theme: themeKey(stoolAvg, true) },
     ];
   }, [dagData, n]);
-
-  // ── Fallback when not enough data ──────────────────────────────────────────
-  if (n < 3) {
-    return (
-      <div style={{
-        padding: '24px 20px', textAlign: 'center',
-        fontFamily: 'Inter', background: '#FFFFFF', borderRadius: 16,
-      }}>
-        <div style={{ fontSize: 18, fontWeight: 700, color: '#377B8A', marginBottom: 10 }}>
-          {titel}
-        </div>
-        <div style={{ fontSize: 14, color: '#727272', lineHeight: '20px' }}>
-          Vul nog <strong style={{ color: '#377B8A' }}>{nodig}</strong> {nodig === 1 ? 'dag' : 'dagen'} in voor je overzicht
-        </div>
-      </div>
-    );
-  }
 
   // ── Chart ──────────────────────────────────────────────────────────────────
   return (
