@@ -8,11 +8,13 @@ export default function DiaryOverzichtPage() {
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
   const [periode, setPeriode] = useState('week');
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
   const [landscape, setLandscape] = useState(
-    () => window.matchMedia('(orientation: landscape)').matches
+    () => isTouchDevice && window.matchMedia('(orientation: landscape)').matches
   );
 
   useEffect(() => {
+    if (!isTouchDevice) return;
     const mq = window.matchMedia('(orientation: landscape)');
     const handler = (e) => setLandscape(e.matches);
     mq.addEventListener('change', handler);
