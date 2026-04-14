@@ -17,6 +17,7 @@ import DiaryIngevuldPage from './pages/diary/DiaryIngevuldPage';
 import DiaryGisterenPage from './pages/diary/DiaryGisterenPage';
 import DiaryBewerkenPage from './pages/diary/DiaryBewerkenPage';
 import DiaryHistoriePage from './pages/diary/DiaryHistoriePage';
+import DiaryOverzichtPage from './pages/diary/DiaryOverzichtPage';
 import GuidePage from './pages/guide/GuidePage';
 import GuideUitlegPage from './pages/guide/GuideUitlegPage';
 import ArticlePage from './pages/guide/ArticlePage';
@@ -92,6 +93,7 @@ export default function App() {
           <Route path="/dagboek/bewerken/:daysAgo/:vraag" element={<DiaryBewerkenPage />} />
           <Route path="/dagboek/gisteren" element={<DiaryGisterenPage />} />
           <Route path="/dagboek/historie/:daysAgo" element={<DiaryHistoriePage />} />
+          <Route path="/dagboek/overzicht" element={<DiaryOverzichtPage />} />
           <Route path="/gids" element={<GuidePage />} />
           <Route path="/gids/uitleg" element={<GuideUitlegPage />} />
           <Route path="/gids/uitleg/:id" element={<UitlegCategoryPage />} />
