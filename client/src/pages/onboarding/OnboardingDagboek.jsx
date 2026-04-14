@@ -275,19 +275,19 @@ export default function OnboardingDagboek() {
         <div style={{ position: 'relative', width: '32px', height: '32px', flexShrink: 0 }}>
           <div style={{
             position: 'absolute',
-            width: '27px',
-            height: '27px',
-            left: '-3px',
-            top: '1px',
+            width: '32px',
+            height: '32px',
+            left: '0px',
+            top: '0px',
             borderRadius: '50%',
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
             position: 'absolute', zIndex: 1,
-            fontSize: '18px', color: '#377B8A',
+            fontSize: '22px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '27px', height: '27px', userSelect: 'none',
-            left: '-3px', top: '1px',
+            width: '32px', height: '32px', userSelect: 'none',
+            left: '0px', top: '0px',
           }}>add_2</span>
         </div>
         <span style={{
@@ -327,19 +327,19 @@ export default function OnboardingDagboek() {
         <div style={{ position: 'relative', width: '32px', height: '32px', flexShrink: 0 }}>
           <div style={{
             position: 'absolute',
-            width: '27px',
-            height: '27px',
-            left: '-3px',
-            top: '1px',
+            width: '32px',
+            height: '32px',
+            left: '0px',
+            top: '0px',
             borderRadius: '50%',
             background: '#CFEBE8',
           }} />
           <span className="material-symbols-outlined" style={{
             position: 'absolute', zIndex: 1,
-            fontSize: '18px', color: '#377B8A',
+            fontSize: '22px', color: '#377B8A',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '27px', height: '27px', userSelect: 'none',
-            left: '-3px', top: '1px',
+            width: '32px', height: '32px', userSelect: 'none',
+            left: '0px', top: '0px',
           }}>visibility</span>
         </div>
         <span style={{
