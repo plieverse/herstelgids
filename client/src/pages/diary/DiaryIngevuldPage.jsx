@@ -98,12 +98,12 @@ function NormalBanner() {
   return (
     <div style={{
       width: '346px', minHeight: '54px',
-      background: '#CFEBD4', borderRadius: '10px',
+      background: '#E8F5EA', borderRadius: '10px',
       display: 'flex', flexDirection: 'row', alignItems: 'center',
       padding: '8px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
       <div style={{ position: 'relative', width: '38px', height: '38px', flexShrink: 0 }}>
-        <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#B2DEB6' }} />
+        <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#CFEBD4' }} />
         <div style={{ position: 'absolute', width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#378A6C', userSelect: 'none' }}>visibility</span>
         </div>
