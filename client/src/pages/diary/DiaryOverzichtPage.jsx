@@ -34,7 +34,7 @@ export default function DiaryOverzichtPage() {
       {/* ── Topbar ── */}
       <div style={{
         position: 'absolute', left: 0, top: 0,
-        width: '414px', height: '135px', background: '#FFFFFF',
+        width: '414px', height: '125px', background: '#FFFFFF',
         display: 'flex', flexDirection: 'column',
         padding: '0 10px 12px', boxSizing: 'border-box', gap: '6px',
       }}>
@@ -43,7 +43,7 @@ export default function DiaryOverzichtPage() {
         <div style={{
           display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between', alignItems: 'center',
-          height: '50px', flexShrink: 0,
+          height: '40px', flexShrink: 0,
         }}>
           <div style={{
             position: 'relative', display: 'flex', flexDirection: 'row',
@@ -134,10 +134,10 @@ export default function DiaryOverzichtPage() {
 
       {/* ── Scrollable content ── */}
       <div style={{
-        position: 'absolute', top: '135px', bottom: '58px',
+        position: 'absolute', top: '125px', bottom: '58px',
         left: 0, right: 0, overflowY: 'auto', overscrollBehavior: 'none',
       }}>
-        <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px', minHeight: '100%', boxSizing: 'border-box' }}>
 
           {/* Back button */}
           <div>
@@ -179,9 +179,11 @@ export default function DiaryOverzichtPage() {
             </div>
           </div>
 
-          {/* Chart card */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', padding: '16px 12px 16px' }}>
-            <VoortgangsGrafiek days={days} />
+          {/* Chart card — flex: 1 so it fills remaining height and centers vertically */}
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+            <div style={{ background: '#FFFFFF', borderRadius: '16px', padding: '16px 12px', width: '100%' }}>
+              <VoortgangsGrafiek days={days} />
+            </div>
           </div>
 
         </div>

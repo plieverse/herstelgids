@@ -18,7 +18,9 @@ function themeKey(avg, isStool = false) {
 }
 
 // Seeded fallback score (1-5) matching DiaryHistoriePage logic
+// qIdx 0 (Gevoel) returns high values so demo shows a green bar
 function seeded(daysAgo, qIdx) {
+  if (qIdx === 0) return 5;
   return (Math.abs((daysAgo * 31 + qIdx * 17) % 5)) + 1;
 }
 
