@@ -5,22 +5,37 @@ const BAR_W   = 52;
 const TOP_PAD = 12; // small breathing room above the top dotted line
 const Y_W     = 62;
 
-// Diary traffic-light colours (same as summary rows)
+// 5-grade colours matching the diary answer circles (score 1=best → darkest green, 5=worst → red)
 const THEME = {
-  green: { bar: '#B2DEB6', icon: '#378A6C' },
-  amber: { bar: '#F2EFC2', icon: '#C5A500' },
-  red:   { bar: '#EEC7C7', icon: '#AF1E1E' },
+  1: { bar: '#B2DEB6', icon: '#378A6C' },
+  2: { bar: '#CFEBD4', icon: '#378A6C' },
+  3: { bar: '#EBE9CF', icon: '#C5A500' },
+  4: { bar: '#F0C8AD', icon: '#CB6E02' },
+  5: { bar: '#EEC7C7', icon: '#AF1E1E' },
 };
 
-function themeKey(avg, isStool = false) {
-  if (isStool) return avg >= 0.75 ? 'green' : avg >= 0.4 ? 'amber' : 'red';
-  return avg >= 4 ? 'green' : avg >= 2.5 ? 'amber' : 'red';
+// Returns 1 (best/green) … 5 (worst/red)
+function themeScore(avg, isStool = false) {
+  if (isStool) {
+    // stoolAvg: 1.0 = perfect, 0.0 = worst
+    if (avg >= 0.85) return 1;
+    if (avg >= 0.65) return 2;
+    if (avg >= 0.4)  return 3;
+    if (avg >= 0.15) return 4;
+    return 5;
+  }
+  // q1–q4: score 1 = best, 5 = worst
+  if (avg <= 1.8) return 1;
+  if (avg <= 2.6) return 2;
+  if (avg <= 3.4) return 3;
+  if (avg <= 4.2) return 4;
+  return 5;
 }
 
 // Seeded fallback score (1-5) matching DiaryHistoriePage logic
-// qIdx 0 (Gevoel) returns high values so demo shows a green bar
+// qIdx 0 returns 1 (best) so demo shows a green bar
 function seeded(daysAgo, qIdx) {
-  if (qIdx === 0) return 5;
+  if (qIdx === 0) return 1;
   return (Math.abs((daysAgo * 31 + qIdx * 17) % 5)) + 1;
 }
 
@@ -66,12 +81,13 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224, baseOf
     const avg = { q1: sum.q1/n, q2: sum.q2/n, q3: sum.q3/n, q4: sum.q4/n };
     const stoolAvg = dagData.reduce((a, d) => a + (1 - Math.abs(d.q5 - 3) / 2), 0) / n;
 
+    // pct: score 1 = best → pct 1.0 (tallest bar); score 5 = worst → pct 0.2
     return [
-      { ...CAT_DEFS[0], pct: avg.q1/5,  theme: themeKey(avg.q1)         },
-      { ...CAT_DEFS[1], pct: avg.q2/5,  theme: themeKey(avg.q2)         },
-      { ...CAT_DEFS[2], pct: avg.q3/5,  theme: themeKey(avg.q3)         },
-      { ...CAT_DEFS[3], pct: avg.q4/5,  theme: themeKey(avg.q4)         },
-      { ...CAT_DEFS[4], pct: stoolAvg,  theme: themeKey(stoolAvg, true) },
+      { ...CAT_DEFS[0], pct: (6 - avg.q1) / 5, theme: themeScore(avg.q1)         },
+      { ...CAT_DEFS[1], pct: (6 - avg.q2) / 5, theme: themeScore(avg.q2)         },
+      { ...CAT_DEFS[2], pct: (6 - avg.q3) / 5, theme: themeScore(avg.q3)         },
+      { ...CAT_DEFS[3], pct: (6 - avg.q4) / 5, theme: themeScore(avg.q4)         },
+      { ...CAT_DEFS[4], pct: stoolAvg,           theme: themeScore(stoolAvg, true) },
     ];
   }, [dagData, n]);
 
