@@ -220,7 +220,7 @@ export default function DiaryIngevuldPage() {
             }} onClick={handleTripleClick}>Dagboek</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
-            <div onClick={() => navigate('/dagboek/bewerken/1')} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            <div onClick={() => navigate('/dagboek/bewerken/0/1')} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>edit</span>
             </div>
             <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>

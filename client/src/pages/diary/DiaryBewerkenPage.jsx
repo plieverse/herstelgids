@@ -1,15 +1,28 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { saveDiaryAnswer, loadDiaryAnswers } from './DiaryPage';
+import { saveDiaryAnswerForDay, loadDiaryAnswersForDay } from './DiaryPage';
 
 const DUTCH_MONTHS = [
   'januari', 'februari', 'maart', 'april', 'mei', 'juni',
   'juli', 'augustus', 'september', 'oktober', 'november', 'december',
 ];
 
-function todayLabel() {
-  const d = new Date();
-  return `Vandaag: ${d.getDate()} ${DUTCH_MONTHS[d.getMonth()]}`;
+function dateLabel(daysAgo) {
+  if (daysAgo === 0) {
+    const d = new Date();
+    return `Vandaag: ${d.getDate()} ${DUTCH_MONTHS[d.getMonth()]}`;
+  }
+  if (daysAgo === 1) {
+    const d = new Date(Date.now() - 86400000);
+    return `Gisteren: ${d.getDate()} ${DUTCH_MONTHS[d.getMonth()]}`;
+  }
+  const d = new Date(Date.now() - daysAgo * 86400000);
+  return `${d.getDate()} ${DUTCH_MONTHS[d.getMonth()]}`;
+}
+
+// Deterministic seeded default answer (1-5) matching DiaryHistoriePage logic
+function seededDefault(qIdx, daysAgo) {
+  return (Math.abs((daysAgo * 31 + qIdx * 17) % 5)) + 1;
 }
 
 const QUESTIONS = [
@@ -78,31 +91,37 @@ const QUESTIONS = [
 
 export default function DiaryBewerkenPage() {
   const navigate = useNavigate();
-  const { vraag } = useParams();
+  const { daysAgo: daysAgoStr, vraag } = useParams();
+  const daysAgo = parseInt(daysAgoStr, 10) || 0;
   const qNum = Math.min(5, Math.max(1, parseInt(vraag, 10) || 1));
   const q = QUESTIONS[qNum - 1];
 
-  const saved = loadDiaryAnswers();
-  const defaultAnswer = saved[`q${qNum}`] ?? null;
+  // Load saved answers for this day; fall back to seeded defaults for historical days
+  const saved = loadDiaryAnswersForDay(daysAgo);
+  const defaultAnswer = saved
+    ? (saved[`q${qNum}`] ?? null)
+    : seededDefault(qNum - 1, daysAgo);
+
   const [selected, setSelected] = useState(defaultAnswer);
 
   const isLast = qNum === 5;
-  const dateLabel = todayLabel();
+  const label = dateLabel(daysAgo);
+  const backRoute = daysAgo === 0 ? '/dagboek/samenvatting' : `/dagboek/historie/${daysAgo}`;
 
   function handleNext() {
-    saveDiaryAnswer(qNum, selected ?? defaultAnswer ?? 3);
+    saveDiaryAnswerForDay(daysAgo, qNum, selected ?? defaultAnswer ?? 3);
     if (isLast) {
-      navigate('/dagboek/samenvatting');
+      navigate(backRoute);
     } else {
-      navigate(`/dagboek/bewerken/${qNum + 1}`);
+      navigate(`/dagboek/bewerken/${daysAgo}/${qNum + 1}`);
     }
   }
 
   function handleBack() {
     if (qNum === 1) {
-      navigate('/dagboek/samenvatting');
+      navigate(backRoute);
     } else {
-      navigate(`/dagboek/bewerken/${qNum - 1}`);
+      navigate(`/dagboek/bewerken/${daysAgo}/${qNum - 1}`);
     }
   }
 
@@ -134,12 +153,12 @@ export default function DiaryBewerkenPage() {
               fontFamily: 'Inter', fontWeight: 400, fontSize: '14px',
               lineHeight: '17px', color: '#727272', marginTop: '2px',
             }}>
-              {dateLabel}
+              {label}
             </div>
           </div>
           {/* Close / annuleren */}
           <button
-            onClick={() => navigate('/dagboek/samenvatting')}
+            onClick={() => navigate(backRoute)}
             aria-label="Annuleren"
             style={{
               width: 36, height: 36, borderRadius: '50%',

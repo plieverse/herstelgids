@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DIARY_DONE_KEY, todayKey } from './DiaryPage';
+import { DIARY_DONE_KEY, todayKey, loadDiaryAnswersForDay } from './DiaryPage';
 import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
 const DUTCH_MONTHS = [
@@ -84,13 +84,21 @@ export default function DiaryHistoriePage() {
   const date = new Date(Date.now() - daysAgo * 86400000);
   const dateString = `${date.getDate()} ${DUTCH_MONTHS[date.getMonth()]}`;
 
-  // Deterministic answers for this specific day
+  // Load saved answers if this day was edited, otherwise use seeded deterministic data
+  const savedAnswers = loadDiaryAnswersForDay(daysAgo);
+
   const summaryRows = useMemo(() =>
     CATEGORIES.map((cat, i) => {
-      const option = seededPick(cat.options, daysAgo, i);
+      let option;
+      if (savedAnswers) {
+        const score = savedAnswers[`q${cat.id}`];
+        option = score ? cat.options[score - 1] : seededPick(cat.options, daysAgo, i);
+      } else {
+        option = seededPick(cat.options, daysAgo, i);
+      }
       return { ...cat, ...option, iconColor: ICON_COLOR[option.circleColor] };
     }),
-  [daysAgo]);
+  [daysAgo, savedAnswers]);
 
   const goBack  = () => navigate(`/dagboek/historie/${daysAgo + 1}`);
   const goForward = () => {
@@ -135,7 +143,7 @@ export default function DiaryHistoriePage() {
             }}>Dagboek</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
-            <div style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div onClick={() => navigate(`/dagboek/bewerken/${daysAgo}/1`)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>edit</span>
             </div>
             <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>

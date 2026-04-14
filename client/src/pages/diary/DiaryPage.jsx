@@ -22,6 +22,31 @@ export function loadDiaryAnswers() {
   } catch { return {}; }
 }
 
+export function dateKeyForDaysAgo(daysAgo) {
+  const d = new Date(Date.now() - daysAgo * 86400000);
+  return d.toISOString().slice(0, 10);
+}
+
+export function loadDiaryAnswersForDay(daysAgo) {
+  if (daysAgo === 0) return loadDiaryAnswers();
+  try {
+    const key = `diary_answers_${dateKeyForDaysAgo(daysAgo)}`;
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : null;
+  } catch { return null; }
+}
+
+export function saveDiaryAnswerForDay(daysAgo, questionNum, score) {
+  if (daysAgo === 0) { saveDiaryAnswer(questionNum, score); return; }
+  try {
+    const key = `diary_answers_${dateKeyForDaysAgo(daysAgo)}`;
+    const stored = localStorage.getItem(key);
+    const data = stored ? JSON.parse(stored) : {};
+    data[`q${questionNum}`] = score;
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch {}
+}
+
 import DebugMenu, { useTripleClick } from '../../components/layout/DebugMenu';
 import ProfileOverlay from '../../components/ui/ProfileOverlay';
 
