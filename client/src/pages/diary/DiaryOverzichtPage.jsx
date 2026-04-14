@@ -129,8 +129,8 @@ export default function DiaryOverzichtPage() {
       }}>
         <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px', minHeight: '100%', boxSizing: 'border-box' }}>
 
-          {/* Back button */}
-          <div style={{ flexShrink: 0 }}>
+          {/* Back button + "Overzicht" title side by side */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
             <button
               onClick={() => navigate(-1)}
               aria-label="Terug"
@@ -138,23 +138,24 @@ export default function DiaryOverzichtPage() {
                 width: 36, height: 36, borderRadius: '50%',
                 background: '#377B8A', border: 'none', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
+                flexShrink: 0,
               }}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M10 3L5 8L10 13" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-          </div>
 
-          {/* "Overzicht" title with decorative circles — same style as "Samenvatting" */}
-          <div style={{ position: 'relative', height: '55px', width: '100%', flexShrink: 0 }}>
-            <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8' }} />
-            <div style={{ position: 'absolute', width: '14px', height: '14px', left: '47px', top: '47px', borderRadius: '50%', background: '#CFEBE8' }} />
-            <div style={{
-              position: 'absolute', left: '12px', top: '8px',
-              fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
-              lineHeight: '39px', color: '#377B8A',
-            }}>Overzicht</div>
+            {/* "Overzicht" title with decorative circles */}
+            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', height: '54px' }}>
+              <div style={{ position: 'absolute', width: '54px', height: '54px', left: '-8px', top: 0, borderRadius: '50%', background: '#CFEBE8', zIndex: 0 }} />
+              <div style={{ position: 'absolute', width: '14px', height: '14px', left: '38px', top: '38px', borderRadius: '50%', background: '#CFEBE8', zIndex: 0 }} />
+              <span style={{
+                position: 'relative', zIndex: 1,
+                fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
+                lineHeight: '39px', color: '#377B8A',
+              }}>Overzicht</span>
+            </div>
           </div>
 
           {/* Info banner */}
