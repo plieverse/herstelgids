@@ -22,7 +22,6 @@ export default function DiaryOverzichtPage() {
   }, []);
 
   const days = periode === 'week' ? 7 : 30;
-  const periodeLabel = periode === 'week' ? 'afgelopen week' : 'afgelopen maand';
 
   return (
     <div style={{
@@ -174,7 +173,7 @@ export default function DiaryOverzichtPage() {
                 Overzicht van hoe het met je gaat
               </div>
               <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '15px', color: '#727272' }}>
-                De grafiek hierdonder laat zien hoe het met je gaat de {periodeLabel}. Hoe hoger de balk, hoe beter het gaat voor die categorie. Draai je telefoon om de grafiek beter te bekijken.
+                De grafiek laat zien hoe het is gegaan de afgelopen {days} dagen. Hoe hoger de balk, hoe beter het is gegaan voor dat onderdeel. Draai je telefoon om de grafiek beter te bekijken.
               </div>
             </div>
           </div>

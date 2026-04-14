@@ -108,7 +108,7 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
 
           <div style={{
             position: 'absolute', left: 0, right: 0, top: 0, bottom: 0,
-            display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 1,
+            display: 'flex', alignItems: 'flex-end', zIndex: 1,
           }}>
             {cats.map((cat) => {
               const barH = Math.max(cat.pct * maxBarHeight, 3);
@@ -116,34 +116,35 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
               const showIcon = barH >= 34;
 
               return (
-                <div
-                  key={cat.label}
-                  role="img"
-                  aria-label={cat.label}
-                  style={{
-                    position: 'relative',
-                    width: BAR_W,
-                    height: barH,
-                    background: THEME[cat.theme].bar,
-                    borderRadius: '10px 10px 0 0',
-                  }}
-                >
-                  {showIcon && (
-                    <div style={{
-                      position: 'absolute', top: 7, left: 0, right: 0,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      {cat.isText ? (
-                        <span style={{ fontSize: 20, fontWeight: 400, color: iconColor, fontFamily: 'Inter', userSelect: 'none', lineHeight: '22px' }}>
-                          {cat.icon}
-                        </span>
-                      ) : (
-                        <span className="material-symbols-outlined" style={{ fontSize: 28, color: iconColor, userSelect: 'none' }}>
-                          {cat.icon}
-                        </span>
-                      )}
-                    </div>
-                  )}
+                <div key={cat.label} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%' }}>
+                  <div
+                    role="img"
+                    aria-label={cat.label}
+                    style={{
+                      position: 'relative',
+                      width: BAR_W,
+                      height: barH,
+                      background: THEME[cat.theme].bar,
+                      borderRadius: '10px 10px 0 0',
+                    }}
+                  >
+                    {showIcon && (
+                      <div style={{
+                        position: 'absolute', top: 7, left: 0, right: 0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      }}>
+                        {cat.isText ? (
+                          <span style={{ fontSize: 20, fontWeight: 400, color: iconColor, fontFamily: 'Inter', userSelect: 'none', lineHeight: '22px' }}>
+                            {cat.icon}
+                          </span>
+                        ) : (
+                          <span className="material-symbols-outlined" style={{ fontSize: 28, color: iconColor, userSelect: 'none' }}>
+                            {cat.icon}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })}
@@ -151,10 +152,10 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
         </div>
       </div>
 
-      {/* X-axis labels */}
-      <div style={{ display: 'flex', justifyContent: 'space-around', marginLeft: Y_W, marginTop: 8 }}>
+      {/* X-axis labels — same flex:1 structure as bars so they stay perfectly centred */}
+      <div style={{ display: 'flex', marginLeft: Y_W, marginTop: 8 }}>
         {cats.map((cat) => (
-          <div key={cat.label} style={{ width: BAR_W, textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#377B8A', fontWeight: 700 }}>
+          <div key={cat.label} style={{ flex: 1, textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#377B8A', fontWeight: 700 }}>
             {cat.label}
           </div>
         ))}
