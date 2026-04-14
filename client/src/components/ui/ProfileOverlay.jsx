@@ -55,14 +55,30 @@ const editFieldStyle = {
   outline: 'none',
   colorScheme: 'light',
   display: 'block',
+  WebkitAppearance: 'none',
+  appearance: 'none',
 };
 
-// CSS to tint the native picker icon to teal (#377B8A)
+// CSS to tint the native picker icon to teal (#377B8A) and force width constraints
 const PICKER_ICON_CSS = `
   .profile-date-input::-webkit-calendar-picker-indicator,
   .profile-time-input::-webkit-calendar-picker-indicator {
     filter: invert(38%) sepia(44%) saturate(493%) hue-rotate(147deg) brightness(87%) contrast(89%);
     cursor: pointer;
+  }
+  .profile-input-wrapper {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .profile-date-input,
+  .profile-time-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 `;
 
@@ -185,6 +201,9 @@ export default function ProfileOverlay({ onClose }) {
           padding: '0 24px 28px',
           display: 'flex', flexDirection: 'column', gap: '14px',
           overflow: 'hidden',
+          boxSizing: 'border-box',
+          width: '100%',
+          maxWidth: '100%',
         }}>
 
           {/* Naam */}
@@ -208,14 +227,16 @@ export default function ProfileOverlay({ onClose }) {
           <div>
             <label style={labelStyle}>Datum van operatie</label>
             {editing ? (
-              <input
-                type="date"
-                className="profile-date-input"
-                value={profile.operatieDatum}
-                onChange={e => handleChange('operatieDatum', e.target.value)}
-                onClick={e => { try { e.target.showPicker(); } catch {} }}
-                style={editFieldStyle}
-              />
+              <div className="profile-input-wrapper">
+                <input
+                  type="date"
+                  className="profile-date-input"
+                  value={profile.operatieDatum}
+                  onChange={e => handleChange('operatieDatum', e.target.value)}
+                  onClick={e => { try { e.target.showPicker(); } catch {} }}
+                  style={editFieldStyle}
+                />
+              </div>
             ) : (
               <div style={readonlyFieldStyle}>
                 {formatDutchDate(profile.operatieDatum)}
@@ -227,14 +248,16 @@ export default function ProfileOverlay({ onClose }) {
           <div>
             <label style={labelStyle}>Tijd herinnering dagboek</label>
             {editing ? (
-              <input
-                type="time"
-                className="profile-time-input"
-                value={profile.herinnering}
-                onChange={e => handleChange('herinnering', e.target.value)}
-                onClick={e => { try { e.target.showPicker(); } catch {} }}
-                style={editFieldStyle}
-              />
+              <div className="profile-input-wrapper">
+                <input
+                  type="time"
+                  className="profile-time-input"
+                  value={profile.herinnering}
+                  onChange={e => handleChange('herinnering', e.target.value)}
+                  onClick={e => { try { e.target.showPicker(); } catch {} }}
+                  style={editFieldStyle}
+                />
+              </div>
             ) : (
               <div style={readonlyFieldStyle}>{profile.herinnering}</div>
             )}
