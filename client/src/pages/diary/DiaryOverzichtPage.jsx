@@ -130,7 +130,7 @@ export default function DiaryOverzichtPage() {
         <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px', minHeight: '100%', boxSizing: 'border-box' }}>
 
           {/* Back button + "Overzicht" title side by side */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px', flexShrink: 0 }}>
             <button
               onClick={() => navigate(-1)}
               aria-label="Terug"
@@ -146,10 +146,10 @@ export default function DiaryOverzichtPage() {
               </svg>
             </button>
 
-            {/* "Overzicht" title with decorative circles */}
-            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', height: '54px' }}>
-              <div style={{ position: 'absolute', width: '54px', height: '54px', left: '-8px', top: 0, borderRadius: '50%', background: '#CFEBE8', zIndex: 0 }} />
-              <div style={{ position: 'absolute', width: '14px', height: '14px', left: '38px', top: '38px', borderRadius: '50%', background: '#CFEBE8', zIndex: 0 }} />
+            {/* "Overzicht" title with decorative circles — matching Samenvatting style */}
+            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', height: '55px', paddingLeft: '12px' }}>
+              <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8', zIndex: 0 }} />
+              <div style={{ position: 'absolute', width: '14px', height: '14px', left: '47px', top: '47px', borderRadius: '50%', background: '#CFEBE8', zIndex: 0 }} />
               <span style={{
                 position: 'relative', zIndex: 1,
                 fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
