@@ -137,10 +137,10 @@ export default function DiaryOverzichtPage() {
         position: 'absolute', top: '135px', bottom: '58px',
         left: 0, right: 0, overflowY: 'auto', overscrollBehavior: 'none',
       }}>
-        <div style={{ padding: '16px 17px 28px' }}>
+        <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
           {/* Back button */}
-          <div style={{ marginBottom: '12px' }}>
+          <div>
             <button
               onClick={() => navigate(-1)}
               aria-label="Terug"
@@ -162,7 +162,6 @@ export default function DiaryOverzichtPage() {
             background: '#E6F4F2', borderRadius: '10px',
             display: 'flex', flexDirection: 'row', alignItems: 'center',
             padding: '8px 10px', gap: '10px', boxSizing: 'border-box',
-            marginBottom: '12px',
           }}>
             <div style={{ position: 'relative', width: '38px', height: '38px', flexShrink: 0 }}>
               <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#CFEBE8' }} />

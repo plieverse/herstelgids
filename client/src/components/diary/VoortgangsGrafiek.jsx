@@ -32,9 +32,9 @@ const CAT_DEFS = [
 ];
 
 const Y_LINES = [
-  { pos: 0,   label: 'Heel goed'   },
-  { pos: 0.5, label: 'Matig'       },
-  { pos: 1,   label: 'Heel slecht' },
+  { pos: 0,   label: 'Heel goed'    },
+  { pos: 0.5, label: 'Middelmatig'  },
+  { pos: 1,   label: 'Heel slecht'  },
 ];
 
 export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
@@ -86,7 +86,7 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
               top: TOP_PAD + pos * maxBarHeight,
               transform: 'translateY(-50%)',
               fontSize: 10, lineHeight: '13px',
-              color: '#9E9E9E', textAlign: 'right', whiteSpace: 'nowrap',
+              color: '#377B8A', textAlign: 'right', whiteSpace: 'nowrap',
             }}>
               {label}
             </div>
@@ -132,11 +132,11 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                       {cat.isText ? (
-                        <span style={{ fontSize: 16, fontWeight: 400, color: iconColor, fontFamily: 'Inter', userSelect: 'none', lineHeight: '18px' }}>
+                        <span style={{ fontSize: 20, fontWeight: 400, color: iconColor, fontFamily: 'Inter', userSelect: 'none', lineHeight: '22px' }}>
                           {cat.icon}
                         </span>
                       ) : (
-                        <span className="material-symbols-outlined" style={{ fontSize: 22, color: iconColor, userSelect: 'none' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: 28, color: iconColor, userSelect: 'none' }}>
                           {cat.icon}
                         </span>
                       )}
@@ -152,7 +152,7 @@ export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
       {/* X-axis labels */}
       <div style={{ display: 'flex', justifyContent: 'space-around', marginLeft: Y_W, marginTop: 8 }}>
         {cats.map((cat) => (
-          <div key={cat.label} style={{ width: BAR_W, textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#377B8A' }}>
+          <div key={cat.label} style={{ width: BAR_W, textAlign: 'center', fontSize: 11, lineHeight: '14px', color: '#377B8A', fontWeight: 700 }}>
             {cat.label}
           </div>
         ))}
