@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { saveDiaryAnswerForDay, loadDiaryAnswersForDay } from './DiaryPage';
 
@@ -96,20 +96,26 @@ export default function DiaryBewerkenPage() {
   const qNum = Math.min(5, Math.max(1, parseInt(vraag, 10) || 1));
   const q = QUESTIONS[qNum - 1];
 
-  // Load saved answers for this day; fall back to seeded defaults for historical days
-  const saved = loadDiaryAnswersForDay(daysAgo);
-  const defaultAnswer = saved
-    ? (saved[`q${qNum}`] ?? null)
-    : seededDefault(qNum - 1, daysAgo);
+  function getDefaultAnswer(qIndex, days) {
+    const savedAnswers = loadDiaryAnswersForDay(days);
+    return savedAnswers
+      ? (savedAnswers[`q${qIndex}`] ?? null)
+      : seededDefault(qIndex - 1, days);
+  }
 
-  const [selected, setSelected] = useState(defaultAnswer);
+  const [selected, setSelected] = useState(() => getDefaultAnswer(qNum, daysAgo));
+
+  // Reset selection whenever the question or day changes
+  useEffect(() => {
+    setSelected(getDefaultAnswer(qNum, daysAgo));
+  }, [qNum, daysAgo]);
 
   const isLast = qNum === 5;
   const label = dateLabel(daysAgo);
   const backRoute = daysAgo === 0 ? '/dagboek/samenvatting' : `/dagboek/historie/${daysAgo}`;
 
   function handleNext() {
-    saveDiaryAnswerForDay(daysAgo, qNum, selected ?? defaultAnswer ?? 3);
+    saveDiaryAnswerForDay(daysAgo, qNum, selected ?? 3);
     if (isLast) {
       navigate(backRoute);
     } else {
