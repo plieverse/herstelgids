@@ -97,27 +97,24 @@ function buildRows(answers) {
 function NormalBanner() {
   return (
     <div style={{
-      width: '346px',
-      background: '#CFEBD4',
-      borderRadius: '10px',
-      padding: '12px 16px 12px 54px',
-      boxSizing: 'border-box',
-      position: 'relative',
-      minHeight: '68px',
+      width: '346px', minHeight: '77px',
+      background: '#CFEBD4', borderRadius: '10px',
+      display: 'flex', flexDirection: 'row', alignItems: 'center',
+      padding: '10px 10px 10px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
-      <div style={{
-        position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
-        width: '31px', height: '31px', borderRadius: '50%', background: '#B2DEB6',
-      }} />
-      <span className="material-symbols-outlined" style={{
-        position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
-        fontSize: '32px', color: '#378A6C', userSelect: 'none',
-      }}>visibility</span>
-      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#378A6C' }}>
-        Samenvatting bekeken
+      <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
+        <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: '#B2DEB6' }} />
+        <div style={{ position: 'absolute', width: '51px', height: '51px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#378A6C', userSelect: 'none' }}>visibility</span>
+        </div>
       </div>
-      <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
-        Op dit moment zien we geen signalen die direct extra aandacht nodig hebben.
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
+        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#378A6C' }}>
+          Samenvatting bekeken
+        </div>
+        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', lineHeight: '18px', color: '#727272' }}>
+          Op dit moment zien we geen signalen die extra aandacht nodig hebben.
+        </div>
       </div>
     </div>
   );
@@ -126,27 +123,24 @@ function NormalBanner() {
 function AlarmBanner() {
   return (
     <div style={{
-      width: '346px',
-      background: '#FEF0E9',
-      borderRadius: '10px',
-      padding: '12px 16px 12px 54px',
-      boxSizing: 'border-box',
-      position: 'relative',
-      minHeight: '68px',
+      width: '346px', minHeight: '77px',
+      background: '#FEF0E9', borderRadius: '10px',
+      display: 'flex', flexDirection: 'row', alignItems: 'center',
+      padding: '10px 10px 10px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
-      <div style={{
-        position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
-        width: '31px', height: '31px', borderRadius: '50%', background: '#F4D2BC',
-      }} />
-      <span className="material-symbols-outlined" style={{
-        position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)',
-        fontSize: '32px', color: '#CB6E02', userSelect: 'none',
-      }}>warning</span>
-      <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '14px', lineHeight: '17px', color: '#CB6E02' }}>
-        Samenvatting bekeken
+      <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
+        <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: '#F4D2BC' }} />
+        <div style={{ position: 'absolute', width: '51px', height: '51px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#CB6E02', userSelect: 'none' }}>warning</span>
+        </div>
       </div>
-      <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '16px', color: '#727272', marginTop: '4px' }}>
-        Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
+        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#CB6E02' }}>
+          Samenvatting bekeken
+        </div>
+        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', lineHeight: '18px', color: '#727272' }}>
+          Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
+        </div>
       </div>
     </div>
   );
