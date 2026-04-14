@@ -3,18 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import ProfileOverlay from '../../components/ui/ProfileOverlay';
 import VoortgangsGrafiek from '../../components/diary/VoortgangsGrafiek';
 
-const DUTCH_MONTHS = [
-  'januari', 'februari', 'maart', 'april', 'mei', 'juni',
-  'juli', 'augustus', 'september', 'oktober', 'november', 'december',
-];
-
 export default function DiaryOverzichtPage() {
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
-  const [periode, setPeriode] = useState('week'); // 'week' | 'maand'
-
-  const now = new Date();
-  const dateString = `${now.getDate()} ${DUTCH_MONTHS[now.getMonth()]}`;
+  const [periode, setPeriode] = useState('week');
 
   const days = periode === 'week' ? 7 : 30;
   const periodeLabel = periode === 'week' ? 'afgelopen week' : 'afgelopen maand';
@@ -29,14 +21,16 @@ export default function DiaryOverzichtPage() {
       {/* ── Topbar ── */}
       <div style={{
         position: 'absolute', left: 0, top: 0,
-        width: '414px', height: '105px', background: '#FFFFFF',
-        display: 'flex', flexDirection: 'column', gap: '15px',
+        width: '414px', height: '135px', background: '#FFFFFF',
+        display: 'flex', flexDirection: 'column',
+        padding: '0 10px 12px', boxSizing: 'border-box', gap: '6px',
       }}>
-        {/* Title row */}
+
+        {/* Row 1: title + icons */}
         <div style={{
           display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between', alignItems: 'center',
-          padding: '0px 10px', height: '40px',
+          height: '50px', flexShrink: 0,
         }}>
           <div style={{
             position: 'relative', display: 'flex', flexDirection: 'row',
@@ -53,36 +47,78 @@ export default function DiaryOverzichtPage() {
               lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 2,
             }}>Dagboek</span>
           </div>
+
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '11px' }}>
-            <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            {/* Bar chart icon — click to leave overzicht */}
+            <div
+              onClick={() => navigate(-1)}
+              style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#377B8A', userSelect: 'none' }}>bar_chart</span>
+            </div>
+            {/* Profile icon */}
+            <div
+              onClick={() => setProfileOpen(true)}
+              style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            >
               <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
             </div>
           </div>
         </div>
 
-        {/* Subtitle row with back button */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px 0px 10px', height: '46px' }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', height: '36px' }}>
-            <button onClick={() => navigate(-1)} style={{
-              width: '30px', height: '30px', background: '#E6F4F2',
-              border: '0.5px solid #CFEBE8', borderRadius: '4px',
+        {/* Row 2: "Overzicht" label */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          height: '24px', flexShrink: 0,
+        }}>
+          <span style={{
+            fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
+            lineHeight: '24px', color: '#377B8A',
+          }}>Overzicht</span>
+        </div>
+
+        {/* Row 3: 1 week / 1 maand chips */}
+        <div style={{
+          height: '33px', background: '#F5F5F5', borderRadius: '20px',
+          display: 'flex', flexDirection: 'row', alignItems: 'center',
+          padding: '3px 5px', boxSizing: 'border-box', flexShrink: 0,
+        }}>
+          <div
+            onClick={() => setPeriode('week')}
+            style={{
+              flex: 1, height: '27px',
+              background: periode === 'week' ? '#377B8A' : 'transparent',
+              borderRadius: '20px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', padding: 0,
-            }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>chevron_left</span>
-            </button>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: '#377B8A', fontFamily: 'Inter', fontWeight: 400 }}>
-              <span style={{ fontSize: '20px', lineHeight: '24px' }}>Overzicht</span>
-              <span style={{ fontSize: '12px', lineHeight: '15px' }}>{dateString}</span>
-            </div>
-            <div style={{ width: '30px', height: '30px' }} />
+              cursor: 'pointer',
+            }}
+          >
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '16px', lineHeight: '20px',
+              color: periode === 'week' ? '#FFFFFF' : '#B3B2B2',
+            }}>1 week</span>
+          </div>
+          <div
+            onClick={() => setPeriode('maand')}
+            style={{
+              flex: 1, height: '27px',
+              background: periode === 'maand' ? '#377B8A' : 'transparent',
+              borderRadius: '20px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <span style={{
+              fontFamily: 'Inter', fontWeight: 400, fontSize: '16px', lineHeight: '20px',
+              color: periode === 'maand' ? '#FFFFFF' : '#B3B2B2',
+            }}>1 maand</span>
           </div>
         </div>
       </div>
 
       {/* ── Scrollable content ── */}
       <div style={{
-        position: 'absolute', top: '105px', bottom: '58px',
+        position: 'absolute', top: '135px', bottom: '58px',
         left: 0, right: 0, overflowY: 'auto', overscrollBehavior: 'none',
       }}>
         <div style={{ padding: '16px 17px 28px' }}>
@@ -98,60 +134,7 @@ export default function DiaryOverzichtPage() {
             }}>Overzicht</div>
           </div>
 
-          {/* ── "Grafiek" selected tab ── */}
-          <div style={{
-            width: '100%', height: '39px', background: '#F5F5F5', borderRadius: '20px',
-            display: 'flex', flexDirection: 'row', alignItems: 'center',
-            padding: '3px 5px', boxSizing: 'border-box', marginBottom: '10px',
-          }}>
-            <div style={{
-              flex: 1, height: '33px', background: '#377B8A', borderRadius: '20px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
-            }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#FFFFFF', userSelect: 'none' }}>bar_chart</span>
-              <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', lineHeight: '22px', color: '#FFFFFF' }}>Grafiek</span>
-            </div>
-          </div>
-
-          {/* ── Periode chips: 1 week / 1 maand ── */}
-          <div style={{
-            width: '100%', height: '39px', background: '#F5F5F5', borderRadius: '20px',
-            display: 'flex', flexDirection: 'row', alignItems: 'center',
-            padding: '3px 5px', boxSizing: 'border-box', marginBottom: '14px',
-          }}>
-            <div
-              onClick={() => setPeriode('week')}
-              style={{
-                flex: 1, height: '33px',
-                background: periode === 'week' ? '#377B8A' : 'transparent',
-                borderRadius: '20px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer',
-              }}
-            >
-              <span style={{
-                fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', lineHeight: '22px',
-                color: periode === 'week' ? '#FFFFFF' : '#B3B2B2',
-              }}>1 week</span>
-            </div>
-            <div
-              onClick={() => setPeriode('maand')}
-              style={{
-                flex: 1, height: '33px',
-                background: periode === 'maand' ? '#377B8A' : 'transparent',
-                borderRadius: '20px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer',
-              }}
-            >
-              <span style={{
-                fontFamily: 'Inter', fontWeight: 400, fontSize: '18px', lineHeight: '22px',
-                color: periode === 'maand' ? '#FFFFFF' : '#B3B2B2',
-              }}>1 maand</span>
-            </div>
-          </div>
-
-          {/* ── Info banner (diary style) ── */}
+          {/* Info banner */}
           <div style={{
             width: '100%', minHeight: '54px',
             background: '#E6F4F2', borderRadius: '10px',
@@ -175,7 +158,7 @@ export default function DiaryOverzichtPage() {
             </div>
           </div>
 
-          {/* ── Chart card ── */}
+          {/* Chart card */}
           <div style={{ background: '#FFFFFF', borderRadius: '16px', padding: '16px 12px 16px' }}>
             <VoortgangsGrafiek days={days} />
           </div>
