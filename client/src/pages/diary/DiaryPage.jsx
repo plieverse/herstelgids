@@ -171,8 +171,8 @@ export default function DiaryPage() {
             <button onClick={() => navigate('/dagboek/historie/1')} style={{
               width: '30px',
               height: '30px',
-              background: '#E6F4F2',
-              border: '0.5px solid #CFEBE8',
+              background: '#377B8A',
+              border: 'none',
               borderRadius: '4px',
               display: 'flex',
               alignItems: 'center',
@@ -182,7 +182,7 @@ export default function DiaryPage() {
             }}>
               <span className="material-symbols-outlined" style={{
                 fontSize: '20px',
-                color: '#377B8A',
+                color: '#FFFFFF',
                 userSelect: 'none',
               }}>chevron_left</span>
             </button>

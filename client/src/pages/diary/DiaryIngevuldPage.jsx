@@ -29,39 +29,39 @@ const Q5_COLORS = {
 
 // Text per score for each question
 const Q1 = {
-  1: { bold: 'Veel beter', normal: ' Ik voel me veel beter. Ik heb bijna geen last.' },
-  2: { bold: 'Iets beter', normal: ' Ik voel me iets beter. Ik heb nog een beetje last.' },
+  1: { bold: 'Veel beter.', normal: ' Ik voel me veel beter. Ik heb bijna geen last.' },
+  2: { bold: 'Iets beter.', normal: ' Ik voel me iets beter. Ik heb nog een beetje last.' },
   3: { bold: 'Hetzelfde.', normal: ' Ik voel me hetzelfde als gisteren.' },
-  4: { bold: 'Iets slechter', normal: ' Ik voel me iets slechter. Ik heb meer last.' },
-  5: { bold: 'Veel slechter', normal: ' Ik voel me veel slechter. Ik heb heel veel last.' },
+  4: { bold: 'Iets slechter.', normal: ' Ik voel me iets slechter. Ik heb meer last.' },
+  5: { bold: 'Veel slechter.', normal: ' Ik voel me veel slechter. Ik heb heel veel last.' },
 };
 const Q2 = {
-  1: { bold: 'Heel goed', normal: ' Ik heb geen problemen met eten.' },
+  1: { bold: 'Heel goed.', normal: ' Ik heb geen problemen met eten.' },
   2: { bold: 'Goed.', normal: ' Ik heb af en toe last, maar het gaat.' },
-  3: { bold: 'Middelmatig', normal: ' Ik heb duidelijk moeite met eten.' },
-  4: { bold: 'Moeilijk', normal: ' Ik kan moeilijk mijn eten doorslikken.' },
-  5: { bold: 'Heel moeilijk', normal: ' Ik kan mijn eten bijna niet doorslikken.' },
+  3: { bold: 'Middelmatig.', normal: ' Ik heb duidelijk moeite met eten.' },
+  4: { bold: 'Moeilijk.', normal: ' Ik kan moeilijk mijn eten doorslikken.' },
+  5: { bold: 'Heel moeilijk.', normal: ' Ik kan mijn eten bijna niet doorslikken.' },
 };
 const Q3 = {
-  1: { bold: 'Heel goed', normal: ' Ik kan goed doorademen.' },
-  2: { bold: 'Goed', normal: ' Ik heb af en toe moeite met ademen.' },
-  3: { bold: 'Middelmatig', normal: ' Ik heb duidelijk moeite met ademen.' },
+  1: { bold: 'Heel goed.', normal: ' Ik kan goed doorademen.' },
+  2: { bold: 'Goed.', normal: ' Ik heb af en toe moeite met ademen.' },
+  3: { bold: 'Middelmatig.', normal: ' Ik heb duidelijk moeite met ademen.' },
   4: { bold: 'Moeilijk.', normal: ' Ik kan niet goed ademen.' },
-  5: { bold: 'Heel moeilijk', normal: ' Ik kan bijna niet ademen.' },
+  5: { bold: 'Heel moeilijk.', normal: ' Ik kan bijna niet ademen.' },
 };
 const Q4 = {
-  1: { bold: 'Geen pijn', normal: ' Ik voel helemaal geen pijn.' },
-  2: { bold: 'Weinig pijn', normal: ' Ik voel het, maar het gaat.' },
-  3: { bold: 'Pijn', normal: ' Ik voel duidelijk pijn. Maar het is nog vol te houden.' },
-  4: { bold: 'Veel pijn', normal: ' Ik heb veel pijn.' },
-  5: { bold: 'Heel veel pijn', normal: ' Ik heb heel veel pijn.' },
+  1: { bold: 'Geen pijn.', normal: ' Ik voel helemaal geen pijn.' },
+  2: { bold: 'Weinig pijn.', normal: ' Ik voel het, maar het gaat.' },
+  3: { bold: 'Pijn.', normal: ' Ik voel duidelijk pijn. Maar het is nog vol te houden.' },
+  4: { bold: 'Veel pijn.', normal: ' Ik heb veel pijn.' },
+  5: { bold: 'Heel veel pijn.', normal: ' Ik heb heel veel pijn.' },
 };
 const Q5 = {
-  1: { bold: 'Diarree', normal: ' Mijn poep is heel dun of waterig.' },
-  2: { bold: 'Wat dunner', normal: ' Mijn poep was wat dunner dan normaal.' },
+  1: { bold: 'Diarree.', normal: ' Mijn poep is heel dun of waterig.' },
+  2: { bold: 'Wat dunner.', normal: ' Mijn poep was wat dunner dan normaal.' },
   3: { bold: 'Normaal.', normal: ' Mijn poep was normaal.' },
-  4: { bold: 'Wat harder', normal: ' Mijn poep is wat harder of vaster.' },
-  5: { bold: 'Verstopping', normal: ' Ik heb moeite met naar het toilet gaan.' },
+  4: { bold: 'Wat harder.', normal: ' Mijn poep is wat harder of vaster.' },
+  5: { bold: 'Verstopping.', normal: ' Ik heb moeite met naar het toilet gaan.' },
 };
 
 /**
@@ -235,12 +235,12 @@ export default function DiaryIngevuldPage() {
             <button
               onClick={() => navigate('/dagboek/historie/1')}
               style={{
-                width: '30px', height: '30px', background: '#E6F4F2',
-                border: '0.5px solid #CFEBE8', borderRadius: '4px',
+                width: '30px', height: '30px', background: '#377B8A',
+                border: 'none', borderRadius: '4px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer', padding: 0,
               }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>chevron_left</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#FFFFFF', userSelect: 'none' }}>chevron_left</span>
             </button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: '#377B8A', fontFamily: 'Inter', fontWeight: 400 }}>
               <span style={{ fontSize: '20px', lineHeight: '24px' }}>Vandaag</span>

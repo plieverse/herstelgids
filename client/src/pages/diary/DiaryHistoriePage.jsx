@@ -159,12 +159,12 @@ export default function DiaryHistoriePage() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px 0px 10px', height: '46px' }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', height: '36px' }}>
             <button onClick={goBack} style={{
-              width: '30px', height: '30px', background: '#E6F4F2',
-              border: '0.5px solid #CFEBE8', borderRadius: '4px',
+              width: '30px', height: '30px', background: '#377B8A',
+              border: 'none', borderRadius: '4px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', padding: 0,
             }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>chevron_left</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#FFFFFF', userSelect: 'none' }}>chevron_left</span>
             </button>
 
             {/* Date label — show "Gisteren" above date when daysAgo === 1 */}
@@ -183,12 +183,12 @@ export default function DiaryHistoriePage() {
             </div>
 
             <button onClick={goForward} style={{
-              width: '30px', height: '30px', background: '#E6F4F2',
-              border: '0.5px solid #CFEBE8', borderRadius: '4px',
+              width: '30px', height: '30px', background: '#377B8A',
+              border: 'none', borderRadius: '4px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', padding: 0,
             }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#377B8A', userSelect: 'none' }}>chevron_right</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#FFFFFF', userSelect: 'none' }}>chevron_right</span>
             </button>
           </div>
         </div>
