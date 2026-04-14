@@ -121,7 +121,12 @@ export default function ProfileOverlay({ onClose }) {
             position: 'absolute',
             width: 76, height: 76, left: 143, top: 5,
             borderRadius: '50%', background: '#CFEBE8',
-          }} />
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span className="material-symbols-outlined" style={{
+              fontSize: '54px', color: '#377B8A', userSelect: 'none',
+            }}>account_circle</span>
+          </div>
           <span style={{
             position: 'relative', zIndex: 1,
             fontFamily: 'Inter', fontWeight: 700, fontSize: 24,
