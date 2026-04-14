@@ -97,19 +97,19 @@ function buildRows(answers) {
 function NormalBanner() {
   return (
     <div style={{
-      width: '346px', minHeight: '60px',
+      width: '346px', minHeight: '54px',
       background: '#CFEBD4', borderRadius: '10px',
       display: 'flex', flexDirection: 'row', alignItems: 'center',
       padding: '8px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
-      <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
-        <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: '#B2DEB6' }} />
-        <div style={{ position: 'absolute', width: '51px', height: '51px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#378A6C', userSelect: 'none' }}>visibility</span>
+      <div style={{ position: 'relative', width: '38px', height: '38px', flexShrink: 0 }}>
+        <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#B2DEB6' }} />
+        <div style={{ position: 'absolute', width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#378A6C', userSelect: 'none' }}>visibility</span>
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#378A6C' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
+        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '15px', lineHeight: '18px', color: '#378A6C' }}>
           Samenvatting bekeken
         </div>
         <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '15px', color: '#727272' }}>
@@ -123,19 +123,19 @@ function NormalBanner() {
 function AlarmBanner() {
   return (
     <div style={{
-      width: '346px', minHeight: '60px',
+      width: '346px', minHeight: '54px',
       background: '#FEF0E9', borderRadius: '10px',
       display: 'flex', flexDirection: 'row', alignItems: 'center',
       padding: '8px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
-      <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
-        <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: '#F4D2BC' }} />
-        <div style={{ position: 'absolute', width: '51px', height: '51px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#CB6E02', userSelect: 'none' }}>warning</span>
+      <div style={{ position: 'relative', width: '38px', height: '38px', flexShrink: 0 }}>
+        <div style={{ position: 'absolute', width: '38px', height: '38px', borderRadius: '50%', background: '#F4D2BC' }} />
+        <div style={{ position: 'absolute', width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#CB6E02', userSelect: 'none' }}>warning</span>
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#CB6E02' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
+        <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '15px', lineHeight: '18px', color: '#CB6E02' }}>
           Samenvatting bekeken
         </div>
         <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '15px', color: '#727272' }}>
