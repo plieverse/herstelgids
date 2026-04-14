@@ -143,14 +143,14 @@ export default function DiaryBewerkenPage() {
             aria-label="Annuleren"
             style={{
               width: 36, height: 36, borderRadius: '50%',
-              background: '#E6F4F2', border: 'none', cursor: 'pointer',
+              background: '#377B8A', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0, marginTop: '2px',
             }}
           >
-            <span className="material-symbols-outlined" style={{
-              fontSize: '22px', color: '#377B8A', userSelect: 'none',
-            }}>close</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 2l10 10M12 2L2 12" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </button>
         </div>
 
