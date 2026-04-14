@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import ProfileOverlay from '../../components/ui/ProfileOverlay';
 import VoortgangsGrafiek from '../../components/diary/VoortgangsGrafiek';
@@ -7,6 +8,16 @@ export default function DiaryOverzichtPage() {
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
   const [periode, setPeriode] = useState('week');
+  const [landscape, setLandscape] = useState(
+    () => window.matchMedia('(orientation: landscape)').matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(orientation: landscape)');
+    const handler = (e) => setLandscape(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   const days = periode === 'week' ? 7 : 30;
   const periodeLabel = periode === 'week' ? 'afgelopen week' : 'afgelopen maand';
@@ -126,6 +137,23 @@ export default function DiaryOverzichtPage() {
       }}>
         <div style={{ padding: '16px 17px 28px' }}>
 
+          {/* Back button */}
+          <div style={{ marginBottom: '12px' }}>
+            <button
+              onClick={() => navigate(-1)}
+              aria-label="Terug"
+              style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: '#377B8A', border: 'none', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3L5 8L10 13" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
           {/* Info banner */}
           <div style={{
             width: '100%', minHeight: '54px',
@@ -159,6 +187,38 @@ export default function DiaryOverzichtPage() {
       </div>
 
       {profileOpen && <ProfileOverlay onClose={() => setProfileOpen(false)} />}
+
+      {/* ── Landscape fullscreen chart (portal outside ScaleWrapper) ── */}
+      {landscape && createPortal(
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: '#FFFFFF',
+          display: 'flex', flexDirection: 'column',
+          padding: '16px 20px 12px', boxSizing: 'border-box',
+        }}>
+          {/* Header */}
+          <div style={{
+            display: 'flex', flexDirection: 'row',
+            justifyContent: 'space-between', alignItems: 'center',
+            marginBottom: 10, flexShrink: 0,
+          }}>
+            <span style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: 18, color: '#377B8A' }}>
+              Overzicht — {periode === 'week' ? '1 week' : '1 maand'}
+            </span>
+            <span style={{ fontFamily: 'Inter', fontSize: 12, color: '#9E9E9E' }}>
+              Draai terug voor overzicht
+            </span>
+          </div>
+          {/* Chart filling remaining height */}
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+            <VoortgangsGrafiek
+              days={days}
+              maxBarHeight={Math.max(window.innerHeight - 120, 80)}
+            />
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

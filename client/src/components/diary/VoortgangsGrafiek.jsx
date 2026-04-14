@@ -1,12 +1,10 @@
 import { useMemo } from 'react';
 import { loadDiaryAnswersForDay } from '../../pages/diary/DiaryPage';
 
-const MAX_BAR    = 224;
 const BAR_W      = 52;
 const SMILEY     = 34;
 const SMILEY_GAP = 6;
 const TOP_PAD    = SMILEY + SMILEY_GAP; // 40px
-const CHART_H    = TOP_PAD + MAX_BAR;   // 264px
 const Y_W        = 62;
 
 // Diary traffic-light colours (same as summary rows)
@@ -52,7 +50,8 @@ const Y_LINES = [
   { pos: 1,   label: 'Heel slecht' },
 ];
 
-export default function VoortgangsGrafiek({ days = 7 }) {
+export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
+  const CHART_H = TOP_PAD + maxBarHeight;
   const dagData = useMemo(() => {
     const result = [];
     for (let i = 1; i <= days; i++) {
@@ -96,7 +95,7 @@ export default function VoortgangsGrafiek({ days = 7 }) {
           {Y_LINES.map(({ pos, label }) => (
             <div key={label} style={{
               position: 'absolute', right: 8,
-              top: TOP_PAD + pos * MAX_BAR,
+              top: TOP_PAD + pos * maxBarHeight,
               transform: 'translateY(-50%)',
               fontSize: 10, lineHeight: '13px',
               color: '#9E9E9E', textAlign: 'right', whiteSpace: 'nowrap',
@@ -112,7 +111,7 @@ export default function VoortgangsGrafiek({ days = 7 }) {
           {Y_LINES.map(({ pos, label }) => (
             <div key={label} style={{
               position: 'absolute', left: 0, right: 0,
-              top: TOP_PAD + pos * MAX_BAR,
+              top: TOP_PAD + pos * maxBarHeight,
               height: 1, borderTop: '1.5px dashed #E0E0E0', zIndex: 0,
             }} />
           ))}
@@ -122,7 +121,7 @@ export default function VoortgangsGrafiek({ days = 7 }) {
             display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 1,
           }}>
             {cats.map((cat) => {
-              const barH = Math.max(cat.pct * MAX_BAR, 3);
+              const barH = Math.max(cat.pct * maxBarHeight, 3);
               return (
                 <div key={cat.label}
                   style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SMILEY_GAP }}
