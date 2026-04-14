@@ -246,7 +246,7 @@ export default function MessagesPage() {
             <span style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '24px', lineHeight: '29px', color: '#377B8A', position: 'relative', zIndex: 2 }} onClick={handleTripleClick}>Berichten</span>
           </div>
           <div onClick={() => setProfileOpen(true)} style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '35px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#377B8A', userSelect: 'none' }}>account_circle</span>
           </div>
         </div>
       </div>
