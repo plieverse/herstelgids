@@ -35,7 +35,7 @@ export default function DiaryOverzichtPage() {
       {/* ── Topbar ── */}
       <div style={{
         position: 'absolute', left: 0, top: 0,
-        width: '414px', height: '125px', background: '#FFFFFF',
+        width: '414px', height: '95px', background: '#FFFFFF',
         display: 'flex', flexDirection: 'column',
         padding: '0 10px 12px', boxSizing: 'border-box', gap: '6px',
       }}>
@@ -83,18 +83,7 @@ export default function DiaryOverzichtPage() {
           </div>
         </div>
 
-        {/* Row 2: "Overzicht" label */}
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          height: '24px', flexShrink: 0,
-        }}>
-          <span style={{
-            fontFamily: 'Inter', fontWeight: 400, fontSize: '20px',
-            lineHeight: '24px', color: '#377B8A',
-          }}>Overzicht</span>
-        </div>
-
-        {/* Row 3: 1 week / 1 maand chips */}
+        {/* Row 2: 1 week / 1 maand chips */}
         <div style={{
           height: '33px', background: '#F5F5F5', borderRadius: '20px',
           display: 'flex', flexDirection: 'row', alignItems: 'center',
@@ -135,26 +124,20 @@ export default function DiaryOverzichtPage() {
 
       {/* ── Scrollable content ── */}
       <div style={{
-        position: 'absolute', top: '125px', bottom: '58px',
+        position: 'absolute', top: '95px', bottom: '58px',
         left: 0, right: 0, overflowY: 'auto', overscrollBehavior: 'none',
       }}>
         <div style={{ padding: '16px 17px 28px', display: 'flex', flexDirection: 'column', gap: '16px', minHeight: '100%', boxSizing: 'border-box' }}>
 
-          {/* Back button */}
-          <div>
-            <button
-              onClick={() => navigate(-1)}
-              aria-label="Terug"
-              style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: '#377B8A', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M10 3L5 8L10 13" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+          {/* "Overzicht" title with decorative circles — same style as "Samenvatting" */}
+          <div style={{ position: 'relative', height: '55px', width: '100%', flexShrink: 0 }}>
+            <div style={{ position: 'absolute', width: '54px', height: '54px', left: 0, top: 0, borderRadius: '50%', background: '#CFEBE8' }} />
+            <div style={{ position: 'absolute', width: '14px', height: '14px', left: '47px', top: '47px', borderRadius: '50%', background: '#CFEBE8' }} />
+            <div style={{
+              position: 'absolute', left: '12px', top: '8px',
+              fontFamily: 'Inter', fontWeight: 700, fontSize: '32px',
+              lineHeight: '39px', color: '#377B8A',
+            }}>Overzicht</div>
           </div>
 
           {/* Info banner */}
