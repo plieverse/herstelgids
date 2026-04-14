@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ProfileOverlay from '../../components/ui/ProfileOverlay';
 import VoortgangsGrafiek from '../../components/diary/VoortgangsGrafiek';
 
 export default function DiaryOverzichtPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const baseOffset = parseInt(searchParams.get('from') || '0', 10);
   const [profileOpen, setProfileOpen] = useState(false);
   const [periode, setPeriode] = useState('week');
   const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
@@ -181,7 +183,7 @@ export default function DiaryOverzichtPage() {
           {/* Chart card — flex: 1 so it fills remaining height and centers vertically */}
           <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
             <div style={{ background: '#FFFFFF', borderRadius: '16px', padding: '16px 12px', width: '100%' }}>
-              <VoortgangsGrafiek days={days} />
+              <VoortgangsGrafiek days={days} baseOffset={baseOffset} />
             </div>
           </div>
 
@@ -215,6 +217,7 @@ export default function DiaryOverzichtPage() {
           <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
             <VoortgangsGrafiek
               days={days}
+              baseOffset={baseOffset}
               maxBarHeight={Math.max(window.innerHeight - 120, 80)}
             />
           </div>

@@ -39,21 +39,22 @@ const Y_LINES = [
   { pos: 1,   label: 'Heel slecht'  },
 ];
 
-export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224 }) {
+export default function VoortgangsGrafiek({ days = 7, maxBarHeight = 224, baseOffset = 0 }) {
   const CHART_H = TOP_PAD + maxBarHeight;
 
   const dagData = useMemo(() => {
     const result = [];
     for (let i = 1; i <= days; i++) {
-      const ans = loadDiaryAnswersForDay(i);
+      const d = i + baseOffset; // actual daysAgo to load
+      const ans = loadDiaryAnswersForDay(d);
       if (ans && (ans.q1 || ans.q2 || ans.q3 || ans.q4 || ans.q5)) {
-        result.push({ q1: ans.q1 ?? seeded(i,0), q2: ans.q2 ?? seeded(i,1), q3: ans.q3 ?? seeded(i,2), q4: ans.q4 ?? seeded(i,3), q5: ans.q5 ?? seeded(i,4) });
+        result.push({ q1: ans.q1 ?? seeded(d,0), q2: ans.q2 ?? seeded(d,1), q3: ans.q3 ?? seeded(d,2), q4: ans.q4 ?? seeded(d,3), q5: ans.q5 ?? seeded(d,4) });
       } else {
-        result.push({ q1: seeded(i,0), q2: seeded(i,1), q3: seeded(i,2), q4: seeded(i,3), q5: seeded(i,4) });
+        result.push({ q1: seeded(d,0), q2: seeded(d,1), q3: seeded(d,2), q4: seeded(d,3), q5: seeded(d,4) });
       }
     }
     return result;
-  }, [days]);
+  }, [days, baseOffset]);
 
   const n = dagData.length;
 
