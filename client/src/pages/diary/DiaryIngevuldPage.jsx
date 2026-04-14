@@ -97,10 +97,10 @@ function buildRows(answers) {
 function NormalBanner() {
   return (
     <div style={{
-      width: '346px', minHeight: '77px',
+      width: '346px', minHeight: '60px',
       background: '#CFEBD4', borderRadius: '10px',
       display: 'flex', flexDirection: 'row', alignItems: 'center',
-      padding: '10px 10px 10px 10px', gap: '10px', boxSizing: 'border-box',
+      padding: '8px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
       <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
         <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: '#B2DEB6' }} />
@@ -112,7 +112,7 @@ function NormalBanner() {
         <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#378A6C' }}>
           Samenvatting bekeken
         </div>
-        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', lineHeight: '18px', color: '#727272' }}>
+        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '15px', color: '#727272' }}>
           Op dit moment zien we geen signalen die extra aandacht nodig hebben.
         </div>
       </div>
@@ -123,10 +123,10 @@ function NormalBanner() {
 function AlarmBanner() {
   return (
     <div style={{
-      width: '346px', minHeight: '77px',
+      width: '346px', minHeight: '60px',
       background: '#FEF0E9', borderRadius: '10px',
       display: 'flex', flexDirection: 'row', alignItems: 'center',
-      padding: '10px 10px 10px 10px', gap: '10px', boxSizing: 'border-box',
+      padding: '8px 10px', gap: '10px', boxSizing: 'border-box',
     }}>
       <div style={{ position: 'relative', width: '51px', height: '51px', flexShrink: 0 }}>
         <div style={{ position: 'absolute', width: '51px', height: '51px', borderRadius: '50%', background: '#F4D2BC' }} />
@@ -138,7 +138,7 @@ function AlarmBanner() {
         <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '20px', lineHeight: '24px', color: '#CB6E02' }}>
           Samenvatting bekeken
         </div>
-        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', lineHeight: '18px', color: '#727272' }}>
+        <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '12px', lineHeight: '15px', color: '#727272' }}>
           Er zijn signalen die extra aandacht nodig hebben. Een zorgverlener kijkt mee en neemt contact op als dat nodig is.
         </div>
       </div>
