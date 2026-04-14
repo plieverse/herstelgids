@@ -129,7 +129,7 @@ export default function ProfileOverlay({ onClose }) {
           }}>account_circle</span>
           {/* Title — overlapping bottom of circle */}
           <span style={{
-            position: 'absolute', left: 0, right: 0, top: 76,
+            position: 'absolute', left: 0, right: 0, top: 68,
             fontFamily: 'Inter', fontWeight: 700, fontSize: 24,
             lineHeight: '29px', color: '#377B8A',
             textAlign: 'center',
